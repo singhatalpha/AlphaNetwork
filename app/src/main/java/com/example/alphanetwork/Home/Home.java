@@ -8,7 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import com.example.alphanetwork.Home.SectionsPagerAdapter;
+
 import com.example.alphanetwork.R;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
@@ -36,7 +36,7 @@ public class Home extends AppCompatActivity{
 
 
     private void setupViewPager(){
-        SectionsPagerAdapter adapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        HomePagerAdapter adapter = new HomePagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new HomeWallFragment()); //index 0
         adapter.addFragment(new HomeEventsFragment()); //index 1
         adapter.addFragment(new HomeLiveFragment()); //index 2
