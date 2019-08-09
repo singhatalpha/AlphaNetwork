@@ -19,4 +19,16 @@
         android:icon="@drawable/ic_circle"
         android:title="">
     </item>
+
+    <item
+        android:id="@+id/ic_notification"
+        android:icon="@drawable/ic_notification"
+        android:title="">
+    </item>
+
+    <item
+        android:id="@+id/ic_menu"
+        android:icon="@drawable/ic_menu"
+        android:title="">
+    </item>
 </menu>

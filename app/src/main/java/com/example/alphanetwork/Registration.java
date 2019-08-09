@@ -1,109 +1,77 @@
 package com.example.alphanetwork;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.app.LoaderManager.LoaderCallbacks;
-
-import android.content.CursorLoader;
-import android.content.Loader;
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.AsyncTask;
-
-import android.os.Build;
+import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.text.TextUtils;
 import android.util.Patterns;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
+import android.content.Intent;
+import android.text.method.LinkMovementMethod;
+import android.widget.TextView;
 
-import com.google.gson.JsonIOException;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+
+import com.example.alphanetwork.Home.Home;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static android.Manifest.permission.READ_CONTACTS;
-
 /**
  * A login screen that offers login via email/password.
  */
-public class Registraion extends AppCompatActivity implements OnClickListener {
-
-    /**
-     * Id to identity READ_CONTACTS permission request.
-//     */
-//    private static final int REQUEST_READ_CONTACTS = 0;
-//
-//    /**
-//     * A dummy authentication store containing known user names and passwords.
-//     * TODO: remove after connecting to a real authentication system.
-//     */
-//    private static final String[] DUMMY_CREDENTIALS = new String[]{
-//            "foo@example.com:hello", "bar@example.com:world"
-//    };
-//    /**
-//     * Keep track of the login task to ensure we can cancel it if requested.
-//     */
-//    private UserLoginTask mAuthTask = null;
-//
-//    // UI references.
-//    private AutoCompleteTextView mEmailView;
-//    private EditText mPasswordView;
-//    private View mProgressView;
-//    private View mLoginFormView;
+public class Registration extends AppCompatActivity implements OnClickListener {
 
     private EditText username, Email, password1,password2;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registraion);
-        // Set up the login form.
-        SharedPreferences sharedPreferences = getSharedPreferences("tokeninfo", Context.MODE_PRIVATE);
-        String token = sharedPreferences.getString("token",null);
-        username = findViewById(R.id.editUserName);
-        Email = findViewById(R.id.editEmail);
-        password1 = findViewById(R.id.editPassword1);
-        password2 = findViewById(R.id.EditPassword2);
+        setContentView(R.layout.activity_registration);
 
-        findViewById(R.id.buttonSignUp).setOnClickListener(this);
-        findViewById(R.id.textViewLogin).setOnClickListener(this);
+//        SharedPreferences sharedPreferences = getSharedPreferences("tokeninfo", Context.MODE_PRIVATE);
+//        String token = sharedPreferences.getString("token",null);
+
+        username = findViewById(R.id.txtID);
+        Email = findViewById(R.id.txtEmail);
+        password1 = findViewById(R.id.txtPwd);
+        password2 = findViewById(R.id.txtPwd1);
+
+        findViewById(R.id.btnLogin).setOnClickListener(this);
+        findViewById(R.id.lnkLogin).setOnClickListener(this);
+//        TextView login = (TextView)findViewById(R.id.lnkLogin);
+//        login.setMovementMethod(LinkMovementMethod.getInstance());
+//        login.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(Registration.this, user_login.class);
+//                startActivity(intent);
+//            }
+//        });
     }
 
     public void userSignup()
     {
+
+        //defining a progress dialog to show while signing up
+//        final ProgressDialog progressDialog = new ProgressDialog(this);
+//        progressDialog.setMessage("Signing Up...");
+//        progressDialog.show();
         String user = username.getText().toString().trim();
         String email = Email.getText().toString().trim();
         String pass1 = password1.getText().toString().trim();
         String pass2 = password2.getText().toString().trim();
-
 
         if(email.isEmpty()){
             Email.setError("Email is required");
@@ -136,7 +104,7 @@ public class Registraion extends AppCompatActivity implements OnClickListener {
         }
 
         if(pass2.isEmpty()){
-            password2.setError("Shoudl match above password");
+            password2.setError("Should match above password");
             password2.requestFocus();
             return;
         }
@@ -144,31 +112,42 @@ public class Registraion extends AppCompatActivity implements OnClickListener {
         Call<ResponseBody> call = RetrofitClient
                 .getInstance()
                 .getApi()
-                .createUser(user,pass1);
-//                .createUser(user,email,pass1,pass2);
+                .createUser(email,email,pass1,pass2);
 
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 String s = null;
+//                System.out.println(s);
+                System.out.println(response.code());
                 try {
-                if(response.code() == 200) {
+                if(response.code() == 201) {
 
                         System.out.println("entered here");
                         s = response.body().string();
-                        SharedPreferences sharedPref = getSharedPreferences("tokeninfo" , Context.MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sharedPref.edit();
-                        editor.putString("token" , s);
-                        editor.apply();
+//                        SharedPreferences sharedPref = getSharedPreferences("tokeninfo" , Context.MODE_PRIVATE);
+//                        SharedPreferences.Editor editor = sharedPref.edit();
+//                        editor.putString("token" , s);
+//                        editor.apply();
+//                        String temp = sharedPref.getString("token" , "NULL");
+                        Toast.makeText(Registration.this, s , Toast.LENGTH_LONG).show();
 
-                        String temp = sharedPref.getString("token" , "NULL");
-
-                        Toast.makeText(Registraion.this, temp + " " + "sharedpref", Toast.LENGTH_LONG).show();
+                    //redirect to home activity if successful
+                    Intent intent = new Intent(Registration.this, user_login.class);
+                    startActivity(intent);
 
                 }
                 else
                     {
-                        s = response.errorBody().string();
+//                        System.out.println("else");
+
+
+                            s = response.errorBody().string();
+//                            JSONObject jsonObject = new JSONObject(s);
+
+                            Toast.makeText(Registration.this, s, Toast.LENGTH_LONG).show();
+
+
 
                     }
                 } catch (IOException e) {
@@ -180,7 +159,7 @@ public class Registraion extends AppCompatActivity implements OnClickListener {
                     try {
 
                         JSONObject jsonObject = new JSONObject(s);
-                        Toast.makeText(Registraion.this, jsonObject.getString("message"), Toast.LENGTH_LONG).show();
+                        Toast.makeText(Registration.this, jsonObject.getString("detail"), Toast.LENGTH_LONG).show();
 
 
                     }
@@ -198,11 +177,10 @@ public class Registraion extends AppCompatActivity implements OnClickListener {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
 
-                Toast.makeText(Registraion.this,t.getMessage(),Toast.LENGTH_LONG).show();
+                Toast.makeText(Registration.this,t.getMessage(),Toast.LENGTH_LONG).show();
 
             }
         });
-
 
     }
     @Override
@@ -210,16 +188,15 @@ public class Registraion extends AppCompatActivity implements OnClickListener {
 
         switch (v.getId())
         {
-            case R.id.buttonSignUp:
+            case R.id.btnLogin:
             userSignup();
             break;
-
-            case R.id.textViewLogin:
-
+            case R.id.lnkLogin:
+            Intent intent = new Intent(Registration.this, user_login.class);
+            startActivity(intent);
                 break;
         }
-
-
+    }
     }
 
 
@@ -429,7 +406,7 @@ public class Registraion extends AppCompatActivity implements OnClickListener {
 //    private void addEmailsToAutoComplete(List<String> emailAddressCollection) {
 //        //Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.
 //        ArrayAdapter<String> adapter =
-//                new ArrayAdapter<>(Registraion.this,
+//                new ArrayAdapter<>(Registration.this,
 //                        android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
 //
 //        mEmailView.setAdapter(adapter);
@@ -502,5 +479,4 @@ public class Registraion extends AppCompatActivity implements OnClickListener {
 //            showProgress(false);
 //        }
 //    }
-}
 

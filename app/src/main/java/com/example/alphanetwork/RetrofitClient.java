@@ -14,33 +14,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
 
-    private static final String BASE_URL = "http://10.7.8.35:8000/feed/";
+    private static final String BASE_URL = "http://10.7.8.35:8000/";
 
     private static RetrofitClient mInstance;
     private Retrofit retrofit;
 
     private RetrofitClient()
     {
-//        OkHttpClient okHttpClient = new OkHttpClient().Builder().addInterceptor()
-//        {
-////            SharedPreferences sharedPref = getSharedPreferences("tokeninfo" , Context.MODE_PRIVATE);
-//////            SharedPreferences sharedPreferences =
-////            SharedPreferences.Editor editor = sharedPref.edit();
-//////            editor.putString("token" , s);
-////            editor.apply();
-//
-////            String temp = sharedPref.getString("token" , "NULL");
-//            SharedPreferences sharedPreferences =
-//            new Interceptor()
-//            {
-//                @Override
-//                public Response intercept(Chain chain) throws IOException
-//                {
-//                    Request original = chain.request();
-//                    Request.Builder requestBuilder = original.newBuilder().addHeader("Authorization");
-//                }
-//            }
-//        }
         retrofit = new Retrofit.Builder().baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();

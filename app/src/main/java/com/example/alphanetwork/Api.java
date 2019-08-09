@@ -9,32 +9,26 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 
-/**
- * Created by Belal on 10/2/2017.
- */
 
 public interface Api {
 
 
-//
-//    @GET("marvel")
-//    Call<List<Hero>> getHeroes();
-
-
-
     @FormUrlEncoded
-    @POST("token/")
+    @POST("rest-auth/registration/")
     Call<ResponseBody> createUser(
         @Field("username") String username,
 //        @Field("email") String email,
-        @Field("password") String password1
+        @Field("email") String email,
 //        @Field("password2") String password2
+        @Field("password1") String password1,
+        @Field("password2") String password2
     );
 
     @FormUrlEncoded
-    @POST("users/")
+    @POST("rest-auth/login/")
     Call<ResponseBody> userLogin(
             @Field("username") String username,
+            @Field("email") String email,
             @Field("password") String password
     );
 
