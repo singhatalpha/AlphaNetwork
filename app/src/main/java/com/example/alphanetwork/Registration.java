@@ -1,7 +1,5 @@
 package com.example.alphanetwork;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,12 +8,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.Toast;
-import android.content.Intent;
-import android.text.method.LinkMovementMethod;
-import android.widget.TextView;
 
 
-import com.example.alphanetwork.Home.Home;
+import com.example.alphanetwork.Retrofit.RetrofitClient;
 
 import org.json.JSONException;
 import org.json.JSONObject;

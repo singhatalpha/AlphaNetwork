@@ -12,5 +12,11 @@
     <color name="black">#000000</color>
     <color name="light_grey">#e4e4e4</color>
     <color name="dark_grey">#696969</color>
+    <!--<color name="colorPrimary">#ea474a</color>-->
+    <!--<color name="colorPrimaryDark">#cf2a2d</color>-->
+    <!--<color name="colorAccent">#1e344b</color>-->
 
+    <color name="colorBackground">#f9f9fa</color>
+    <color name="colorTextSubtitle">#4e4e4e</color>
+    <color name="colorTextTitle">#262626</color>
 </resources>

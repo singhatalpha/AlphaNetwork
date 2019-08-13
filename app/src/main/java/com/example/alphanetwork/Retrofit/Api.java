@@ -1,6 +1,7 @@
-package com.example.alphanetwork;
+package com.example.alphanetwork.Retrofit;
 
-import java.util.List;
+
+import com.example.alphanetwork.Model.ModelHomeWall;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -11,6 +12,8 @@ import retrofit2.http.POST;
 
 
 public interface Api {
+
+
 
 
     @FormUrlEncoded
@@ -32,4 +35,7 @@ public interface Api {
             @Field("password") String password
     );
 
+
+    @GET("feed/feed_i/")
+    Call<ModelHomeWall> feed();
 }
