@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,38 +61,38 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
         requestOptions.centerCrop();
 
 
-        if(modelFeed.getMedia().size()!=0) {
-            holder.imgView_postPic.setVisibility(View.VISIBLE);
-            System.out.println(modelFeed.getMedia().get(0).getFile_data() );
-            System.out.println("Konda is anaconda" );
-            Glide.with(context)
-                    .load(modelFeed.getMedia().get(0).getFile_data())
-                    .apply(requestOptions)
-                    .listener(new RequestListener<Drawable>() {
-                        @Override
-                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                            System.out.println("Konda is in LoadFailed" );
-                            System.out.println(e);
-                            holder.progressBar.setVisibility(View.GONE);
-                            return false;
-                        }
-
-                        @Override
-                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                            System.out.println("Konda is onResourceReady" );
+//        if(modelFeed.getMedia().size()!=0) {
+//            holder.imgView_postPic.setVisibility(View.VISIBLE);
+//            System.out.println(modelFeed.getMedia().get(0).getFile_data() );
+//            System.out.println("Konda is anaconda" );
+//            Glide.with(context)
+//                    .load(modelFeed.getMedia().get(0).getFile_data())
+//                    .apply(requestOptions)
+//                    .listener(new RequestListener<Drawable>() {
+//                        @Override
+//                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+//                            System.out.println("Konda is in LoadFailed" );
+//                            System.out.println(e);
 //                            holder.progressBar.setVisibility(View.GONE);
-                            return false;
-                        }
-                    })
-                    .transition(DrawableTransitionOptions.withCrossFade())
-                    .dontAnimate()
-                    .into(holder.imgView_postPic);
-
-//            Glide.with(context).load(modelFeed.getMedia().get(0).getFile_data()).dontAnimate().into(holder.imgView_postPic);
-        }
-        else{
-//            holder.imgView_postPic.setVisibility(View.GONE);
-        }
+//                            return false;
+//                        }
+//
+//                        @Override
+//                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+//                            System.out.println("Konda is onResourceReady" );
+////                            holder.progressBar.setVisibility(View.GONE);
+//                            return false;
+//                        }
+//                    })
+//                    .transition(DrawableTransitionOptions.withCrossFade())
+//                    .dontAnimate()
+//                    .into(holder.imgView_postPic);
+//
+////            Glide.with(context).load(modelFeed.getMedia().get(0).getFile_data()).dontAnimate().into(holder.imgView_postPic);
+//        }
+//        else{
+////            holder.imgView_postPic.setVisibility(View.GONE);
+//        }
 
 
         holder.tv_name.setText(modelFeed.getProfile().getUser());
@@ -133,6 +134,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
         ImageView imgView_proPic, imgView_postPic;
         ProgressBar progressBar;
         OnItemClickListener onItemClickListener;
+        ViewPager vp;
 
         public MyViewHolder(View itemView, OnItemClickListener onItemClickListener) {
 
@@ -140,8 +142,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
 
             itemView.setOnClickListener(this);
             imgView_proPic = (ImageView) itemView.findViewById(R.id.imgView_proPic);
-            imgView_postPic = (ImageView) itemView.findViewById(R.id.imgView_postPic);
-
+//            imgView_postPic = (ImageView) itemView.findViewById(R.id.imgView_postPic);
+            vp = itemView.findViewById(R.id.view_pager_media);
             tv_name = (TextView) itemView.findViewById(R.id.tv_name);
             tv_time = (TextView) itemView.findViewById(R.id.tv_time);
             tv_likes = (TextView) itemView.findViewById(R.id.tv_like);

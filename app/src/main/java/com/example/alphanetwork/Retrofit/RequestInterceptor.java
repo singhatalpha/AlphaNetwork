@@ -5,8 +5,7 @@ import java.io.IOException;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.example.alphanetwork.MainActivity;
-import com.example.alphanetwork.MyApp;
+import Utils.MyApp;
 
 import okhttp3.Interceptor;
 import okhttp3.Request;

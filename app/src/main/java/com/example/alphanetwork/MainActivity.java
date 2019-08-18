@@ -27,14 +27,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
 
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private List<ModelFeed> feed = new ArrayList<>();
     private Adapter adapter;
     private String TAG = MainActivity.class.getSimpleName();
-    private TextView topHeadline;
     private SwipeRefreshLayout swipeRefreshLayout;
     private RelativeLayout errorLayout;
     private ImageView errorImage;
@@ -47,13 +46,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_feed);
 
 
-        topHeadline = findViewById(R.id.topheadelines);
+        swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout.setOnRefreshListener(this);
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
+
         recyclerView = findViewById(R.id.recyclerView);
         layoutManager = new LinearLayoutManager(MainActivity.this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setNestedScrollingEnabled(false);
-        LoadJson();
+        onLoadingSwipeRefresh();
 
         //FOr testing interceptor token
 
@@ -70,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void LoadJson() {
 
+        swipeRefreshLayout.setRefreshing(true);
 
         Api api = RetrofitClient.getInstance().getApi();
         Call <ModelHomeWall> call;
@@ -85,8 +88,10 @@ public class MainActivity extends AppCompatActivity {
                     recyclerView.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
 
+                    swipeRefreshLayout.setRefreshing(false);
 
                 } else {
+                    swipeRefreshLayout.setRefreshing(false);
                     Toast.makeText(MainActivity.this, "No Response", Toast.LENGTH_LONG).show();
 
                     }
@@ -100,6 +105,24 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
+
+    }
+
+    @Override
+    public void onRefresh() {
+        LoadJson();
+    }
+
+    private void onLoadingSwipeRefresh(){
+
+        swipeRefreshLayout.post(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        LoadJson();
+                    }
+                }
+        );
 
     }
 }

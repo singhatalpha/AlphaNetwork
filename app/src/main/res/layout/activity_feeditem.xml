@@ -19,7 +19,7 @@
         android:layout_height="45dp"
         android:adjustViewBounds="true"
         android:scaleType="fitCenter"
-        android:src="@drawable/temp_propic1" />
+         />
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -55,21 +55,44 @@
         android:text="This is Status"
         android:textColor="@color/black"
         android:textSize="16sp" />
-    <ImageView
-        android:id="@+id/imgView_postPic"
+
+
+    <!--<ImageView-->
+        <!--android:id="@+id/imgView_postPic"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/tv_status"-->
+        <!--android:layout_marginTop="5dp"-->
+        <!--android:adjustViewBounds="true"-->
+        <!--android:scaleType="fitCenter"-->
+
+        <!--android:visibility="gone" />-->
+    <android.support.v4.view.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:id="@+id/view_pager_media"
+        >
+
+    </android.support.v4.view.ViewPager>
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_status"
-        android:layout_marginTop="5dp"
-        android:adjustViewBounds="true"
-        android:scaleType="fitCenter"
-        android:src="@drawable/temp_post1"
-        android:visibility="gone" />
+        app:tabBackground="@drawable/tab_selector"
+        app:tabGravity="center"
+        app:tabIndicatorHeight="0dp"
+        app:tabMaxWidth="10dp"/>
+
+
+
+
+
     <RelativeLayout
         android:id="@+id/rellay2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imgView_postPic"
+        android:layout_below="@+id/view_pager_media"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:layout_marginTop="15dp">
@@ -183,3 +206,16 @@
 </LinearLayout>
 </RelativeLayout>
 
+<!--<TextView-->
+<!--android:id="@+id/topheadelines"-->
+<!--android:textColor="@color/colorTextTitle"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:textStyle="bold"-->
+<!--android:text="Top Headlines"-->
+<!--android:fontFamily="sans-serif-light"-->
+<!--android:textSize="17sp"-->
+<!--android:layout_marginLeft="16dp"-->
+<!--android:layout_marginRight="16dp"-->
+<!--android:layout_marginTop="10dp"-->
+<!--android:visibility="invisible"/>-->

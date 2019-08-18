@@ -1,4 +1,4 @@
-package com.example.alphanetwork;
+package Utils;
 
 import android.app.Application;
 import android.content.Context;
