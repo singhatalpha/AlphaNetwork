@@ -6,6 +6,20 @@
     tools:context=".Feed.MediaAdapter">
 
     <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:id="@+id/test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rellay1"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="15dp"
+        android:text="This is Status"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+
     <VideoView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

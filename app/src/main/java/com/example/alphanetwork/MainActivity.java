@@ -2,6 +2,7 @@ package com.example.alphanetwork;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
+
 
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
@@ -84,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
                     feed = response.body().getPosts();
                     System.out.println(feed);
-                    adapter = new Adapter(feed, MainActivity.this);
+                    adapter = new Adapter(feed, MainActivity.this, getSupportFragmentManager());
                     recyclerView.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
 
@@ -126,3 +128,16 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
     }
 }
+
+//    private void init(){
+//        ArrayList<Fragment> fragments = new ArrayList<>();
+//        Hat[] hats = Hats.getHats();
+//        for(Hat hat: hats){
+//            ViewPagerItemFragment fragment = ViewPagerItemFragment.getInstance(hat);
+//            fragments.add(fragment);
+//        }
+//        MyPagerAdapter pagerAdapter = new MyPagerAdapter(getSupportFragmentManager(), fragments);
+//        mMyViewPager.setAdapter(pagerAdapter);
+//        mTabLayout.setupWithViewPager(mMyViewPager, true);
+//    }
+

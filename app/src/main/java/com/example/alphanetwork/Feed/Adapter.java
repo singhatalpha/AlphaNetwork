@@ -2,8 +2,12 @@ package com.example.alphanetwork.Feed;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -22,6 +26,7 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.example.alphanetwork.Model.ModelFeed;
@@ -35,11 +40,12 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
     private List<ModelFeed> posts;
     private Context context;
     private OnItemClickListener onItemClickListener;
+    private FragmentManager fragmentManager;
 
-
-    public Adapter(List<ModelFeed> posts, Context context) {
+    public Adapter(List<ModelFeed> posts, Context context,FragmentManager fragmentManager) {
         this.posts = posts;
         this.context = context;
+        this.fragmentManager = fragmentManager;
     }
 
     @NonNull
@@ -95,6 +101,88 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
 //        }
 
 
+//        MediaAdapter ma = new MediaAdapter();
+//        holder.vp.setAdapter(ma);
+
+        final ArrayList<Fragment> fragments = new ArrayList<>();
+        List<String> medias = modelFeed.getMedia();
+
+        for(String media : medias){
+            MediaAdapter fragment = MediaAdapter.getInstance(media);
+            fragments.add(fragment);
+        }
+
+        MyPagerAdapter pagerAdapter = new MyPagerAdapter(fragmentManager, fragments);
+        holder.vp.setAdapter(pagerAdapter);
+
+
+
+
+         ViewPager.OnPageChangeListener pageChangeListener = new ViewPager.SimpleOnPageChangeListener() {
+
+            @Override
+            public void onPageSelected(int position) {
+//                System.out.println(viewPager);
+//                System.out.println("view pager");
+//
+                MediaAdapter one = (MediaAdapter) fragments.get(holder.vp.getCurrentItem());
+                System.out.println("fragement : " + one);
+                if(one.link.endsWith(".mp4")){
+                    one.bar.setVisibility(View.VISIBLE);
+                    one.mVideo.setMediaController(one.mediacontroller);
+//                System.out.println(one.uri);
+                    one.mVideo.setVideoURI(Uri.parse(one.link));
+                    one.mVideo.requestFocus();
+                    one.mVideo.start();}
+                else
+                {
+
+//                    ((MediaAdapter)fragments.get(holder.vp.getCurrentItem()-1)).mVideo.stopPlayback();
+                    Glide.with(context).load(one.link).into(one.mImage);
+                }
+
+            }
+
+
+        };
+        holder.vp.addOnPageChangeListener(pageChangeListener);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        holder.tl.setupWithViewPager(holder.vp, true);
+
+
         holder.tv_name.setText(modelFeed.getProfile().getUser());
         holder.tv_time.setText(Utils.DateFormat(modelFeed.getTime()));
         holder.tv_likes.setText(String.valueOf(modelFeed.getLikes()));
@@ -135,6 +223,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
         ProgressBar progressBar;
         OnItemClickListener onItemClickListener;
         ViewPager vp;
+        TabLayout tl;
 
         public MyViewHolder(View itemView, OnItemClickListener onItemClickListener) {
 
@@ -144,6 +233,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
             imgView_proPic = (ImageView) itemView.findViewById(R.id.imgView_proPic);
 //            imgView_postPic = (ImageView) itemView.findViewById(R.id.imgView_postPic);
             vp = itemView.findViewById(R.id.view_pager_media);
+            tl = itemView.findViewById(R.id.tab_layout);
+
             tv_name = (TextView) itemView.findViewById(R.id.tv_name);
             tv_time = (TextView) itemView.findViewById(R.id.tv_time);
             tv_likes = (TextView) itemView.findViewById(R.id.tv_like);

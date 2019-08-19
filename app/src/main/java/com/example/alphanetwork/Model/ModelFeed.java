@@ -1,8 +1,11 @@
 package com.example.alphanetwork.Model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
-public class ModelFeed {
+public class ModelFeed{
 
 
     private int likes = 7;
@@ -12,7 +15,7 @@ public class ModelFeed {
     private String title;
     private String content;
     private int user;
-    private List<ModelMedia> media;
+    private List<String> media;
     private ModelProfile profile;
 
 
@@ -73,17 +76,17 @@ public class ModelFeed {
         this.user = user;
     }
 
-    public List<ModelMedia> getMedia() {
+    public List<String> getMedia() {
         return media;
     }
-    public String oneMedia()
-    {
+//    public String oneMedia()
+//    {
+//
+//            return this.getMedia().get(0).getFile_data();
+//
+//    }
 
-            return this.getMedia().get(0).getFile_data();
-
-    }
-
-    public void setMedia(List<ModelMedia> media) {
+    public void setMedia(List<String> media) {
         if(media.size() == 0) {
             this.media = null;
         }
@@ -98,4 +101,14 @@ public class ModelFeed {
         this.profile = profile;
     }
 
+//    @Override
+//    public int describeContents() {
+//        return 0;
+//    }
+//
+//    @Override
+//    public void writeToParcel(Parcel dest, int flags) {
+//        dest.writeString(media);
+//
+//    }
 }
