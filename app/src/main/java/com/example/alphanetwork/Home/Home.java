@@ -38,8 +38,8 @@ public class Home extends AppCompatActivity{
     private void setupViewPager(){
         HomePagerAdapter adapter = new HomePagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new HomeWallFragment()); //index 0
-        adapter.addFragment(new HomeEventsFragment()); //index 1
-        adapter.addFragment(new HomeLiveFragment()); //index 2
+//        adapter.addFragment(new HomeEventsFragment()); //index 1
+        adapter.addFragment(new HomeLocalWallFragment()); //index 1
         ViewPager viewPager = findViewById(R.id.container);
         viewPager.setAdapter(adapter);
 
@@ -47,8 +47,8 @@ public class Home extends AppCompatActivity{
         tabLayout.setupWithViewPager(viewPager);
 
         tabLayout.getTabAt(0).setIcon(R.drawable.ic_wall);
-        tabLayout.getTabAt(1).setIcon(R.drawable.ic_events);
-        tabLayout.getTabAt(2).setIcon(R.drawable.ic_live);
+        tabLayout.getTabAt(1).setIcon(R.drawable.ic_wall);
+//        tabLayout.getTabAt(2).setIcon(R.drawable.ic_live);
     }
 
 

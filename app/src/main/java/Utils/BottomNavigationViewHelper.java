@@ -14,7 +14,7 @@ import com.example.alphanetwork.Search.Search;
 import com.example.alphanetwork.Circle.Circle;
 import com.example.alphanetwork.R;
 import com.example.alphanetwork.Notification.Notification;
-import com.example.alphanetwork.Menu.More;
+import com.example.alphanetwork.Dark.Dark;
 
 public class BottomNavigationViewHelper {
 
@@ -52,8 +52,8 @@ public class BottomNavigationViewHelper {
                         context.startActivity(intent4);
                         break;
 
-                    case R.id.ic_menu:
-                        Intent intent5 = new Intent(context, More.class);//ACTIVITY_NUM = 4
+                    case R.id.ic_warning:
+                        Intent intent5 = new Intent(context, Dark.class);//ACTIVITY_NUM = 4
                         context.startActivity(intent5);
                         break;
 

@@ -9,10 +9,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.example.alphanetwork.Circle.CirclePagerAdapter;
-import com.example.alphanetwork.Circle.CircleChatFragment;
-import com.example.alphanetwork.Circle.CircleWallFragment;
-import com.example.alphanetwork.Circle.CircleWatchFragment;
+//import com.example.alphanetwork.Circle.CircleChatFragment;
 import com.example.alphanetwork.R;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
@@ -39,8 +36,8 @@ public class Circle extends AppCompatActivity{
 
     private void setupViewPager(){
         CirclePagerAdapter adapter = new CirclePagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new CircleWallFragment()); //index 0
-        adapter.addFragment(new CircleChatFragment()); //index 1
+        adapter.addFragment(new CircleEventsFragment()); //index 0
+//        adapter.addFragment(new CircleChatFragment()); //index 1
         adapter.addFragment(new CircleWatchFragment()); //index 2
         ViewPager viewPager = findViewById(R.id.container);
         viewPager.setAdapter(adapter);
@@ -48,9 +45,9 @@ public class Circle extends AppCompatActivity{
         TabLayout tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
-        tabLayout.getTabAt(0).setIcon(R.drawable.ic_wall);
-        tabLayout.getTabAt(1).setIcon(R.drawable.ic_chat);
-        tabLayout.getTabAt(2).setIcon(R.drawable.ic_watch);
+        tabLayout.getTabAt(0).setIcon(R.drawable.ic_events);
+//        tabLayout.getTabAt(1).setIcon(R.drawable.ic_chat);
+        tabLayout.getTabAt(1).setIcon(R.drawable.ic_watch);
     }
 
     /**
