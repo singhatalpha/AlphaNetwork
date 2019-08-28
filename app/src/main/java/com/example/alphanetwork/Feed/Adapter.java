@@ -158,10 +158,17 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
 
 
         final PagerAdapter receive = addData(position);
-        System.out.println(holder.vp);
+        if(receive == null)
+        {
+//             View namebar = View.findViewById(R.id.namebar);
+            ((ViewGroup) holder.vp.getParent()).removeView(holder.vp);
+        }
+        else
+        {
+            System.out.println(holder.vp);
 //        System.out.println("veiw holder : " + holder);
-        holder.vp.setId(position+1);
-        holder.vp.setAdapter(receive);
+            holder.vp.setId(position+1);
+            holder.vp.setAdapter(receive);
 
 
 
@@ -199,7 +206,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
 
 
 
-
+        }
 
 
 
@@ -269,6 +276,11 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
 
         ModelFeed modelFeed = posts.get(i);
         List<String> urls = modelFeed.getMedia();
+        
+        if(urls.size() == 0)
+        {
+            return null;
+        }
 
 
 
