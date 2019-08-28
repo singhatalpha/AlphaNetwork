@@ -8,6 +8,10 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+
+//import android.support.v4.view.PagerAdapter;
+
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -29,6 +33,7 @@ import com.bumptech.glide.request.target.Target;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.alphanetwork.MainActivity;
 import com.example.alphanetwork.Model.ModelFeed;
 import com.example.alphanetwork.R;
 import Utils.Utils;
@@ -59,7 +64,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
     public void onBindViewHolder(@NonNull MyViewHolder holders, int position) {
         final MyViewHolder holder = holders;
         ModelFeed modelFeed = posts.get(position);
+
         System.out.println(modelFeed.getMedia());
+
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.placeholder(Utils.getRandomDrawbleColor());
         requestOptions.error(Utils.getRandomDrawbleColor());
@@ -104,59 +111,91 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
 //        MediaAdapter ma = new MediaAdapter();
 //        holder.vp.setAdapter(ma);
 
-        final ArrayList<Fragment> fragments = new ArrayList<>();
-        List<String> medias = modelFeed.getMedia();
+//        final ArrayList<Fragment> fragments = new ArrayList<>();
+//        List<String> medias = modelFeed.getMedia();
+//
+//        for(String media : medias){
+//            MediaAdapter fragment = MediaAdapter.getInstance(media);
+//            fragments.add(fragment);
+//        }
+//
+//        MyPagerAdapter pagerAdapter = new MyPagerAdapter(fragmentManager, fragments);
+//        holder.vp.setAdapter(pagerAdapter);
+//
+//
+//
+//
+//         ViewPager.OnPageChangeListener pageChangeListener = new ViewPager.SimpleOnPageChangeListener() {
+//
+//            @Override
+//            public void onPageSelected(int position) {
+////                System.out.println(viewPager);
+////                System.out.println("view pager");
+////
+//                MediaAdapter one = (MediaAdapter) fragments.get(holder.vp.getCurrentItem());
+//                System.out.println("fragement : " + one);
+//                if(one.link.endsWith(".mp4")){
+//                    one.bar.setVisibility(View.VISIBLE);
+//                    one.mVideo.setMediaController(one.mediacontroller);
+////                System.out.println(one.uri);
+//                    one.mVideo.setVideoURI(Uri.parse(one.link));
+//                    one.mVideo.requestFocus();
+//                    one.mVideo.start();}
+//                else
+//                {
+//
+////                    ((MediaAdapter)fragments.get(holder.vp.getCurrentItem()-1)).mVideo.stopPlayback();
+//                    Glide.with(context).load(one.link).into(one.mImage);
+//                }
+//
+//            }
+//
+//
+//        };
+//        holder.vp.addOnPageChangeListener(pageChangeListener);
 
-        for(String media : medias){
-            MediaAdapter fragment = MediaAdapter.getInstance(media);
-            fragments.add(fragment);
-        }
-
-        MyPagerAdapter pagerAdapter = new MyPagerAdapter(fragmentManager, fragments);
-        holder.vp.setAdapter(pagerAdapter);
 
 
 
+        final PagerAdapter receive = addData(position);
+        System.out.println(holder.vp);
+//        System.out.println("veiw holder : " + holder);
+        holder.vp.setId(position+1);
+        holder.vp.setAdapter(receive);
 
-         ViewPager.OnPageChangeListener pageChangeListener = new ViewPager.SimpleOnPageChangeListener() {
+
+
+
+
+//        viewPager.setAdapter(adapter);
+//        viewPager.setCurrentItem(0);
+        ViewPager.OnPageChangeListener pageChangeListener = new ViewPager.SimpleOnPageChangeListener() {
 
             @Override
             public void onPageSelected(int position) {
 //                System.out.println(viewPager);
-//                System.out.println("view pager");
-//
-                MediaAdapter one = (MediaAdapter) fragments.get(holder.vp.getCurrentItem());
+                System.out.println("view pager");
+
+                MediaAdapter one = (MediaAdapter) receive.mediaFragments.get(holder.vp.getCurrentItem());
                 System.out.println("fragement : " + one);
                 if(one.link.endsWith(".mp4")){
                     one.bar.setVisibility(View.VISIBLE);
-                    one.mVideo.setMediaController(one.mediacontroller);
+                    one.mVideo.setMediaController(MediaAdapter.mediaController);
 //                System.out.println(one.uri);
+//                    one.mVideo.setVideoURI(Uri.parse(one.link));
                     one.mVideo.setVideoURI(Uri.parse(one.link));
                     one.mVideo.requestFocus();
                     one.mVideo.start();}
-                else
-                {
-
-//                    ((MediaAdapter)fragments.get(holder.vp.getCurrentItem()-1)).mVideo.stopPlayback();
-                    Glide.with(context).load(one.link).into(one.mImage);
-                }
+//                else
+//                {
+//                    ((MediaAdapter)receive.mediaFragments.get(holder.vp.getCurrentItem()-1)).mVideo.stopPlayback();
+//                    Glide.with(MainActivity.this).load(one.url).into(one.iv);
+//                }
 
             }
-
-
         };
+//
         holder.vp.addOnPageChangeListener(pageChangeListener);
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -215,6 +254,68 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
     public interface OnItemClickListener {
         void onItemClick(View view, int position);
     }
+
+
+
+
+
+
+
+    public PagerAdapter addData(int i)
+    {
+        System.out.println(i);
+        System.out.println(posts.size());
+
+
+        ModelFeed modelFeed = posts.get(i);
+        List<String> urls = modelFeed.getMedia();
+
+
+
+
+        PagerAdapter pagerAdapter = new PagerAdapter(fragmentManager);
+//        ArrayList<String> urls = modelFeed.getMedia().get(i);
+        MediaAdapter one;
+
+        for(int j = 0; j < urls.size(); j++)
+        {
+            System.out.println(urls.get(j));
+            one = MediaAdapter.newInstance(urls.get(j));
+            pagerAdapter.mediaFragments.add(one);
+
+        }
+//        viewPager.setAdapter(pagerAdapter);
+        return  pagerAdapter;
+    }
+
+
+    public class PagerAdapter extends FragmentStatePagerAdapter
+    {
+        //        public ArrayList<MediaFragment> arrayList =
+        public ArrayList<MediaAdapter> mediaFragments = new ArrayList<>();
+        public PagerAdapter(FragmentManager manager)
+        {
+            super(manager);
+        }
+
+
+        @Override
+        public Fragment getItem(int i) {
+            return mediaFragments.get(i);
+        }
+
+        @Override
+        public int getCount() {
+            return mediaFragments.size();
+        }
+    }
+
+
+
+
+
+
+
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements  View.OnClickListener {
 

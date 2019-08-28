@@ -2,6 +2,7 @@ package com.example.alphanetwork;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.alphanetwork.Feed.Adapter;
+import com.example.alphanetwork.Feed.MediaAdapter;
 import com.example.alphanetwork.Model.ModelFeed;
 import com.example.alphanetwork.Retrofit.Api;
 import com.example.alphanetwork.Model.ModelHomeWall;
@@ -28,7 +30,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
+public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener, MediaAdapter.OnFragmentInteractionListener {
 
 
     private RecyclerView recyclerView;
@@ -125,6 +127,10 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                     }
                 }
         );
+
+    }
+    @Override
+    public void onFragmentInteraction(Uri uri) {
 
     }
 }

@@ -1,5 +1,6 @@
 package com.example.alphanetwork.Feed;
 
+import android.content.Context;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.support.v4.app.Fragment;
@@ -22,38 +23,60 @@ import com.example.alphanetwork.R;
 
 public class MediaAdapter extends Fragment {
 
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
 
-    //
     public ImageView mImage;
     public VideoView mVideo;
     public TextView mTest;
     // vars
     public String link;
-    public static MediaController mediacontroller;
+
     public Uri uri;
     public ProgressBar bar;
+    private OnFragmentInteractionListener mListener;
 
-    public static MediaAdapter getInstance(String media) {
-        MediaAdapter fragment = new MediaAdapter();
+    public static MediaController mediaController;
+//    public ProgressBar progressBar;
 
-//        if(media != null){
-//            Bundle bundle = new Bundle();
-//            bundle.putParcelable("media", media);
-//            fragment.setArguments(bundle);
-//        }
+
+    public MediaAdapter() {
+        // Required empty public constructor
+    }
+
+//    public static MediaAdapter getInstance(String media) {
+//        MediaAdapter fragment = new MediaAdapter();
+//
+////        if(media != null){
+////            Bundle bundle = new Bundle();
+////            bundle.putParcelable("media", media);
+////            fragment.setArguments(bundle);
+////        }
+////        return fragment;
+//
+//        Bundle args = new Bundle();
+//        args.putString("media", media);
+//        fragment.setArguments(args);
 //        return fragment;
+//    }
 
+
+
+    public static MediaAdapter newInstance(String media) {
+        MediaAdapter fragment = new MediaAdapter();
         Bundle args = new Bundle();
-        args.putString("media", media);
+        args.putString(ARG_PARAM1, media);
+//        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            link = getArguments().getString("media");
+            link = getArguments().getString(ARG_PARAM1);
         }
     }
 
@@ -69,7 +92,7 @@ public class MediaAdapter extends Fragment {
         System.out.println("thiis reached onview created");
         mImage = view.findViewById(R.id.imageplayer);
         mVideo = view.findViewById(R.id.videoplayer);
-        mTest = view.findViewById(R.id.test);
+//        mTest = view.findViewById(R.id.test);
         bar = view.findViewById(R.id.progress);
         init();
     }
@@ -86,57 +109,73 @@ public class MediaAdapter extends Fragment {
 //                    .into(mImage);
 //        }
 //        System.out.println("thiis reached media inititations " + link);
-//        if (link != null) {
-//            mTest.setText("Its working for tv");
-//            if (link.endsWith(".mp4")) {
-//                mVideo.setVisibility(View.VISIBLE);
-//                mVideo.setVideoPath(link);
-//                mVideo.start();
-//
-//            }
-//            else {
-//                mImage.setVisibility(View.VISIBLE);
-//                RequestOptions requestOptions = new RequestOptions()
-//                        .placeholder(R.drawable.ic_launcher_background);
-//                System.out.println("loading image");
-//                Glide.with(getActivity())
-//                        .setDefaultRequestOptions(requestOptions)
-//                        .load(link)
-//                        .dontAnimate()
-//                        .into(mImage);
-//            }
-//
-//
-//        }
         if (link != null) {
             if (link.endsWith(".mp4")) {
-//                bar = (ProgressBar) view.findViewById(R.id.progrss);
-//            bar=new ProgressDialog(getActivity());
-//            bar.setTitle("Connecting server");
-//            bar.setMessage("Please Wait... ");
-//            bar.setCancelable(false);
-//            bar.show();
-//                vv = (VideoView) view.findViewById(R.id.videoplayer);
-                mediacontroller = new MediaController(getActivity());
-                mediacontroller.setAnchorView(mVideo);
+                mVideo.setVisibility(View.VISIBLE);
+                mediaController = new MediaController(getActivity());
+                mediaController.setAnchorView(mVideo);
                 mVideo.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                    // Close the progress bar and play the video
-                    public void onPrepared(MediaPlayer mp) {
-                        bar.setVisibility(View.GONE);
+                    @Override
+                    public void onPrepared(MediaPlayer mediaPlayer) {
+                        bar.setVisibility(getView().GONE);
                     }
                 });
-//                mImage = (ImageView) view.findViewById(R.id.imageshow);
+
+
+//                mVideo.setVideoPath(link);
+
+//                bar.setVisibility(View.GONE);
+//                mVideo.start();
                 mImage.setVisibility(View.GONE);
             } else {
-                //put the glide code for the image
-//            RequestOptions
-//                iv = (ImageView) view.findViewById(R.id.imageshow);
-//                vv = (VideoView) view.findViewById(R.id.videoplayer);
                 mVideo.setVisibility(View.GONE);
-//            iv.setImageURI();
-//.setBackgroundResource(R.drawable.ic_launcher_background);
-
+                mImage.setVisibility(View.VISIBLE);
+                RequestOptions requestOptions = new RequestOptions()
+                        .placeholder(R.drawable.ic_launcher_background);
+                System.out.println("loading image");
+                bar.setVisibility(View.GONE);
+                Glide.with(getActivity())
+                        .setDefaultRequestOptions(requestOptions)
+                        .load(link)
+                        .dontAnimate()
+                        .into(mImage);
             }
+
+
+        }
+        else
+        {
+            mVideo.setVisibility(View.GONE);
+            mImage.setVisibility(View.GONE);
         }
     }
+
+    public void onButtonPressed(Uri uri) {
+        if (mListener != null) {
+            mListener.onFragmentInteraction(uri);
+        }
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    public interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
+        void onFragmentInteraction(Uri uri);
+    }
+
 }

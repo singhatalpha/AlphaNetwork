@@ -1,221 +1,415 @@
 <?xml version="1.0" encoding="utf-8" ?>
+
+<!--    <RelativeLayout-->
+<!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:layout_marginBottom="10dp"-->
+<!--    android:background="@color/white">-->
+<!--    <RelativeLayout-->
+<!--        android:id="@+id/rellay1"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginLeft="15dp"-->
+<!--        android:layout_marginRight="15dp"-->
+<!--        android:layout_marginTop="15dp">-->
+<!--    <ImageView-->
+<!--        android:id="@+id/imgView_proPic"-->
+<!--        android:layout_width="45dp"-->
+<!--        android:layout_height="45dp"-->
+<!--        android:adjustViewBounds="true"-->
+<!--        android:scaleType="fitCenter"-->
+<!--        />-->
+<!--        -->
+<!--    <LinearLayout-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_centerVertical="true"-->
+<!--        android:layout_marginLeft="10dp"-->
+<!--        android:layout_toRightOf="@+id/imgView_proPic"-->
+<!--        android:orientation="vertical">-->
+<!--        -->
+<!--        -->
+<!--    <TextView-->
+<!--        android:id="@+id/tv_name"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:fontFamily="sans-serif-medium"-->
+<!--        android:text="Karun Shrestha"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="17sp" />-->
+<!--    <TextView android:id="@+id/tv_time"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:fontFamily="sans-serif"-->
+<!--        android:text="11 hrs"-->
+<!--        android:textColor="@color/grey"-->
+<!--        android:textSize="13sp" />-->
+<!--</LinearLayout>-->
+<!--</RelativeLayout>-->
+<!--    <TextView-->
+<!--        android:id="@+id/tv_status"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/rellay1"-->
+<!--        android:layout_marginLeft="15dp"-->
+<!--        android:layout_marginRight="15dp"-->
+<!--        android:layout_marginTop="15dp"-->
+<!--        android:text="This is Status"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="16sp" />-->
+
+<!--    -->
+
+<!--    <android.support.v4.view.ViewPager-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="500dp"-->
+<!--        android:id="@+id/view_pager_media"-->
+<!--        >-->
+
+<!--    </android.support.v4.view.ViewPager>-->
+
+<!--    <android.support.design.widget.TabLayout-->
+<!--        android:id="@+id/tab_layout"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:tabBackground="@drawable/tab_selector"-->
+<!--        app:tabGravity="center"-->
+<!--        app:tabIndicatorHeight="0dp"-->
+<!--        app:tabMaxWidth="10dp"/>-->
+
+
+
+
+
+<!--    <RelativeLayout-->
+<!--        android:id="@+id/rellay2"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/view_pager_media"-->
+<!--        android:layout_marginLeft="15dp"-->
+<!--        android:layout_marginRight="15dp"-->
+<!--        android:layout_marginTop="15dp">-->
+<!--    <LinearLayout-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content">-->
+<!--    <ImageView-->
+<!--        android:layout_width="15dp"-->
+<!--        android:layout_height="15dp"-->
+<!--        android:src="@drawable/temp_like" />-->
+<!--    <TextView-->
+<!--        android:id="@+id/tv_like"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginLeft="5dp"-->
+<!--        android:text="18"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="13sp" />-->
+<!--</LinearLayout>-->
+<!--    <TextView-->
+<!--        android:id="@+id/tv_comment"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentRight="true"-->
+<!--        android:text="5 comments"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="13sp" />-->
+<!--</RelativeLayout>-->
+<!--    <ImageView-->
+<!--        android:id="@+id/imgView_line"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0.5dp"-->
+<!--        android:layout_below="@+id/rellay2"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:background="@color/light_grey" />-->
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="45dp"-->
+<!--        android:layout_below="@+id/imgView_line">-->
+<!--    <RelativeLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_weight="1">-->
+<!--    <LinearLayout-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_centerInParent="true">-->
+<!--    <ImageView-->
+<!--        android:layout_width="18dp"-->
+<!--        android:layout_height="18dp"-->
+<!--        android:adjustViewBounds="true"-->
+<!--        android:scaleType="fitCenter" app:srcCompat="@drawable/temp_like_btn" />-->
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginLeft="10dp"-->
+<!--        android:fontFamily="sans-serif-medium"-->
+<!--        android:text="Like"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="13sp" />-->
+<!--</LinearLayout>-->
+<!--</RelativeLayout>-->
+<!--    <RelativeLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_weight="1">-->
+<!--    <LinearLayout-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_centerInParent="true">-->
+<!--    <ImageView-->
+<!--        android:layout_width="18dp"-->
+<!--        android:layout_height="18dp"-->
+<!--        android:adjustViewBounds="true"-->
+<!--        android:scaleType="fitCenter"-->
+<!--        app:srcCompat="@drawable/temp_comment_btn" />-->
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginLeft="10dp"-->
+<!--        android:fontFamily="sans-serif-medium"-->
+<!--        android:text="Comment"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="13sp" />-->
+<!--</LinearLayout>-->
+<!--</RelativeLayout>-->
+<!--    <RelativeLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_weight="1">-->
+<!--    <LinearLayout-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_centerInParent="true">-->
+<!--    <ImageView-->
+<!--        android:layout_width="18dp"-->
+<!--        android:layout_height="18dp"-->
+<!--        android:adjustViewBounds="true"-->
+<!--        android:scaleType="fitCenter"-->
+<!--        app:srcCompat="@drawable/temp_share_btn" />-->
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginLeft="10dp"-->
+<!--        android:fontFamily="sans-serif-medium"-->
+<!--        android:text="Share"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="13sp" />-->
+<!--</LinearLayout>-->
+<!--</RelativeLayout>-->
+<!--</LinearLayout>-->
+<!--</RelativeLayout>-->
+
+
+
+
+
+
+
+
+
+<RelativeLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
     <RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="10dp"
-    android:background="@color/white">
-    <RelativeLayout
-        android:id="@+id/rellay1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="15dp">
-    <ImageView
-        android:id="@+id/imgView_proPic"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:adjustViewBounds="true"
-        android:scaleType="fitCenter"
-         />
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="10dp"
-        android:layout_toRightOf="@+id/imgView_proPic"
-        android:orientation="vertical">
-    <TextView
-        android:id="@+id/tv_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-medium"
-        android:text="Karun Shrestha"
-        android:textColor="@color/black"
-        android:textSize="17sp" />
-    <TextView android:id="@+id/tv_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
-        android:text="11 hrs"
-        android:textColor="@color/grey"
-        android:textSize="13sp" />
-</LinearLayout>
-</RelativeLayout>
-    <TextView
-        android:id="@+id/tv_status"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/rellay1"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="15dp"
-        android:text="This is Status"
-        android:textColor="@color/black"
-        android:textSize="16sp" />
-
-
-    <!--<ImageView-->
-        <!--android:id="@+id/imgView_postPic"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_below="@+id/tv_status"-->
-        <!--android:layout_marginTop="5dp"-->
-        <!--android:adjustViewBounds="true"-->
-        <!--android:scaleType="fitCenter"-->
-
-        <!--android:visibility="gone" />-->
-    <android.support.v4.view.ViewPager
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:id="@+id/view_pager_media"
-        >
-
-    </android.support.v4.view.ViewPager>
-
-    <android.support.design.widget.TabLayout
-        android:id="@+id/tab_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:tabBackground="@drawable/tab_selector"
-        app:tabGravity="center"
-        app:tabIndicatorHeight="0dp"
-        app:tabMaxWidth="10dp"/>
-
-
-
-
-
-    <RelativeLayout
-        android:id="@+id/rellay2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/view_pager_media"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="15dp">
-    <LinearLayout
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content">
-    <ImageView
-        android:layout_width="15dp"
-        android:layout_height="15dp"
-        android:src="@drawable/temp_like" />
-    <TextView
-        android:id="@+id/tv_like"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:text="18"
-        android:textColor="@color/black"
-        android:textSize="13sp" />
-</LinearLayout>
-    <TextView
-        android:id="@+id/tv_comment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:text="5 comments"
-        android:textColor="@color/black"
-        android:textSize="13sp" />
-</RelativeLayout>
-    <ImageView
-        android:id="@+id/imgView_line"
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_below="@+id/rellay2"
-        android:layout_marginTop="10dp"
-        android:background="@color/light_grey" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_below="@+id/imgView_line">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true">
-    <ImageView
-        android:layout_width="18dp"
-        android:layout_height="18dp"
-        android:adjustViewBounds="true"
-        android:scaleType="fitCenter" app:srcCompat="@drawable/temp_like_btn" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:fontFamily="sans-serif-medium"
-        android:text="Like"
-        android:textColor="@color/black"
-        android:textSize="13sp" />
-</LinearLayout>
-</RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true">
-    <ImageView
-        android:layout_width="18dp"
-        android:layout_height="18dp"
-        android:adjustViewBounds="true"
-        android:scaleType="fitCenter"
-        app:srcCompat="@drawable/temp_comment_btn" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:fontFamily="sans-serif-medium"
-        android:text="Comment"
-        android:textColor="@color/black"
-        android:textSize="13sp" />
-</LinearLayout>
-</RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true">
-    <ImageView
-        android:layout_width="18dp"
-        android:layout_height="18dp"
-        android:adjustViewBounds="true"
-        android:scaleType="fitCenter"
-        app:srcCompat="@drawable/temp_share_btn" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:fontFamily="sans-serif-medium"
-        android:text="Share"
-        android:textColor="@color/black"
-        android:textSize="13sp" />
-</LinearLayout>
-</RelativeLayout>
-</LinearLayout>
-</RelativeLayout>
 
-<!--<TextView-->
-<!--android:id="@+id/topheadelines"-->
-<!--android:textColor="@color/colorTextTitle"-->
-<!--android:layout_width="match_parent"-->
-<!--android:layout_height="wrap_content"-->
-<!--android:textStyle="bold"-->
-<!--android:text="Top Headlines"-->
-<!--android:fontFamily="sans-serif-light"-->
-<!--android:textSize="17sp"-->
-<!--android:layout_marginLeft="16dp"-->
-<!--android:layout_marginRight="16dp"-->
-<!--android:layout_marginTop="10dp"-->
-<!--android:visibility="invisible"/>-->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/relLayout1">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/imgView_proPic"
+                android:layout_marginTop="15dp"
+
+                android:layout_marginLeft="25dp"
+                android:layout_centerVertical="true"
+                />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="mitch.tabian"
+                android:layout_toRightOf="@+id/imgView_proPic"
+                android:layout_marginLeft="10dp"
+                android:layout_centerVertical="true"
+                android:id="@+id/tv_name"
+                android:textColor="@color/black"
+                />
+
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:icon="@drawable/ic_ellipses"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                android:id="@+id/ivEllipses"/>
+
+        </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/relLayout11"
+        android:layout_below="@+id/relLayout1">
+
+        <TextView
+            android:id="@+id/tv_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="5dp"
+            android:text="This is Status"
+            android:textColor="@color/black"
+            android:textSize="25sp" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/relLayout12"
+        android:layout_below="@+id/relLayout11">
+
+            <android.support.v4.view.ViewPager
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:id="@+id/view_pager_media"
+                >
+
+            </android.support.v4.view.ViewPager>
+
+    </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/relLayout2"
+            android:layout_below="@+id/relLayout12">
+
+
+
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tab_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tabBackground="@drawable/tab_selector"
+                app:tabGravity="center"
+                app:tabIndicatorHeight="0dp"
+                app:tabMaxWidth="10dp"
+                />
+
+
+
+
+            <RelativeLayout
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:id="@+id/heartLayout"
+                android:background="@color/white">
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:id="@+id/image_heart_red"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="20dp"
+                    android:src="@drawable/temp_like"
+                    android:visibility="invisible"/>
+
+<!--                <ImageView-->
+<!--                    android:layout_width="35dp"-->
+<!--                    android:layout_height="35dp"-->
+<!--                    android:id="@+id/image_heart"-->
+<!--                    android:layout_centerInParent="true"-->
+<!--                    android:layout_marginLeft="20dp"-->
+<!--                    android:src="@drawable/ic_heart_outline"-->
+<!--                    android:visibility="visible"/>-->
+
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:id="@+id/speech_bubble"
+                android:layout_toRightOf="@+id/heartLayout"
+                android:layout_marginLeft="10dp"
+                app:srcCompat="@drawable/temp_comment_btn"
+                android:visibility="visible"
+                android:layout_centerVertical="true"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/relLayout3"
+            android:layout_below="@+id/relLayout2"
+            android:padding="20dp"
+            android:layout_marginBottom="50dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Liked by Mitch, Tom, Mohammed and 30 others"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:id="@+id/tv_like"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="mitch.tabian moutains #earthporn #mountains"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:id="@+id/image_caption"
+                android:layout_below="@+id/tv_like"
+                android:layout_marginTop="15dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="View all 3 comments"
+                android:textColor="@color/grey"
+                android:textSize="18sp"
+                android:layout_below="@+id/image_caption"
+                android:id="@+id/tv_comment"
+                android:layout_marginTop="15dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3 DAYS AGO"
+                android:textColor="@color/grey"
+                android:textSize="18sp"
+                android:layout_below="@+id/tv_comment"
+                android:id="@+id/tv_time"
+                android:layout_marginTop="15dp"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+<!--<include layout="@layout/layout_bottom_navigation_view"/>-->
+
+</RelativeLayout>
