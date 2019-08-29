@@ -18,8 +18,13 @@ import android.widget.TextView;
 import android.widget.VideoView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.alphanetwork.R;
+
+import Utils.Utils;
+
+import static android.widget.ImageView.ScaleType.CENTER_CROP;
 
 public class MediaAdapter extends Fragment {
 
@@ -91,6 +96,7 @@ public class MediaAdapter extends Fragment {
 
         System.out.println("thiis reached onview created");
         mImage = view.findViewById(R.id.imageplayer);
+//        mImage.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
         mVideo = view.findViewById(R.id.videoplayer);
 //        mTest = view.findViewById(R.id.test);
         bar = view.findViewById(R.id.progress);
@@ -112,6 +118,7 @@ public class MediaAdapter extends Fragment {
         if (link != null) {
             if (link.endsWith(".mp4")) {
                 mVideo.setVisibility(View.VISIBLE);
+
                 mediaController = new MediaController(getActivity());
                 mediaController.setAnchorView(mVideo);
                 mVideo.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
@@ -121,23 +128,29 @@ public class MediaAdapter extends Fragment {
                     }
                 });
 
-
 //                mVideo.setVideoPath(link);
-
 //                bar.setVisibility(View.GONE);
 //                mVideo.start();
                 mImage.setVisibility(View.GONE);
+
             } else {
+
                 mVideo.setVisibility(View.GONE);
                 mImage.setVisibility(View.VISIBLE);
-                RequestOptions requestOptions = new RequestOptions()
-                        .placeholder(R.drawable.ic_launcher_background);
+
+                RequestOptions requestOptions = new RequestOptions();
+                requestOptions.placeholder(R.drawable.ic_launcher_background);
+                requestOptions.error(Utils.getRandomDrawbleColor());
+                requestOptions.diskCacheStrategy(DiskCacheStrategy.ALL);
+
+
                 System.out.println("loading image");
                 bar.setVisibility(View.GONE);
                 Glide.with(getActivity())
                         .setDefaultRequestOptions(requestOptions)
                         .load(link)
                         .dontAnimate()
+
                         .into(mImage);
             }
 

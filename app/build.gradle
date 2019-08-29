@@ -51,5 +51,5 @@ dependencies {
 
 //Times Formater
     implementation 'org.ocpsoft.prettytime:prettytime:4.0.1.Final'
-
+    implementation 'de.hdodenhof:circleimageview:3.0.1'
 }

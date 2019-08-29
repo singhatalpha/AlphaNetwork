@@ -1,5 +1,10 @@
 package com.example.alphanetwork.Retrofit;
 
+import android.app.Activity;
+import android.content.Context;
+
+import com.example.alphanetwork.MainActivity;
+
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -11,7 +16,7 @@ public class RetrofitClient {
 
     private static RetrofitClient mInstance;
     private static Retrofit retrofit;
-
+    private Context context;
 
     OkHttpClient okHttpClient = new OkHttpClient.Builder()
             .addInterceptor(new RequestInterceptor()) // This is used to add ApplicationInterceptor.

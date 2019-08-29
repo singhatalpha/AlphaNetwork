@@ -226,15 +226,22 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
             android:layout_height="50dp"
             android:id="@+id/relLayout1">
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:id="@+id/imgView_proPic"
                 android:layout_marginTop="15dp"
-
-                android:layout_marginLeft="25dp"
+                android:layout_marginLeft="20dp"
                 android:layout_centerVertical="true"
+
+                app:civ_border_width="1dp"
+                app:civ_border_color="#FF000000"
                 />
+
+
+
+
+
 
 
             <TextView
@@ -251,13 +258,14 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
             <ImageView
+                android:id="@+id/ivEllipses"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:icon="@drawable/ic_ellipses"
-                android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
                 android:layout_marginRight="20dp"
-                android:id="@+id/ivEllipses"/>
+                android:icon="@drawable/ic_ellipses"
+                app:srcCompat="@drawable/ic_ellipses" />
 
         </RelativeLayout>
 
@@ -328,13 +336,13 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                 android:background="@color/white">
 
                 <ImageView
+                    android:id="@+id/image_heart_red"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:id="@+id/image_heart_red"
                     android:layout_centerInParent="true"
                     android:layout_marginLeft="20dp"
                     android:src="@drawable/temp_like"
-                    android:visibility="invisible"/>
+                    android:visibility="visible" />
 
 <!--                <ImageView-->
 <!--                    android:layout_width="35dp"-->

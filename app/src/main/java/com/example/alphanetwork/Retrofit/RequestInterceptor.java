@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import Utils.MyApp;
+import com.example.alphanetwork.MainActivity;
 
 import okhttp3.Interceptor;
 import okhttp3.Request;
@@ -19,7 +20,6 @@ public class RequestInterceptor implements Interceptor {
 
     private SharedPreferences sharedpref;
     private Context context = MyApp.getContext();
-
 
 //    public RequestInterceptor(Context context) {
 //        this.context = context;
