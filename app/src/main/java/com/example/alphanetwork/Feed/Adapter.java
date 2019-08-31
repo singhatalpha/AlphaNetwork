@@ -1,5 +1,6 @@
 package com.example.alphanetwork.Feed;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -14,7 +15,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -37,6 +41,7 @@ import com.example.alphanetwork.MainActivity;
 import com.example.alphanetwork.Model.ModelFeed;
 import com.example.alphanetwork.R;
 import Utils.Utils;
+import Utils.LikesToggle;
 
 
 
@@ -46,6 +51,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
     private Context context;
     private OnItemClickListener onItemClickListener;
     private FragmentManager fragmentManager;
+    private static final String TAG = "Adapter";
 
     public Adapter(List<ModelFeed> posts, Context context,FragmentManager fragmentManager) {
         this.posts = posts;
@@ -337,6 +343,15 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
         OnItemClickListener onItemClickListener;
         ViewPager vp;
         TabLayout tl;
+        ImageView imgView_like, imgView_liked, imgView_dislike, imgView_disliked;
+        private GestureDetector lGestureDetector;
+        private GestureDetector dGestureDetector;
+        private LikesToggle like;
+
+
+
+
+
 
         public MyViewHolder(View itemView, OnItemClickListener onItemClickListener) {
 
@@ -351,8 +366,29 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
             tv_name = (TextView) itemView.findViewById(R.id.tv_name);
             tv_time = (TextView) itemView.findViewById(R.id.tv_time);
             tv_likes = (TextView) itemView.findViewById(R.id.tv_like);
-            tv_comments = (TextView) itemView.findViewById(R.id.tv_comment);
+
+            tv_comments = (TextView) itemView.findViewById(R.id.tv_comments);
             tv_status = (TextView) itemView.findViewById(R.id.tv_status);
+
+
+            //likes toggling
+            imgView_like = (ImageView) itemView.findViewById(R.id.image_like);
+            imgView_liked= (ImageView) itemView.findViewById(R.id.image_liked);
+            imgView_dislike = (ImageView) itemView.findViewById(R.id.image_dislike);
+            imgView_disliked = (ImageView) itemView.findViewById(R.id.image_disliked);
+            lGestureDetector = new GestureDetector(context,new lGestureListener());
+            dGestureDetector = new GestureDetector(context,new dGestureListener());
+
+
+            imgView_liked.setVisibility(View.GONE);
+            imgView_like.setVisibility(View.VISIBLE);
+            imgView_disliked.setVisibility(View.GONE);
+            imgView_dislike.setVisibility(View.VISIBLE);
+            like = new LikesToggle(imgView_like,imgView_liked,imgView_dislike,imgView_disliked);
+            likeToggle();
+            dislikeToggle();
+
+
 
             this.onItemClickListener = onItemClickListener;
 
@@ -362,5 +398,110 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
         public void onClick(View v) {
             onItemClickListener.onItemClick(v, getAdapterPosition());
         }
+
+
+
+
+        private void likeToggle(){
+
+            imgView_liked.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    return lGestureDetector.onTouchEvent(event);
+                }
+            });
+
+
+            imgView_like.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    Log.d(TAG, "Entered like touch listerner");
+                    return lGestureDetector.onTouchEvent(event);
+                }
+            });
+
+
+        }
+
+
+
+        private void dislikeToggle(){
+            imgView_disliked.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    return dGestureDetector.onTouchEvent(event);
+                }
+            });
+
+
+            imgView_dislike.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    Log.d(TAG, "Entered dislike touch listerner");
+                    return dGestureDetector.onTouchEvent(event);
+                }
+            });
+        }
+
+
+
+        public class lGestureListener extends GestureDetector.SimpleOnGestureListener{
+
+
+
+            @Override
+            public boolean onDown(MotionEvent e) {
+                return true;
+            }
+
+            @Override
+            public boolean onDoubleTap(MotionEvent e) {
+                like.toggleLike();
+                return true;
+            }
+
+            @Override
+            public boolean onSingleTapConfirmed(MotionEvent e) {
+                like.toggleLike();
+                return true;
+            }
+
+
+
+
+        }
+
+        public class dGestureListener extends GestureDetector.SimpleOnGestureListener{
+
+            @Override
+            public boolean onDown(MotionEvent e) {
+                return true;
+            }
+
+            @Override
+            public boolean onDoubleTap(MotionEvent e) {
+                like.toggleDisLike();
+                return true;
+            }
+
+            @Override
+            public boolean onSingleTapConfirmed(MotionEvent e) {
+                like.toggleDisLike();
+                return true;
+            }
+
+
+        }
+
+
+
     }
+
+
+
+
+
+
+
+
 }
