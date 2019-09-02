@@ -3,13 +3,16 @@ package com.example.alphanetwork;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -18,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.alphanetwork.Feed.Adapter;
 import com.example.alphanetwork.Feed.MediaAdapter;
+import com.example.alphanetwork.Feed.ViewCommentsFragment;
 import com.example.alphanetwork.Model.ModelFeed;
 import com.example.alphanetwork.Retrofit.Api;
 import com.example.alphanetwork.Model.ModelHomeWall;
@@ -92,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                     adapter = new Adapter(feed, MainActivity.this, getSupportFragmentManager());
                     recyclerView.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
-
+                    initListener();;
                     swipeRefreshLayout.setRefreshing(false);
 
                 } else {
@@ -112,6 +116,45 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         });
 
     }
+
+
+    public void initListener(){
+        adapter.setOnItemClickListener(new Adapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Toast.makeText(MainActivity.this, "Clicks not available yet", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void iconTextViewOnClick(View view, int position) {
+                Fragment fragment = new ViewCommentsFragment();
+                FragmentManager fragmentManager = MainActivity.this.getSupportFragmentManager();
+                Bundle args = new Bundle();
+                args.putString("YourKey", "YourValue");
+                fragment.setArguments(args);
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.ViewCommentsFragment, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+
+            @Override
+            public void iconImageViewOnClick(View view, int position) {
+                Fragment fragment = new ViewCommentsFragment();
+                FragmentManager fragmentManager = MainActivity.this.getSupportFragmentManager();
+                Bundle args = new Bundle();
+                args.putString("YourKey", "YourValue");
+                fragment.setArguments(args);
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_view_comments, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+
+
+    }
+
 
     @Override
     public void onRefresh() {
@@ -136,15 +179,4 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     }
 }
 
-//    private void init(){
-//        ArrayList<Fragment> fragments = new ArrayList<>();
-//        Hat[] hats = Hats.getHats();
-//        for(Hat hat: hats){
-//            ViewPagerItemFragment fragment = ViewPagerItemFragment.getInstance(hat);
-//            fragments.add(fragment);
-//        }
-//        MyPagerAdapter pagerAdapter = new MyPagerAdapter(getSupportFragmentManager(), fragments);
-//        mMyViewPager.setAdapter(pagerAdapter);
-//        mTabLayout.setupWithViewPager(mMyViewPager, true);
-//    }
 

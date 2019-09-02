@@ -2,6 +2,7 @@ package com.example.alphanetwork.Feed;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.annotation.NonNull;
@@ -53,10 +54,23 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
     private FragmentManager fragmentManager;
     private static final String TAG = "Adapter";
 
+
+    public OnItemClickListener  onClickListener;
+
+
+
+    public interface OnItemClickListener  {
+
+        void onItemClick(View view, int position);
+        void iconTextViewOnClick(View view, int position);
+        void iconImageViewOnClick(View view, int position);
+    }
+
     public Adapter(List<ModelFeed> posts, Context context,FragmentManager fragmentManager) {
         this.posts = posts;
         this.context = context;
         this.fragmentManager = fragmentManager;
+
     }
 
     @NonNull
@@ -264,12 +278,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
         this.onItemClickListener = onItemClickListener;
     }
 
-    public interface OnItemClickListener {
-        void onItemClick(View view, int position);
-    }
-
-
-
 
 
 
@@ -338,7 +346,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
     public class MyViewHolder extends RecyclerView.ViewHolder implements  View.OnClickListener {
 
         TextView tv_name, tv_time, tv_likes, tv_comments, tv_status;
-        ImageView imgView_proPic, imgView_postPic;
+        ImageView imgView_proPic, imgView_postPic, imgView_comments, imgView_back;
         ProgressBar progressBar;
         OnItemClickListener onItemClickListener;
         ViewPager vp;
@@ -365,9 +373,13 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
 
             tv_name = (TextView) itemView.findViewById(R.id.tv_name);
             tv_time = (TextView) itemView.findViewById(R.id.tv_time);
-            tv_likes = (TextView) itemView.findViewById(R.id.tv_like);
+            tv_likes = (TextView) itemView.findViewById(R.id.tv_likescount);
+
 
             tv_comments = (TextView) itemView.findViewById(R.id.tv_comments);
+            imgView_comments = itemView.findViewById(R.id.speech_bubble);
+            imgView_back = itemView.findViewById(R.id.backArrow);
+
             tv_status = (TextView) itemView.findViewById(R.id.tv_status);
 
 
@@ -387,7 +399,12 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
             like = new LikesToggle(imgView_like,imgView_liked,imgView_dislike,imgView_disliked);
             likeToggle();
             dislikeToggle();
+            comments();
 
+
+
+
+            //comments
 
 
             this.onItemClickListener = onItemClickListener;
@@ -493,15 +510,26 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
 
         }
 
+        public void comments() {
+            tv_comments.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickListener.iconTextViewOnClick(v, getAdapterPosition());
+            }
+        });
+            imgView_comments.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onClickListener.iconImageViewOnClick(v, getAdapterPosition());
+                }
+            });
+
+
+        }
+
 
 
     }
-
-
-
-
-
-
 
 
 }

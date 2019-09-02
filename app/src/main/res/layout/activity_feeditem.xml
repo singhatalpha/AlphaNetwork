@@ -326,7 +326,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
 
             <RelativeLayout
                 android:id="@+id/likeLayout"
-                android:layout_width="100dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent">
 
 
@@ -348,15 +348,25 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                     android:visibility="visible"
                     app:srcCompat="@drawable/ic_like" />
 
-
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Likes"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:id="@+id/tv_likescount"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/image_like"
+                    android:layout_marginLeft="10dp"
+                    />
 
                 <ImageView
                     android:id="@+id/image_disliked"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:layout_centerVertical="true"
-
-                    android:layout_marginLeft="50dp"
+                    android:layout_toRightOf="@+id/tv_likescount"
+                    android:layout_marginLeft="10dp"
                     android:visibility="invisible"
                     app:srcCompat="@drawable/ic_disliked" />
 
@@ -366,8 +376,8 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:layout_centerVertical="true"
-
-                    android:layout_marginLeft="50dp"
+                    android:layout_toRightOf="@+id/tv_likescount"
+                    android:layout_marginLeft="10dp"
                     android:visibility="visible"
                     app:srcCompat="@drawable/ic_dislike" />
 
@@ -375,6 +385,8 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
             </RelativeLayout>
+
+
 
             <ImageView
                 android:id="@+id/speech_bubble"
@@ -393,26 +405,26 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
             android:layout_height="wrap_content"
             android:id="@+id/relLayout3"
             android:layout_below="@+id/relLayout2"
-            android:padding="20dp"
+            android:padding="10dp"
             android:layout_marginBottom="50dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Liked by Mitch, Tom, Mohammed and 30 others"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                android:id="@+id/tv_like"/>
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Liked by Mitch, Tom, Mohammed and 30 others"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="18sp"-->
+<!--                android:id="@+id/tv_like"/>-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="mitch.tabian moutains #earthporn #mountains"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                android:id="@+id/image_caption"
-                android:layout_below="@+id/tv_like"
-                android:layout_marginTop="15dp"/>
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="mitch.tabian moutains #earthporn #mountains"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="18sp"-->
+<!--                android:id="@+id/image_caption"-->
+<!--                -->
+<!--                />-->
 
             <TextView
                 android:layout_width="wrap_content"
@@ -420,9 +432,8 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                 android:text="View all 3 comments"
                 android:textColor="@color/grey"
                 android:textSize="18sp"
-                android:layout_below="@+id/image_caption"
                 android:id="@+id/tv_comments"
-                android:layout_marginTop="15dp"/>
+                />
 
             <TextView
                 android:layout_width="wrap_content"
