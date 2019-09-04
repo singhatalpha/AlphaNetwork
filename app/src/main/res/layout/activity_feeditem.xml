@@ -330,6 +330,12 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                 android:layout_height="match_parent">
 
 
+
+                <RelativeLayout
+                    android:id="@+id/likeLayout11"
+                    android:layout_width="35dp"
+                    android:layout_height="match_parent">
+
                 <ImageView
                     android:id="@+id/image_liked"
                     android:layout_width="25dp"
@@ -348,6 +354,9 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                     android:visibility="visible"
                     app:srcCompat="@drawable/ic_like" />
 
+                    </RelativeLayout>
+
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -356,7 +365,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                     android:textSize="20sp"
                     android:id="@+id/tv_likescount"
                     android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/image_like"
+                    android:layout_toRightOf="@+id/likeLayout11"
                     android:layout_marginLeft="10dp"
                     />
 
@@ -393,7 +402,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="20dp"
                 android:layout_toRightOf="@+id/likeLayout"
                 android:visibility="visible"
                 app:srcCompat="@drawable/temp_comment_btn" />

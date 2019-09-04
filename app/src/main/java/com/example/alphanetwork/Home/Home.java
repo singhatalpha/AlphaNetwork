@@ -2,6 +2,7 @@ package com.example.alphanetwork.Home;
 
 
 import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.alphanetwork.Feed.MediaAdapter;
 import com.example.alphanetwork.R;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
@@ -18,7 +20,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 
 
-public class Home extends AppCompatActivity{
+public class Home extends AppCompatActivity implements MediaAdapter.OnFragmentInteractionListener{
     private static final String TAG = "Home";
     private static final int ACTIVITY_NUM = 0;
 
@@ -63,5 +65,10 @@ public class Home extends AppCompatActivity{
         Menu menu = bottomNavigationViewEx.getMenu();
         MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
         menuItem.setChecked(true);
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }

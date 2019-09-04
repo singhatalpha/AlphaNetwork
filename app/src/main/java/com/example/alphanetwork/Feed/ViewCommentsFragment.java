@@ -79,14 +79,7 @@ public class ViewCommentsFragment extends Fragment {
 
 
         String value = getArguments().getString("YourKey");
-
-
-        try {
-//            mPhoto = getPhotoFromBundle();
-
-        } catch (NullPointerException e) {
-            Log.e(TAG, "onCreateView: NullPointerException: " + e.getMessage());
-        }
+        setupWidgets();
 
 
         return view;
@@ -118,15 +111,27 @@ public class ViewCommentsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onClick: navigating back");
-                if (getCallingActivityFromBundle().equals(getString(R.string.home_activity))) {
+
                     getActivity().getSupportFragmentManager().popBackStack();
-                    ((HomeActivity) getActivity()).showLayout();
-                } else {
-                    getActivity().getSupportFragmentManager().popBackStack();
-                }
+
 
             }
         });
+
+
+
+//        if(mPhoto.getComments().size() == 0){
+//            mComments.clear();
+//            Comment firstComment = new Comment();
+//            firstComment.setComment(mPhoto.getCaption());
+//            firstComment.setUser_id(mPhoto.getUser_id());
+//            firstComment.setDate_created(mPhoto.getDate_created());
+//            mComments.add(firstComment);
+//            mPhoto.setComments(mComments);
+//            setupWidgets();
+//        }
+
+
     }
 
     private void closeKeyboard() {
@@ -141,27 +146,14 @@ public class ViewCommentsFragment extends Fragment {
     private void addNewComment(String newComment) {
         Log.d(TAG, "addNewComment: adding new comment: " + newComment);
 
-        String commentID = myRef.push().getKey();
+//        String commentID = myRef.push().getKey();
 
-        Comment comment = new Comment();
-        comment.setComment(newComment);
-        comment.setDate_created(getTimestamp());
-        comment.setUser_id(FirebaseAuth.getInstance().getCurrentUser().getUid());
+//        Comment comment = new Comment();
+//        comment.setComment(newComment);
+//        comment.setDate_created(getTimestamp());
+//        comment.setUser_id(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
-        //insert into photos node
-        myRef.child(getString(R.string.dbname_photos))
-                .child(mPhoto.getPhoto_id())
-                .child(getString(R.string.field_comments))
-                .child(commentID)
-                .setValue(comment);
 
-        //insert into user_photos node
-        myRef.child(getString(R.string.dbname_user_photos))
-                .child(mPhoto.getUser_id()) //should be mphoto.getUser_id()
-                .child(mPhoto.getPhoto_id())
-                .child(getString(R.string.field_comments))
-                .child(commentID)
-                .setValue(comment);
 
     }
 

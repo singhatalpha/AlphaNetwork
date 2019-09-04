@@ -22,7 +22,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".MainActivity"
+            android:name=".Home.Home"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,8 +34,8 @@
         <activity android:name=".Circle.Circle" />
         <activity android:name=".Notification.Notification" />
         <activity android:name=".Dark.Dark" />
-        <activity android:name=".Home.Home" />
-<!--        <activity android:name=".MainActivity" />-->
+<!--        <activity android:name=".Home.Home" />-->
+        <activity android:name=".MainActivity" />
         <activity android:name=".user_login" />
         <activity android:name=".Registration" />
     </application>

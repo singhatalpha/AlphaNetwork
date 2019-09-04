@@ -16,8 +16,9 @@ public class RetrofitClient {
 
     private static RetrofitClient mInstance;
     private static Retrofit retrofit;
+    private static Context context;
 
-//    private Context context = RetrofitClient.this;
+
 
     OkHttpClient okHttpClient = new OkHttpClient.Builder()
             .addInterceptor(new RequestInterceptor()) // This is used to add ApplicationInterceptor.
@@ -27,6 +28,7 @@ public class RetrofitClient {
 
     private RetrofitClient()
     {
+
         retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .client(okHttpClient)

@@ -8,8 +8,10 @@ import java.util.List;
 
 public class Comments {
 
+
     private String comment;
-    private String user_id;
+    private String user;
+    private String dp;
     private int likes;
     private String date_created;
 
@@ -17,12 +19,24 @@ public class Comments {
 
     }
 
-    public Comments(String comment, String user_id, int likes, String date_created) {
-        this.comment = comment;
-        this.user_id = user_id;
-        this.likes = likes;
-        this.date_created = date_created;
+    public String getUser() {
+        return user;
     }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getDp() {
+        return dp;
+    }
+
+    public void setDp(String dp) {
+        this.dp = dp;
+    }
+
+
+
 
     public String getComment() {
         return comment;
@@ -32,13 +46,7 @@ public class Comments {
         this.comment = comment;
     }
 
-    public String getUser_id() {
-        return user_id;
-    }
 
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
-    }
 
     public int getLikes() {
         return likes;
@@ -56,13 +64,5 @@ public class Comments {
         this.date_created = date_created;
     }
 
-    @Override
-    public String toString() {
-        return "Comment{" +
-                "comment='" + comment + '\'' +
-                ", user_id='" + user_id + '\'' +
-                ", likes=" + likes +
-                ", date_created='" + date_created + '\'' +
-                '}';
-    }
+
 }

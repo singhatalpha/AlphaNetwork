@@ -21,9 +21,11 @@ public class RequestInterceptor implements Interceptor {
     private SharedPreferences sharedpref;
     private Context context = MyApp.getContext();
 
+
 //    public RequestInterceptor(Context context) {
 //        this.context = context;
 //    }
+
 
     @Override
     public Response intercept(Chain chain)
