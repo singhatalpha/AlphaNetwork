@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -14,6 +15,7 @@ import android.support.v4.app.FragmentManager;
 //import android.support.v4.view.PagerAdapter;
 
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -38,6 +40,7 @@ import com.bumptech.glide.request.target.Target;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.alphanetwork.Home.Home;
 import com.example.alphanetwork.MainActivity;
 import com.example.alphanetwork.Model.ModelFeed;
 import com.example.alphanetwork.R;
@@ -50,21 +53,13 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
 
     private List<ModelFeed> posts;
     private Context context;
-    private OnItemClickListener onItemClickListener;
     private FragmentManager fragmentManager;
     private static final String TAG = "Adapter";
 
 
-    public OnItemClickListener  onClickListener;
 
 
 
-    public interface OnItemClickListener  {
-
-        void onItemClick(View view, int position);
-        void iconTextViewOnClick(View view, int position);
-        void iconImageViewOnClick(View view, int position);
-    }
 
     public Adapter(List<ModelFeed> posts, Context context,FragmentManager fragmentManager) {
         this.posts = posts;
@@ -77,7 +72,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.activity_feeditem, parent, false);
-        return new MyViewHolder(view, onItemClickListener);
+        return new MyViewHolder(view);
+//        , onItemClickListener
     }
 
     @Override
@@ -274,9 +270,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
 
     }
 
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener){
-        this.onItemClickListener = onItemClickListener;
-    }
+//    public void setOnItemClickListener(OnItemClickListener onItemClickListener){
+//        this.onItemClickListener = onItemClickListener;
+//    }
 
 
 
@@ -341,14 +337,13 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
 
 
 
+// implements  View.OnClickListener
 
-
-    public class MyViewHolder extends RecyclerView.ViewHolder implements  View.OnClickListener {
+    public class MyViewHolder extends RecyclerView.ViewHolder{
 
         TextView tv_name, tv_time, tv_likes, tv_comments, tv_status;
         ImageView imgView_proPic, imgView_postPic, imgView_comments, imgView_back;
         ProgressBar progressBar;
-        OnItemClickListener onItemClickListener;
         ViewPager vp;
         TabLayout tl;
         ImageView imgView_like, imgView_liked, imgView_dislike, imgView_disliked;
@@ -360,12 +355,13 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
 
 
 
+//, OnItemClickListener onItemClickListener
 
-        public MyViewHolder(View itemView, OnItemClickListener onItemClickListener) {
+        public MyViewHolder(View itemView) {
 
             super(itemView);
 
-            itemView.setOnClickListener(this);
+//            itemView.setOnClickListener(this);
             imgView_proPic = (ImageView) itemView.findViewById(R.id.imgView_proPic);
 //            imgView_postPic = (ImageView) itemView.findViewById(R.id.imgView_postPic);
             vp = itemView.findViewById(R.id.view_pager_media);
@@ -399,22 +395,46 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
             like = new LikesToggle(imgView_like,imgView_liked,imgView_dislike,imgView_disliked);
             likeToggle();
             dislikeToggle();
-            comments();
 
 
 
 
             //comments
 
+            tv_comments.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-            this.onItemClickListener = onItemClickListener;
+                    ((Home)context).onCommentThreadSelected();
+
+                    //going to need to do something else?
+                    ((Home)context).hideLayout();
+
+                }
+            });
+
+
+            imgView_comments.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    ((Home)context).onCommentThreadSelected();
+
+                    //going to need to do something else?
+                    ((Home)context).hideLayout();
+
+                }
+            });
+
+
+//            this.onItemClickListener = onItemClickListener;
 
         }
 
-        @Override
-        public void onClick(View v) {
-            onItemClickListener.onItemClick(v, getAdapterPosition());
-        }
+//        @Override
+//        public void onClick(View v) {
+//            onItemClickListener.onItemClick(v, getAdapterPosition());
+//        }
 
 
 
@@ -509,25 +529,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
 
 
         }
-
-        public void comments() {
-            tv_comments.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onClickListener.iconTextViewOnClick(v, getAdapterPosition());
-            }
-        });
-            imgView_comments.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onClickListener.iconImageViewOnClick(v, getAdapterPosition());
-                }
-            });
-
-
-        }
-
-
 
 
 

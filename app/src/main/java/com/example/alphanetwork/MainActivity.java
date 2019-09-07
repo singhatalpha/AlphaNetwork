@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                     adapter = new Adapter(feed, MainActivity.this, getSupportFragmentManager());
                     recyclerView.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
-                    initListener();;
+
                     swipeRefreshLayout.setRefreshing(false);
 
                 } else {
@@ -118,42 +118,42 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     }
 
 
-    public void initListener(){
-        adapter.setOnItemClickListener(new Adapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                Toast.makeText(MainActivity.this, "Clicks not available yet", Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void iconTextViewOnClick(View view, int position) {
-//                Fragment fragment = new ViewCommentsFragment();
-//                FragmentManager fragmentManager = MainActivity.this.getSupportFragmentManager();
-//                Bundle args = new Bundle();
-//                args.putString("YourKey", "YourValue");
-//                fragment.setArguments(args);
-//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//                fragmentTransaction.replace(R.id.ViewCommentsFragment, fragment);
-//                fragmentTransaction.addToBackStack(null);
-//                fragmentTransaction.commit();
-            }
-
-            @Override
-            public void iconImageViewOnClick(View view, int position) {
-//                Fragment fragment = new ViewCommentsFragment();
-//                FragmentManager fragmentManager = MainActivity.this.getSupportFragmentManager();
-//                Bundle args = new Bundle();
-//                args.putString("YourKey", "YourValue");
-//                fragment.setArguments(args);
-//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//                fragmentTransaction.replace(R.id.fragment_view_comments, fragment);
-//                fragmentTransaction.addToBackStack(null);
-//                fragmentTransaction.commit();
-            }
-        });
-
-
-    }
+//    public void initListener(){
+//        adapter.setOnItemClickListener(new Adapter.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(View view, int position) {
+//                Toast.makeText(MainActivity.this, "Clicks not available yet", Toast.LENGTH_LONG).show();
+//            }
+//
+//            @Override
+//            public void iconTextViewOnClick(View view, int position) {
+////                Fragment fragment = new ViewCommentsFragment();
+////                FragmentManager fragmentManager = MainActivity.this.getSupportFragmentManager();
+////                Bundle args = new Bundle();
+////                args.putString("YourKey", "YourValue");
+////                fragment.setArguments(args);
+////                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+////                fragmentTransaction.replace(R.id.ViewCommentsFragment, fragment);
+////                fragmentTransaction.addToBackStack(null);
+////                fragmentTransaction.commit();
+//            }
+//
+//            @Override
+//            public void iconImageViewOnClick(View view, int position) {
+////                Fragment fragment = new ViewCommentsFragment();
+////                FragmentManager fragmentManager = MainActivity.this.getSupportFragmentManager();
+////                Bundle args = new Bundle();
+////                args.putString("YourKey", "YourValue");
+////                fragment.setArguments(args);
+////                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+////                fragmentTransaction.replace(R.id.fragment_view_comments, fragment);
+////                fragmentTransaction.addToBackStack(null);
+////                fragmentTransaction.commit();
+//            }
+//        });
+//
+//
+//    }
 
 
     @Override

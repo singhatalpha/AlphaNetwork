@@ -18,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -42,6 +43,10 @@ import retrofit2.Response;
 
 
 public class HomeWallFragment extends android.support.v4.app.Fragment implements SwipeRefreshLayout.OnRefreshListener, MediaAdapter.OnFragmentInteractionListener{
+
+
+
+
     private static final String TAG = "HomeWallFragment";
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
@@ -58,7 +63,6 @@ public class HomeWallFragment extends android.support.v4.app.Fragment implements
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_feed, container, false);
-
 
 
 
@@ -106,7 +110,7 @@ public class HomeWallFragment extends android.support.v4.app.Fragment implements
                     adapter = new Adapter(feed, getActivity(), getActivity().getSupportFragmentManager());
                     recyclerView.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
-                    initListener();;
+
                     swipeRefreshLayout.setRefreshing(false);
 
                 } else {
@@ -128,45 +132,16 @@ public class HomeWallFragment extends android.support.v4.app.Fragment implements
     }
 
 
-    public void initListener(){
-        adapter.setOnItemClickListener(new Adapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                Toast.makeText(getActivity(), "Clicks not available yet", Toast.LENGTH_LONG).show();
-            }
 
-            @Override
-            public void iconTextViewOnClick(View view, int position) {
-                Fragment fragment = new ViewCommentsFragment();
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                Bundle args = new Bundle();
-                args.putString("YourKey", "YourValue");
-                fragment.setArguments(args);
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.container, fragment);
-                fragmentTransaction.addToBackStack(String.valueOf(R.string.home_wall));
-                fragmentTransaction.commit();
-
-
-
-            }
-
-            @Override
-            public void iconImageViewOnClick(View view, int position) {
-                Fragment fragment = new ViewCommentsFragment();
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                Bundle args = new Bundle();
-                args.putString("YourKey", "YourValue");
-                fragment.setArguments(args);
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.container, fragment);
-                fragmentTransaction.addToBackStack(String.valueOf(R.string.home_wall));
-                fragmentTransaction.commit();
-            }
-        });
-
-
-    }
+//    @Override
+//    public void onAttach(Context context) {
+//        super.onAttach(context);
+//        try{
+//            mOnCommentThreadSelectedListener = (OnCommentThreadSelectedListener) getActivity();
+//        }catch (ClassCastException e){
+//            Log.e(TAG, "onAttach: ClassCastException: " + e.getMessage() );
+//        }
+//    }
 
 
     @Override

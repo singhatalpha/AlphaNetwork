@@ -22,6 +22,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.example.alphanetwork.Home.Home;
+import com.example.alphanetwork.Model.CommentFeed;
 import com.example.alphanetwork.Model.Comments;
 import com.example.alphanetwork.R;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
@@ -45,6 +47,10 @@ import com.example.alphanetwork.Retrofit.Api;
 import com.example.alphanetwork.Model.ModelHomeWall;
 import com.example.alphanetwork.Retrofit.RetrofitClient;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 
 /**
  * Created by User on 8/12/2017.
@@ -63,7 +69,7 @@ public class ViewCommentsFragment extends Fragment {
 
     //vars
 
-    private ArrayList<Comments> mComments;
+    private List<Comments> commentfeed = new ArrayList<>();
     private Context mContext;
 
     @Nullable
@@ -74,12 +80,12 @@ public class ViewCommentsFragment extends Fragment {
         mCheckMark = (ImageView) view.findViewById(R.id.ivPostComment);
         mComment = (EditText) view.findViewById(R.id.comment);
         mListView = (ListView) view.findViewById(R.id.listView);
-        mComments = new ArrayList<>();
         mContext = getActivity();
 
 
         String value = getArguments().getString("YourKey");
         setupWidgets();
+        LoadJson();
 
 
         return view;
@@ -87,9 +93,8 @@ public class ViewCommentsFragment extends Fragment {
 
     private void setupWidgets() {
 
-        CommentListAdapter adapter = new CommentListAdapter(mContext,
-                R.layout.layout_comment, mComments);
-        mListView.setAdapter(adapter);
+
+
 
         mCheckMark.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,8 +116,9 @@ public class ViewCommentsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onClick: navigating back");
-
-                    getActivity().getSupportFragmentManager().popBackStack();
+// TO DO - if coming from home wall, do this, else do something else , in other cases, we wouldnt want to show layout of home!
+                getActivity().getSupportFragmentManager().popBackStack();
+                ((Home)getActivity()).showLayout();
 
 
             }
@@ -157,10 +163,47 @@ public class ViewCommentsFragment extends Fragment {
 
     }
 
-    private String getTimestamp() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.CANADA);
-        sdf.setTimeZone(TimeZone.getTimeZone("Canada/Pacific"));
-        return sdf.format(new Date());
+//    private String getTimestamp() {
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.CANADA);
+//        sdf.setTimeZone(TimeZone.getTimeZone("Canada/Pacific"));
+//        return sdf.format(new Date());
+//    }
+
+
+
+    public void LoadJson() {
+
+
+        Api api = RetrofitClient.getInstance().getApi();
+        Call<CommentFeed> call;
+        call = api.comments();
+        call.enqueue(new Callback<CommentFeed>() {
+            @Override
+            public void onResponse(Call<CommentFeed> call, Response<CommentFeed> response) {
+                if(response.isSuccessful() ){
+
+                    commentfeed = response.body().getComments();
+
+                    CommentListAdapter adapter = new CommentListAdapter(mContext,
+                            R.layout.layout_comment, commentfeed);
+
+                    mListView.setAdapter(adapter);
+
+                } else {
+
+                    Toast.makeText(getActivity(), "No Response", Toast.LENGTH_LONG).show();
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<CommentFeed> call, Throwable t) {
+                Toast.makeText(getActivity(), "onFailure for Comments is triggered", Toast.LENGTH_LONG).show();
+            }
+
+        });
+
     }
 
 

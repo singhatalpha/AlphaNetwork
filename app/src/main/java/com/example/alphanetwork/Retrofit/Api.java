@@ -1,6 +1,9 @@
 package com.example.alphanetwork.Retrofit;
 
 
+//import com.example.alphanetwork.Model.CommentFeed;
+import com.example.alphanetwork.Model.CommentFeed;
+import com.example.alphanetwork.Model.Comments;
 import com.example.alphanetwork.Model.ModelHomeWall;
 
 import okhttp3.ResponseBody;
@@ -38,4 +41,7 @@ public interface Api {
 
     @GET("feed/feed_i/")
     Call<ModelHomeWall> feed();
+
+    @GET("feed/comments/1/")
+    Call<CommentFeed> comments();
 }
