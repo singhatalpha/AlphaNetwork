@@ -41,8 +41,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.alphanetwork.Home.Home;
+import com.example.alphanetwork.Home.HomeWallFragment;
 import com.example.alphanetwork.MainActivity;
 import com.example.alphanetwork.Model.ModelFeed;
+import com.example.alphanetwork.Profile.AccountSettingsActivity;
+import com.example.alphanetwork.Profile.ProfileActivity;
 import com.example.alphanetwork.R;
 import Utils.Utils;
 import Utils.LikesToggle;
@@ -81,7 +84,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
         final MyViewHolder holder = holders;
         ModelFeed modelFeed = posts.get(position);
 
-        System.out.println(modelFeed.getMedia());
+
 
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.placeholder(Utils.getRandomDrawbleColor());
@@ -425,6 +428,31 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
 
                 }
             });
+
+
+            imgView_proPic.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Intent intent = new Intent(context, ProfileActivity.class);
+                    context.startActivity(intent);
+
+                }
+            });
+
+
+            tv_name.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Intent intent = new Intent(context, ProfileActivity.class);
+                    context.startActivity(intent);
+
+                }
+            });
+
+
+
 
 
 //            this.onItemClickListener = onItemClickListener;

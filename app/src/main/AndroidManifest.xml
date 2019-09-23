@@ -38,6 +38,8 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".user_login" />
         <activity android:name=".Registration" />
+        <activity android:name=".Profile.ProfileActivity" />
+        <activity android:name=".Profile.AccountSettingsActivity" />
     </application>
 
 </manifest>

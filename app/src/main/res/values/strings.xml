@@ -15,4 +15,7 @@
     </string>
     <string name="title_activity_registration">Sign in</string>
     <string name="home_wall">Home Wall</string>
+    <string name="edit_profile_fragment">Edit Profile</string>
+    <string name="sign_out_fragment">Sign Out</string>
+    <string name="profile_fragment">Profile Fragment</string>
 </resources>
