@@ -57,7 +57,7 @@ public class AccountSettingsActivity extends AppCompatActivity {
         setupSettingsList();
 
         setupFragments();
-//        getIncomingIntent();
+        getIncomingIntent();
 
         //setup the backarrow for navigating back to "ProfileActivity"
         ImageView backArrow = (ImageView) findViewById(R.id.backArrow);
@@ -72,9 +72,9 @@ public class AccountSettingsActivity extends AppCompatActivity {
 
 
 
-//    private void getIncomingIntent(){
-//        Intent intent = getIntent();
-//
+    private void getIncomingIntent(){
+        Intent intent = getIntent();
+
 //        if(intent.hasExtra(getString(R.string.selected_image))
 //                || intent.hasExtra(getString(R.string.selected_bitmap))){
 //
@@ -98,13 +98,13 @@ public class AccountSettingsActivity extends AppCompatActivity {
 //            }
 //
 //        }
-//
-//        if(intent.hasExtra(getString(R.string.calling_activity))){
-//            Log.d(TAG, "getIncomingIntent: received incoming intent from " + getString(R.string.profile_activity));
-//            setViewPager(pagerAdapter.getFragmentNumber(getString(R.string.edit_profile_fragment)));
-//        }
-//    }
-//
+
+        if(intent.hasExtra(getString(R.string.calling_activity))){
+            Log.d(TAG, "getIncomingIntent: received incoming intent from " + getString(R.string.profile_activity));
+            setViewPager(pagerAdapter.getFragmentNumber(getString(R.string.edit_profile_fragment)));
+        }
+    }
+
     private void setupFragments(){
         pagerAdapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
         pagerAdapter.addFragment(new EditProfileFragment(), getString(R.string.edit_profile_fragment)); //fragment 0

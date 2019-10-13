@@ -3,6 +3,7 @@ package com.example.alphanetwork.Dark;
 
 
 import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.alphanetwork.Feed.MediaAdapter;
 import com.example.alphanetwork.Home.HomeLocalWallFragment;
 import com.example.alphanetwork.Home.HomePagerAdapter;
 import com.example.alphanetwork.Home.HomeWallFragment;
@@ -29,7 +31,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 
 
-public class Dark extends AppCompatActivity{
+public class Dark extends AppCompatActivity implements MediaAdapter.OnFragmentInteractionListener{
     private static final String TAG = "Dark";
     private static final int ACTIVITY_NUM = 4;
 
@@ -74,6 +76,11 @@ public class Dark extends AppCompatActivity{
         Menu menu = bottomNavigationViewEx.getMenu();
         MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
         menuItem.setChecked(true);
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }
 

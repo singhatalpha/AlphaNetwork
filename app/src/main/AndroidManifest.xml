@@ -40,6 +40,8 @@
         <activity android:name=".Registration" />
         <activity android:name=".Profile.ProfileActivity" />
         <activity android:name=".Profile.AccountSettingsActivity" />
+        <activity android:name=".Profile.FollowingActivity" />
+        <activity android:name=".Profile.FollowersActivity" />
     </application>
 
 </manifest>

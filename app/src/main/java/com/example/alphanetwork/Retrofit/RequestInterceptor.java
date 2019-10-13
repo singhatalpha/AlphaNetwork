@@ -33,6 +33,7 @@ public class RequestInterceptor implements Interceptor {
 
         sharedpref = context.getSharedPreferences("Login",Context.MODE_PRIVATE);
         String token = sharedpref.getString("token" , "NULL");
+//        token = "Token "+ token;
 
         System.out.println("Entered in Interceptor,token is :"+token);
 
@@ -41,7 +42,7 @@ public class RequestInterceptor implements Interceptor {
         if(token!=null ){
 
             request = request.newBuilder()
-                    .addHeader("token", token)
+                    .addHeader("Authorization", token)
                     .build();
 
         }

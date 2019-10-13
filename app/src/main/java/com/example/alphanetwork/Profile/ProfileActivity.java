@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -15,6 +16,9 @@ import android.widget.Toast;
 
 import com.example.alphanetwork.MainActivity;
 import com.example.alphanetwork.R;
+
+import Utils.OnBackPressedListener;
+import Utils.OnBackPressedPopListener;
 
 
 /**
@@ -69,6 +73,8 @@ public class ProfileActivity extends AppCompatActivity {
     private static final int NUM_GRID_COLUMNS = 3;
 
     private Context mContext = ProfileActivity.this;
+    protected OnBackPressedListener onBackPressedListener;
+    protected OnBackPressedPopListener onBackPressedPopListener;
 
     private ProgressBar mProgressBar;
     private ImageView profileMenu, back;
@@ -86,6 +92,38 @@ public class ProfileActivity extends AppCompatActivity {
 
         init();
 
+    }
+
+    public void setOnBackPressedListener(OnBackPressedListener onBackPressedListener) {
+        this.onBackPressedListener = onBackPressedListener;
+    }
+
+    public void setOnBackPressedPopListener(OnBackPressedPopListener onBackPressedPopListener) {
+        this.onBackPressedPopListener = onBackPressedPopListener;
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        if (onBackPressedPopListener != null) {
+            System.out.println("doPop");
+            onBackPressedPopListener.doPop();
+            onBackPressedPopListener = null;
+        }
+
+        else if (onBackPressedListener != null) {
+            System.out.println("doBack");
+            onBackPressedListener.doBack();
+            onBackPressedListener = null;
+        }
+
+
+        else {
+            System.out.println("else back");
+            super.onBackPressed();
+            finish();
+
+        }
 
     }
 
@@ -131,33 +169,5 @@ public class ProfileActivity extends AppCompatActivity {
 //        }
 
     }
-
-//    private void setupToolbar(){
-//
-//
-//        setSupportActionBar(toolbar);
-//
-//        profileMenu.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Log.d(TAG, "onClick: navigating to account settings.");
-//                Intent intent = new Intent(mContext, AccountSettingsActivity.class);
-//                startActivity(intent);
-////                ProfileActivity.this.overridePendingTransition(R.anim., R.anim.fade_out);
-//
-//            }
-//        });
-//
-//
-//        back.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Log.d(TAG, "onClick: navigating back to 'Home activity'");
-//                finish();
-//
-//            }
-//        });
-//
-//    }
 
 }
