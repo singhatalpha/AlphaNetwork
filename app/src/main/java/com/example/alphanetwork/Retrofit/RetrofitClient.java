@@ -11,8 +11,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
 
-//    private static final String BASE_URL = "http://10.7.8.35:8000/";
-    private static final String BASE_URL = "https://alpha-hero.herokuapp.com";
+    private static final String BASE_URL = "http://10.7.8.35:8000/";
+//    private static final String BASE_URL = "https://alpha-hero.herokuapp.com";
 //    private static final String BASE_URL = "http://10.7.17.155:8000";
 
 

@@ -2,6 +2,7 @@ package com.example.alphanetwork.Home;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,6 +16,7 @@ import android.view.MenuItem;
 import com.example.alphanetwork.Feed.Adapter;
 import com.example.alphanetwork.Feed.MediaAdapter;
 import com.example.alphanetwork.Feed.ViewCommentsFragment;
+import com.example.alphanetwork.Profile.ProfileActivity;
 import com.example.alphanetwork.R;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
@@ -24,6 +26,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -36,6 +39,7 @@ public class Home extends AppCompatActivity implements MediaAdapter.OnFragmentIn
     private ViewPager mViewPager;
     private FrameLayout mFrameLayout;
     private RelativeLayout mRelativeLayout;
+    private ImageView profile;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,7 +50,15 @@ public class Home extends AppCompatActivity implements MediaAdapter.OnFragmentIn
         mViewPager = (ViewPager) findViewById(R.id.container);
         mFrameLayout = (FrameLayout) findViewById(R.id.fragmentcontainer);
         mRelativeLayout = (RelativeLayout) findViewById(R.id.relLayoutParent);
+        profile = findViewById(R.id.profile);
 
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Home.this, ProfileActivity.class);
+                startActivity(i);
+            }
+        });
 
         setupBottomNavigationView();
         setupViewPager();
@@ -100,8 +112,8 @@ public class Home extends AppCompatActivity implements MediaAdapter.OnFragmentIn
         TabLayout tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
-        tabLayout.getTabAt(0).setIcon(R.drawable.ic_wall);
-        tabLayout.getTabAt(1).setIcon(R.drawable.ic_wall);
+        tabLayout.getTabAt(0).setText("Global");
+        tabLayout.getTabAt(1).setText("Local");
 //        tabLayout.getTabAt(2).setIcon(R.drawable.ic_live);
     }
 

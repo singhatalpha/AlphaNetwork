@@ -1,25 +1,28 @@
-package com.example.alphanetwork;
+package com.example.alphanetwork.Login;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
 import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.EditText;
 import android.content.SharedPreferences;
 import android.widget.Toast;
-import android.preference.PreferenceManager;
 
 import com.example.alphanetwork.Home.Home;
+import com.example.alphanetwork.R;
 import com.example.alphanetwork.Retrofit.RetrofitClient;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -27,7 +30,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class user_login extends AppCompatActivity {
-
+    private static final String TAG = "user_login activity";
     private EditText id,pass;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,10 +96,22 @@ public class user_login extends AppCompatActivity {
                 String s = null;
                 try {
                     if(response.code() == 200 || response.code() == 201) {
-                        System.out.println("entered here");
+
                         s = response.body().string();
+                        Pattern p = Pattern.compile("\"([^\"]*)\"");
+                        Matcher m = p.matcher(s);
+                        m.find();
+                        m.find();
+                        s = m.group(1);
+//                        while (m.find()) {
+//                            System.out.println(m.group(1));
+//
+//
+//                        }
+
                         SharedPreferences sharedPref = getSharedPreferences("Login" , Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPref.edit();
+                        Log.d(TAG, "Entered On response, token is: " + s);
                         // login token
                         editor.putString("token" , s);
                         // login boolean to check for login every time app is launched

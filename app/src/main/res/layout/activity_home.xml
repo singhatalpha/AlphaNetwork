@@ -10,24 +10,91 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/fragmentcontainer">
+        android:id="@+id/fragmentcontainer"
+
+        >
 
     </FrameLayout>
 
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows = "true"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+
+<!--        <android.support.v7.widget.Toolbar-->
+<!--            android:id="@+id/toolbar"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="?attr/actionBarSize"-->
+<!--            android:background="?attr/colorPrimary"-->
+<!--            app:layout_scrollFlags="scroll|enterAlways|snap"-->
+<!--            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" -->
+<!--            -->
+<!--            -->
+<!--            -->
+<!--            />-->
+
+        <android.support.v7.widget.Toolbar
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/toolbar"
+            android:background="@color/blue"
+            app:layout_scrollFlags="scroll|enterAlways" >
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/dp"/>
+
+            </RelativeLayout>
+
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
     <RelativeLayout
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/relLayoutParent">
+        android:id="@+id/relLayoutParent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+
+        >
+
+<!--        <android.support.design.widget.AppBarLayout-->
+<!--            android:id="@+id/appbar"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical"-->
+<!--            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">-->
+
+<!--            <include-->
+<!--                android:id="@+id/toolbar"-->
+<!--                layout="@layout/layout_top_toolbar" />-->
 
 
-        <!-- top toolbar -->
+<!--        </android.support.design.widget.AppBarLayout>-->
+
+
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/relLayout1">
-
+            android:id="@+id/relLayout1"
+            android:layout_below="@+id/appbar"
+            >
             <include layout="@layout/layout_top_tabs"/>
-
         </RelativeLayout>
 
         <!-- Middle section (body) -->

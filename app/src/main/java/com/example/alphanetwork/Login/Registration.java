@@ -1,4 +1,4 @@
-package com.example.alphanetwork;
+package com.example.alphanetwork.Login;
 
 import android.support.v7.app.AppCompatActivity;
 import android.content.Intent;
@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
+import com.example.alphanetwork.R;
 import com.example.alphanetwork.Retrofit.RetrofitClient;
 
 import org.json.JSONException;
