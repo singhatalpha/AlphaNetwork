@@ -110,7 +110,15 @@ public class ProfileFragment extends Fragment {
 
         toolbar = (Toolbar) view.findViewById(R.id.profileToolBar);
         profileMenu = (ImageView) view.findViewById(R.id.profileMenu);
-
+        profileMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onClick: navigating to account settings.");
+                Intent intent = new Intent(mContext, AccountSettingsActivity.class);
+                startActivity(intent);
+//                getActivity().overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+            }
+        });
 
 
 
@@ -503,15 +511,7 @@ public class ProfileFragment extends Fragment {
 //
 //        ((ProfileActivity)getActivity()).setSupportActionBar(toolbar);
 //
-//        profileMenu.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Log.d(TAG, "onClick: navigating to account settings.");
-//                Intent intent = new Intent(mContext, AccountSettingsActivity.class);
-//                startActivity(intent);
-////                getActivity().overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-//            }
-//        });
+
 //
 //        back.setOnClickListener(new View.OnClickListener() {
 //            @Override

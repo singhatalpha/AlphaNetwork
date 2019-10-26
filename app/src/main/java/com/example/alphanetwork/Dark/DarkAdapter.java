@@ -255,7 +255,7 @@ public class DarkAdapter extends RecyclerView.Adapter<DarkAdapter.MyViewHolder>{
 //        holder.tv_time.setText(Utils.DateFormat(modelFeed.getTime()));
         holder.tv_likes.setText(String.valueOf(modelFeed.getLikes()));
 //        holder.tv_comments.setText(modelFeed.getComments() + " comments");
-        holder.tv_status.setText(modelFeed.getContent());
+        holder.tv_status.setText(modelFeed.getTitle());
 
 //        Glide.with(context).load(modelFeed.getProfile().getPhoto()).dontAnimate().into(holder.imgView_proPic);
 

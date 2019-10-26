@@ -101,7 +101,7 @@ public class EditProfileFragment extends Fragment {
 
 
     //EditProfile Fragment widgets
-    private EditText mDisplayName, mUsername, mWebsite, mDescription, mEmail, mPhoneNumber;
+    private EditText mDisplayName, mUsername;
     private TextView mChangeProfilePhoto;
     private CircleImageView mProfilePhoto;
 
@@ -117,10 +117,6 @@ public class EditProfileFragment extends Fragment {
         mProfilePhoto = (CircleImageView) view.findViewById(R.id.profile_photo);
         mDisplayName = (EditText) view.findViewById(R.id.display_name);
         mUsername = (EditText) view.findViewById(R.id.username);
-        mWebsite = (EditText) view.findViewById(R.id.website);
-        mDescription = (EditText) view.findViewById(R.id.description);
-        mEmail = (EditText) view.findViewById(R.id.email);
-        mPhoneNumber = (EditText) view.findViewById(R.id.phoneNumber);
         mChangeProfilePhoto = (TextView) view.findViewById(R.id.changeProfilePhoto);
 
 

@@ -47,8 +47,8 @@
             android:layout_marginRight="15dp"
             android:layout_marginTop="5dp"
             android:text="This is Status"
-            android:textColor="@color/blue"
-            android:textSize="20sp" />
+            android:textColor="@color/black"
+            android:textSize="18sp" />
 
 
 
@@ -60,7 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/relLayout12"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="2dp"
             android:layout_below="@+id/relLayout11">
 
             <android.support.v4.view.ViewPager
@@ -105,8 +105,8 @@
 
                     <ImageView
                         android:id="@+id/image_liked"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="10dp"
                         android:visibility="invisible"
@@ -114,8 +114,8 @@
 
                     <ImageView
                         android:id="@+id/image_like"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="10dp"
                         android:visibility="visible"
@@ -129,7 +129,7 @@
                     android:layout_height="wrap_content"
                     android:text="99M"
                     android:textColor="@color/black"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:id="@+id/tv_likescount"
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/likeLayout11"
@@ -138,8 +138,8 @@
 
                 <ImageView
                     android:id="@+id/image_disliked"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/tv_likescount"
                     android:layout_marginLeft="10dp"
@@ -149,8 +149,8 @@
 
                 <ImageView
                     android:id="@+id/image_dislike"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/tv_likescount"
                     android:layout_marginLeft="10dp"
@@ -166,8 +166,8 @@
 
             <ImageView
                 android:id="@+id/speech_bubble"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="20dp"
                 android:layout_toRightOf="@+id/likeLayout"
@@ -176,29 +176,13 @@
 
             <ImageView
                 android:id="@+id/ivEllipses"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="20dp"
                 android:icon="@drawable/ic_ellipses"
                 app:srcCompat="@drawable/ic_ellipses" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/relLayout3"
-            android:layout_below="@+id/relLayout2"
-            android:padding="10dp"
-            android:layout_marginBottom="20dp">
-
-
-
-
-
-
 
         </RelativeLayout>
 

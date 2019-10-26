@@ -103,12 +103,6 @@ public class user_login extends AppCompatActivity {
                         m.find();
                         m.find();
                         s = m.group(1);
-//                        while (m.find()) {
-//                            System.out.println(m.group(1));
-//
-//
-//                        }
-
                         SharedPreferences sharedPref = getSharedPreferences("Login" , Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPref.edit();
                         Log.d(TAG, "Entered On response, token is: " + s);

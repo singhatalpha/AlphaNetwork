@@ -2,10 +2,12 @@ package com.example.alphanetwork.Home;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -27,12 +29,13 @@ import android.widget.Toast;
 import com.example.alphanetwork.Feed.Adapter;
 import com.example.alphanetwork.Feed.MediaAdapter;
 import com.example.alphanetwork.Feed.ViewCommentsFragment;
-import com.example.alphanetwork.MainActivity;
 import com.example.alphanetwork.Model.ModelFeed;
 import com.example.alphanetwork.Model.ModelHomeWall;
 import com.example.alphanetwork.R;
 import com.example.alphanetwork.Retrofit.Api;
 import com.example.alphanetwork.Retrofit.RetrofitClient;
+
+import com.example.alphanetwork.addpost.post;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,6 +62,7 @@ public class HomeWallFragment extends android.support.v4.app.Fragment implements
     private Button btnRetry;
 
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -78,6 +82,8 @@ public class HomeWallFragment extends android.support.v4.app.Fragment implements
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setNestedScrollingEnabled(false);
         onLoadingSwipeRefresh();
+
+
 
         //FOr testing interceptor token
 

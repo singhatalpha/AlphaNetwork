@@ -1,9 +1,12 @@
 package com.example.alphanetwork.Feed;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.widget.ImageView;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -18,9 +21,28 @@ import android.widget.TextView;
 import android.widget.VideoView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.Target;
 import com.example.alphanetwork.R;
+import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
+import com.nostra13.universalimageloader.cache.disc.naming.HashCodeFileNameGenerator;
+import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.nostra13.universalimageloader.core.decode.BaseImageDecoder;
+import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+import com.nostra13.universalimageloader.utils.StorageUtils;
+
+import java.io.File;
 
 import Utils.Utils;
 
@@ -30,7 +52,7 @@ public class MediaAdapter extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    private static final String TAG = "Media Adapter";
     public ImageView mImage;
     public VideoView mVideo;
     public TextView mTest;
@@ -40,7 +62,7 @@ public class MediaAdapter extends Fragment {
     public Uri uri;
     public ProgressBar bar;
     private OnFragmentInteractionListener mListener;
-
+    public Context context;
     public static MediaController mediaController;
 //    public ProgressBar progressBar;
 
@@ -83,6 +105,7 @@ public class MediaAdapter extends Fragment {
         if (getArguments() != null) {
             link = getArguments().getString(ARG_PARAM1);
         }
+        context = getActivity();
     }
 
     @Nullable
@@ -142,16 +165,83 @@ public class MediaAdapter extends Fragment {
                 requestOptions.placeholder(R.drawable.ic_launcher_background);
                 requestOptions.error(Utils.getRandomDrawbleColor());
                 requestOptions.diskCacheStrategy(DiskCacheStrategy.ALL);
+//
+//
+//
+//                System.out.println("loading image");
+//                Glide.with(getActivity())
+//                        .setDefaultRequestOptions(requestOptions)
+//                        .load(link)
+//                        .dontAnimate()
+//                        .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
+//                        .into(mImage);
 
-
-                System.out.println("loading image");
-                bar.setVisibility(View.GONE);
                 Glide.with(getActivity())
-                        .setDefaultRequestOptions(requestOptions)
                         .load(link)
-                        .dontAnimate()
+                        .apply(requestOptions)
+                        .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
+                        .listener(new RequestListener<Drawable>() {
+                            @Override
+                            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                System.out.println("Glide Load Failed Fellas....Hate glide" );
+                                System.out.println(e);
+                                return false;
+                            }
 
+                            @Override
+                            public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                                System.out.println("Glide worked...damn" );
+                                bar.setVisibility(View.GONE);
+
+                                return false;
+                            }
+                        })
+                        .transition(DrawableTransitionOptions.withCrossFade())
+                        .dontAnimate()
                         .into(mImage);
+
+
+
+//                File cacheDir = StorageUtils.getCacheDirectory(context);
+//                ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context)
+//                        .threadPoolSize(5) // default
+//                        .threadPriority(Thread.NORM_PRIORITY - 1) // default
+//                        .tasksProcessingOrder(QueueProcessingType.FIFO) // default
+//                        .memoryCacheSize(2 * 1024 * 1024)
+//                        .memoryCacheSizePercentage(13) // default
+//                        .diskCache(new UnlimitedDiskCache(cacheDir)) // default
+//                        .diskCacheSize(100 * 1024 * 1024)
+//                        .diskCacheFileCount(100)
+//                        .defaultDisplayImageOptions(DisplayImageOptions.createSimple()) // default
+//                        .writeDebugLogs()
+//                        .build();
+//                ImageLoader imageLoader = ImageLoader.getInstance();
+//                imageLoader.init(config);
+//
+//                imageLoader.displayImage(link, mImage, new ImageLoadingListener() {
+//                    @Override
+//                    public void onLoadingStarted(String imageUri, View view) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+//                        bar.setVisibility(View.GONE);
+//                        Log.e(TAG, "onLoadingComplete: " + imageUri);
+//                    }
+//
+//                    @Override
+//                    public void onLoadingCancelled(String imageUri, View view) {
+//
+//                    }
+//                });
+
+
             }
 
 

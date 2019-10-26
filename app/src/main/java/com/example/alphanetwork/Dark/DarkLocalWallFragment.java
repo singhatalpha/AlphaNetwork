@@ -71,16 +71,6 @@ public class DarkLocalWallFragment extends android.support.v4.app.Fragment imple
         recyclerView.setNestedScrollingEnabled(false);
         onLoadingSwipeRefresh();
 
-        //FOr testing interceptor token
-
-
-        SharedPreferences sharedPref = getActivity().getSharedPreferences("Login" , Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-//        String s = "52f29b7492ca7c80b1e7b63057d41b0ac419ad51";
-        String s = "9054f7aa9305e012b3c2300408c3dfdf390fcddf";
-        editor.putString("token" , s);
-        editor.apply();
-
         return view;
 
     }

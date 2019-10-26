@@ -3,9 +3,12 @@ package com.example.alphanetwork.Home;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +21,8 @@ import com.example.alphanetwork.Feed.MediaAdapter;
 import com.example.alphanetwork.Feed.ViewCommentsFragment;
 import com.example.alphanetwork.Profile.ProfileActivity;
 import com.example.alphanetwork.R;
+import com.example.alphanetwork.addpost.Permissions.Permissions;
+import com.example.alphanetwork.addpost.post;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 
@@ -40,6 +45,7 @@ public class Home extends AppCompatActivity implements MediaAdapter.OnFragmentIn
     private FrameLayout mFrameLayout;
     private RelativeLayout mRelativeLayout;
     private ImageView profile;
+    private FloatingActionButton fab;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,6 +63,25 @@ public class Home extends AppCompatActivity implements MediaAdapter.OnFragmentIn
             public void onClick(View view) {
                 Intent i = new Intent(Home.this, ProfileActivity.class);
                 startActivity(i);
+            }
+        });
+
+        if(checkPermissionArray(Permissions.permissions))
+        {
+
+
+        }
+        else {
+            verifyPermission(Permissions.permissions);
+        }
+
+        fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Home.this, post.class);
+                startActivity(i);
+
             }
         });
 
@@ -134,5 +159,40 @@ public class Home extends AppCompatActivity implements MediaAdapter.OnFragmentIn
     @Override
     public void onFragmentInteraction(Uri uri) {
 
+    }
+
+
+
+
+
+    private boolean checkPermissionArray(String[] permission) {
+
+        for (int i=0;i<permission.length;i++){
+            String singlep = permission[i];
+            if(!checksinglep(singlep)){
+                return false;
+            }
+
+        }
+
+        return true;
+    }
+
+    private boolean checksinglep(String singlep) {
+
+        int PermissionGranted = ActivityCompat.checkSelfPermission(Home.this,singlep);
+        if(PermissionGranted!= PackageManager.PERMISSION_GRANTED){
+            return false;
+        }
+        else {
+            return true;
+        }
+
+    }
+
+    private void verifyPermission(String[] permissions) {
+        Log.e("verify ", "verifyPermission: ");
+
+        ActivityCompat.requestPermissions(Home.this,permissions,1);
     }
 }
