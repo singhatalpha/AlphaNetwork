@@ -84,8 +84,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
         final MyViewHolder holder = holders;
         ModelFeed modelFeed = posts.get(position);
 
-
-
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.placeholder(Utils.getRandomDrawbleColor());
         requestOptions.error(Utils.getRandomDrawbleColor());

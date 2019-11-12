@@ -18,10 +18,25 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.alphanetwork.R;
+import com.example.alphanetwork.Retrofit.RetrofitClient;
+import com.example.alphanetwork.addpost.gallery;
 
 import org.w3c.dom.Text;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import de.hdodenhof.circleimageview.CircleImageView;
+import id.zelory.compressor.Compressor;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 /**
@@ -29,81 +44,17 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 
 public class EditProfileFragment extends Fragment {
-//        implements
-//        ConfirmPasswordDialog.OnConfirmPasswordListener{
-//
-//
-//    @Override
-//    public void onConfirmPassword(String password) {
-//        Log.d(TAG, "onConfirmPassword: got the password: " + password);
-//
-//        // Get auth credentials from the user for re-authentication. The example below shows
-//        // email and password credentials but there are multiple possible providers,
-//        // such as GoogleAuthProvider or FacebookAuthProvider.
-//        AuthCredential credential = EmailAuthProvider
-//                .getCredential(mAuth.getCurrentUser().getEmail(), password);
-//
-//        ///////////////////// Prompt the user to re-provide their sign-in credentials
-//        mAuth.getCurrentUser().reauthenticate(credential)
-//                .addOnCompleteListener(new OnCompleteListener<Void>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<Void> task) {
-//                        if(task.isSuccessful()){
-//                            Log.d(TAG, "User re-authenticated.");
-//
-//                            ///////////////////////check to see if the email is not already present in the database
-//                            mAuth.fetchProvidersForEmail(mEmail.getText().toString()).addOnCompleteListener(new OnCompleteListener<ProviderQueryResult>() {
-//                                @Override
-//                                public void onComplete(@NonNull Task<ProviderQueryResult> task) {
-//                                    if(task.isSuccessful()){
-//                                        try{
-//                                            if(task.getResult().getProviders().size() == 1){
-//                                                Log.d(TAG, "onComplete: that email is already in use.");
-//                                                Toast.makeText(getActivity(), "That email is already in use", Toast.LENGTH_SHORT).show();
-//                                            }
-//                                            else{
-//                                                Log.d(TAG, "onComplete: That email is available.");
-//
-//                                                //////////////////////the email is available so update it
-//                                                mAuth.getCurrentUser().updateEmail(mEmail.getText().toString())
-//                                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-//                                                            @Override
-//                                                            public void onComplete(@NonNull Task<Void> task) {
-//                                                                if (task.isSuccessful()) {
-//                                                                    Log.d(TAG, "User email address updated.");
-//                                                                    Toast.makeText(getActivity(), "email updated", Toast.LENGTH_SHORT).show();
-//                                                                    mFirebaseMethods.updateEmail(mEmail.getText().toString());
-//                                                                }
-//                                                            }
-//                                                        });
-//                                            }
-//                                        }catch (NullPointerException e){
-//                                            Log.e(TAG, "onComplete: NullPointerException: "  +e.getMessage() );
-//                                        }
-//                                    }
-//                                }
-//                            });
-//
-//
-//
-//
-//
-//                        }else{
-//                            Log.d(TAG, "onComplete: re-authentication failed.");
-//                        }
-//
-//                    }
-//                });
-//    }
+
 
     private static final String TAG = "EditProfileFragment";
 
 
 
     //EditProfile Fragment widgets
-    private EditText mDisplayName, mUsername;
+    private EditText mDisplayName, mUsername, mPhone, mEmail;
     private TextView mChangeProfilePhoto;
     private CircleImageView mProfilePhoto;
+    public static List<String> urls = new ArrayList<>();
 
 
     //vars
@@ -115,9 +66,18 @@ public class EditProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_editprofile, container, false);
         mProfilePhoto = (CircleImageView) view.findViewById(R.id.profile_photo);
-        mDisplayName = (EditText) view.findViewById(R.id.display_name);
+        mPhone = view.findViewById(R.id.phoneNumber);
+        mEmail = view.findViewById(R.id.email);
         mUsername = (EditText) view.findViewById(R.id.username);
         mChangeProfilePhoto = (TextView) view.findViewById(R.id.changeProfilePhoto);
+        mChangeProfilePhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(), gallery.class);
+                i.putExtra(getString(R.string.calling_activity), getString(R.string.profile_activity));
+                getActivity().startActivity(i);
+            }
+        });
 
 
         
@@ -130,15 +90,19 @@ public class EditProfileFragment extends Fragment {
                 getActivity().finish();
             }
         });
-//
-//        ImageView checkmark = (ImageView) view.findViewById(R.id.saveChanges);
-//        checkmark.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Log.d(TAG, "onClick: attempting to save changes.");
-//                saveProfileSettings();
-//            }
-//        });
+
+        ImageView checkmark = (ImageView) view.findViewById(R.id.saveChanges);
+        checkmark.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onClick: attempting to save changes.");
+                try {
+                    saveProfileSettings();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
         return view;
     }
@@ -146,60 +110,90 @@ public class EditProfileFragment extends Fragment {
 
 
 
-    /**
-     * Retrieves the data contained in the widgets and submits it to the database
-     * Before donig so it chekcs to make sure the username chosen is unqiue
-     */
-//    private void saveProfileSettings(){
-//        final String displayName = mDisplayName.getText().toString();
-//        final String username = mUsername.getText().toString();
-//        final String website = mWebsite.getText().toString();
-//        final String description = mDescription.getText().toString();
-//        final String email = mEmail.getText().toString();
-//        final long phoneNumber = Long.parseLong(mPhoneNumber.getText().toString());
-//
-//
-//        //case1: if the user made a change to their username
-//        if(!mUserSettings.getUser().getUsername().equals(username)){
-//
-//            checkIfUsernameExists(username);
-//        }
-//        //case2: if the user made a change to their email
-//        if(!mUserSettings.getUser().getEmail().equals(email)){
-//
-//            // step1) Reauthenticate
-//            //          -Confirm the password and email
-//            ConfirmPasswordDialog dialog = new ConfirmPasswordDialog();
-//            dialog.show(getFragmentManager(), getString(R.string.confirm_password_dialog));
-//            dialog.setTargetFragment(EditProfileFragment.this, 1);
-//
-//
-//            // step2) check if the email already is registered
-//            //          -'fetchProvidersForEmail(String email)'
-//            // step3) change the email
-//            //          -submit the new email to the database and authentication
-//        }
-//
-//        /**
-//         * change the rest of the settings that do not require uniqueness
-//         */
-//        if(!mUserSettings.getSettings().getDisplay_name().equals(displayName)){
-//            //update displayname
-//            mFirebaseMethods.updateUserAccountSettings(displayName, null, null, 0);
-//        }
-//        if(!mUserSettings.getSettings().getWebsite().equals(website)){
-//            //update website
-//            mFirebaseMethods.updateUserAccountSettings(null, website, null, 0);
-//        }
-//        if(!mUserSettings.getSettings().getDescription().equals(description)){
-//            //update description
-//            mFirebaseMethods.updateUserAccountSettings(null, null, description, 0);
-//        }
-//        if(!mUserSettings.getSettings().getProfile_photo().equals(phoneNumber)){
-//            //update phoneNumber
-//            mFirebaseMethods.updateUserAccountSettings(null, null, null, phoneNumber);
-//        }
-//    }
+
+    private void saveProfileSettings() throws IOException {
+
+        final String user = mUsername.getText().toString();
+        final String mail = mEmail.getText().toString();
+        final String phoneNumber = mPhone.getText().toString();
+
+
+
+
+
+//pass it like this
+
+        RequestBody username =
+                RequestBody.create(MediaType.parse("multipart/form-data"), user);
+        RequestBody phone =
+                RequestBody.create(MediaType.parse("multipart/form-data"), phoneNumber);
+        RequestBody email =
+                RequestBody.create(MediaType.parse("multipart/form-data"), mail);
+
+        if (urls.size() != 0) {
+
+
+                System.out.println("The urls are :" + urls);
+
+                File file = new File(urls.get(0));
+
+//                RequestBody requestFile =
+//                        RequestBody.create(MediaType.parse("multipart/form-data"), file);
+
+                RequestBody requestFile =
+                        RequestBody.create(MediaType.parse("multipart/form-data"),new Compressor(getActivity()).compressToFile(file));
+
+// MultipartBody.Part is used to send also the actual file name
+                MultipartBody.Part body = MultipartBody.Part.createFormData("photo", file.getName(), requestFile);
+            Call<ResponseBody> call = RetrofitClient
+                    .getInstance()
+                    .getApi()
+                    .updateProfile(body,username,phone,email);
+            call.enqueue(new Callback<ResponseBody>() {
+
+                @Override
+                public void onResponse(Call<ResponseBody> call,
+                                       Response<ResponseBody> response) {
+                    String m = response.message();
+                    System.out.println(m);
+
+                    Log.v("Upload", "success");
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    Log.e("Upload error:", t.getMessage());
+                }
+            });
+
+        }
+        else{
+            Call<ResponseBody> call = RetrofitClient
+                    .getInstance()
+                    .getApi()
+                    .updateProfileWithoutPic(username,phone,email);
+
+            call.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    String m = response.message();
+                    System.out.println(m);
+
+                    Log.v("Upload", "success");
+                }
+
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    Log.e("Upload error:", t.getMessage());
+                }
+            });
+
+        }
+
+
+
+    }
 
 
 

@@ -4,6 +4,8 @@ package com.example.alphanetwork.Retrofit;
 //import com.example.alphanetwork.Model.CommentFeed;
 import com.example.alphanetwork.Model.CommentFeed;
 import com.example.alphanetwork.Model.ModelHomeWall;
+import com.example.alphanetwork.Model.ModelViewProfile;
+import com.example.alphanetwork.Model.ViewProfile;
 
 import java.util.List;
 
@@ -56,10 +58,22 @@ public interface Api {
     @Multipart
     @PATCH("feed/profile/")
     Call<ResponseBody> updateProfile(
-        @Part MultipartBody photo,
-        @Part ("username") RequestBody username
-
+        @Part MultipartBody.Part photo,
+        @Part ("username") RequestBody username,
+        @Part ("phone") RequestBody phone,
+        @Part ("email") RequestBody email
     );
+
+
+    @PATCH("feed/profile/")
+    Call<ResponseBody> updateProfileWithoutPic(
+            @Field ("username") RequestBody username,
+            @Field ("phone") RequestBody phone,
+            @Field ("email") RequestBody email
+    );
+
+    @GET("feed/profile/")
+    Call<ModelViewProfile> getProfile();
 
 
 //    @GET("feed/profile2/")

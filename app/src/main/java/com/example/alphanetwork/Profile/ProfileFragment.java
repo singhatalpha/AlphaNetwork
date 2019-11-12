@@ -28,6 +28,8 @@ import com.bumptech.glide.Glide;
 import com.example.alphanetwork.Feed.Adapter;
 import com.example.alphanetwork.Model.ModelFeed;
 import com.example.alphanetwork.Model.ModelHomeWall;
+import com.example.alphanetwork.Model.ModelViewProfile;
+import com.example.alphanetwork.Model.ViewProfile;
 import com.example.alphanetwork.R;
 import com.example.alphanetwork.Retrofit.Api;
 import com.example.alphanetwork.Retrofit.RetrofitClient;
@@ -69,10 +71,11 @@ public class ProfileFragment extends Fragment {
     private Toolbar toolbar;
     private ImageView profileMenu, back;
 
+
     private Context mContext;
 
     private List<ModelFeed> feed = new ArrayList<>();
-
+    private ViewProfile vp;
 
     //vars
 //    private int mFollowersCount = 0;
@@ -146,9 +149,6 @@ public class ProfileFragment extends Fragment {
 
 //        setupToolbar();
         setProfileWidgets();
-
-
-
         setupGridView();
 
 //        getFollowersCount();
@@ -282,60 +282,6 @@ public class ProfileFragment extends Fragment {
     private void setupGridView(){
         Log.d(TAG, "setupGridView: Setting up image grid.");
 
-//        final ArrayList<Photo> photos = new ArrayList<>();
-//        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
-//        Query query = reference
-//                .child(getString(R.string.dbname_user_photos))
-//                .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
-//        query.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                for ( DataSnapshot singleSnapshot :  dataSnapshot.getChildren()){
-//
-//                    Photo photo = new Photo();
-//                    Map<String, Object> objectMap = (HashMap<String, Object>) singleSnapshot.getValue();
-//
-//                    try {
-//                        photo.setCaption(objectMap.get(getString(R.string.field_caption)).toString());
-//                        photo.setTags(objectMap.get(getString(R.string.field_tags)).toString());
-//                        photo.setPhoto_id(objectMap.get(getString(R.string.field_photo_id)).toString());
-//                        photo.setUser_id(objectMap.get(getString(R.string.field_user_id)).toString());
-//                        photo.setDate_created(objectMap.get(getString(R.string.field_date_created)).toString());
-//                        photo.setImage_path(objectMap.get(getString(R.string.field_image_path)).toString());
-//
-//                        ArrayList<Comment> comments = new ArrayList<Comment>();
-//                        for (DataSnapshot dSnapshot : singleSnapshot
-//                                .child(getString(R.string.field_comments)).getChildren()) {
-//                            Comment comment = new Comment();
-//                            comment.setUser_id(dSnapshot.getValue(Comment.class).getUser_id());
-//                            comment.setComment(dSnapshot.getValue(Comment.class).getComment());
-//                            comment.setDate_created(dSnapshot.getValue(Comment.class).getDate_created());
-//                            comments.add(comment);
-//                        }
-//
-//                        photo.setComments(comments);
-//
-//                        List<Like> likesList = new ArrayList<Like>();
-//                        for (DataSnapshot dSnapshot : singleSnapshot
-//                                .child(getString(R.string.field_likes)).getChildren()) {
-//                            Like like = new Like();
-//                            like.setUser_id(dSnapshot.getValue(Like.class).getUser_id());
-//                            likesList.add(like);
-//                        }
-//                        photo.setLikes(likesList);
-//                        photos.add(photo);
-//                    }catch(NullPointerException e){
-//                        Log.e(TAG, "onDataChange: NullPointerException: " + e.getMessage() );
-//                    }
-//                }
-
-
-
-
-
-
-
-
                 //setup our image grid
         Api api = RetrofitClient.getInstance().getApi();
         Call<ModelHomeWall> call;
@@ -413,114 +359,55 @@ public class ProfileFragment extends Fragment {
 
 
 
-
-
-//    private void getFollowersCount(){
-//        mFollowersCount = 0;
-//
-//        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
-//        Query query = reference.child(getString(R.string.dbname_followers))
-//                .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
-//        query.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                for(DataSnapshot singleSnapshot :  dataSnapshot.getChildren()){
-//                    Log.d(TAG, "onDataChange: found follower:" + singleSnapshot.getValue());
-//                    mFollowersCount++;
-//                }
-//                mFollowers.setText(String.valueOf(mFollowersCount));
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
-//    }
-
-//    private void getFollowingCount(){
-//        mFollowingCount = 0;
-//
-//        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
-//        Query query = reference.child(getString(R.string.dbname_following))
-//                .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
-//        query.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                for(DataSnapshot singleSnapshot :  dataSnapshot.getChildren()){
-//                    Log.d(TAG, "onDataChange: found following user:" + singleSnapshot.getValue());
-//                    mFollowingCount++;
-//                }
-//                mFollowing.setText(String.valueOf(mFollowingCount));
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
-//    }
-//
-//    private void getPostsCount(){
-//        mPostsCount = 0;
-//
-//        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
-//        Query query = reference.child(getString(R.string.dbname_user_photos))
-//                .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
-//        query.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                for(DataSnapshot singleSnapshot :  dataSnapshot.getChildren()){
-//                    Log.d(TAG, "onDataChange: found post:" + singleSnapshot.getValue());
-//                    mPostsCount++;
-//                }
-//                mPosts.setText(String.valueOf(mPostsCount));
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
-//    }
-
     private void setProfileWidgets() {
-        //Log.d(TAG, "setProfileWidgets: setting widgets with data retrieving from firebase database: " + userSettings.toString());
-        //Log.d(TAG, "setProfileWidgets: setting widgets with data retrieving from firebase database: " + userSettings.getSettings().getUsername());
+
+        Log.d(TAG, "setupProfileWidgets: Setting up profile widgets.");
+
+        //setup our image grid
+        Api api = RetrofitClient.getInstance().getApi();
+        Call<ModelViewProfile> call;
+        call = api.getProfile();
+        call.enqueue(new Callback<ModelViewProfile>() {
+            @Override
+            public void onResponse(Call<ModelViewProfile> call, Response<ModelViewProfile> response) {
+                if(response.isSuccessful() ){
+                    Log.d(TAG, "setupProfileWidgets: got response");
+                    if (response.body() != null) {
+                        vp = response.body().getProfile();
+                        mDisplayName.setText(vp.getUsername());
+                        Glide.with(getActivity())
+                                .load(vp.getPhoto())
+                                .into(mProfilePhoto);
+//        mFollowingCount.setText(viewProfile.getFollowing());
+                        mProgressBar.setVisibility(View.GONE);
+
+                    }
+                    System.out.println(response.body());
+                    System.out.println(vp);
+                } else {
+                    Log.d(TAG, "setupProfileWidgets: No damn response");
+                    Toast.makeText(getActivity(), "No Response", Toast.LENGTH_LONG).show();
+
+                }
 
 
-        //User user = userSettings.getUser();
-//        UserAccountSettings settings = userSettings.getSettings();
-//
-//        UniversalImageLoader.setImage(settings.getProfile_photo(), mProfilePhoto, null, "");
+            }
 
-//        Glide.with(getActivity())
-//                .load(feed.get(1).getProfile().getPhoto())
-//                .into(mProfilePhoto);
+            @Override
+            public void onFailure(Call<ModelViewProfile> call, Throwable t) {
+                Log.d(TAG, "setupProfileWidgets: On failure");
+                Toast.makeText(getActivity(), "onFailure is triggered", Toast.LENGTH_LONG).show();
+            }
 
-        mDisplayName.setText("Vikram Singh");
-//        mUsername.setText("Alpha");
-//        mWebsite.setText("");
-//        mDescription.setText("A long way to go");
-        mProgressBar.setVisibility(View.GONE);
+        });
+
+
+
+
+
     }
 
 
 
-//    private void setupToolbar(){
-//
-//        ((ProfileActivity)getActivity()).setSupportActionBar(toolbar);
-//
-
-//
-//        back.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Log.d(TAG, "onClick: navigating back to 'Home activity'");
-//                getFragmentManager().popBackStack();
-//
-//            }
-//        });
-//    }
 
 }

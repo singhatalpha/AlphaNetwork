@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 
 
+import com.example.alphanetwork.Profile.EditProfileFragment;
 import com.example.alphanetwork.R;
 import com.example.alphanetwork.addpost.Files.FilePaths;
 import com.example.alphanetwork.addpost.Files.FileSearch;
@@ -48,23 +49,47 @@ public class gallery extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),post.class));
-                finish();
-            }
-        });
+
+
+
+
+
+
+
+
+        post.urls.clear();
+        EditProfileFragment.urls.clear();
+        Intent intent = getIntent();
+        if(intent.hasExtra(getString(R.string.calling_activity))){
+            Log.d(TAG, "getIncomingIntent: received incoming intent from " + getString(R.string.profile_activity));
+            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+//                    startActivity(new Intent(getApplicationContext(),post.class));
+                    finish();
+                }
+            });
+        }
+        else {
+            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(getApplicationContext(), post.class));
+                    finish();
+                }
+            });
+        }
+
+
+
+
+
+
+
 
 
         directorySpinner = findViewById(R.id.spinner);
         gridView = findViewById(R.id.recycler_view);
-
-
-
-
-
-
 
         init();
 

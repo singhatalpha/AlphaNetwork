@@ -19,6 +19,7 @@ import android.widget.VideoView;
 
 
 import com.bumptech.glide.Glide;
+import com.example.alphanetwork.Profile.EditProfileFragment;
 import com.example.alphanetwork.R;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -219,7 +220,7 @@ public class GridviewAdapter extends RecyclerView.Adapter<ViewHolderItem> {
                             post.NoOfSlecteImg++;
                             gallery.SelectedImgUrls.add(TrueImageUrl);
                             post.urls.add(imgURL);
-
+                            EditProfileFragment.urls.add(imgURL);
 
                             File file = new File(TrueImageUrl);
                             Date lastModDate = new Date(file.lastModified());
@@ -238,6 +239,7 @@ public class GridviewAdapter extends RecyclerView.Adapter<ViewHolderItem> {
                             post.NoOfSlecteImg--;
                             gallery.SelectedImgUrls.remove(TrueImageUrl);
                             post.urls.remove(imgURL);
+                            EditProfileFragment.urls.remove(imgURL);
 
                         }
 
@@ -251,6 +253,7 @@ public class GridviewAdapter extends RecyclerView.Adapter<ViewHolderItem> {
                             post.NoOfSlecteImg--;
                             gallery.SelectedImgUrls.remove(TrueImageUrl);
                             post.urls.remove(imgURL);
+                            EditProfileFragment.urls.remove(imgURL);
 
 
                         }
