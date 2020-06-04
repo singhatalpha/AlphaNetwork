@@ -6,7 +6,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import Utils.MyApp;
-import com.example.alphanetwork.MainActivity;
+//import com.example.alphanetwork.MainActivity;
 
 import okhttp3.Interceptor;
 import okhttp3.Request;
@@ -17,7 +17,7 @@ import okhttp3.Response;
 public class RequestInterceptor implements Interceptor {
 
 //    .addHeader("Authenticator", prefs.getToken())
-
+//    Authorization: Token jwt.token.here
     private SharedPreferences sharedpref;
     private Context context = MyApp.getContext();
 

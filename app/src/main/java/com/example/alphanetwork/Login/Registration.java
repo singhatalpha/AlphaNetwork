@@ -1,6 +1,6 @@
 package com.example.alphanetwork.Login;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -108,7 +108,7 @@ public class Registration extends AppCompatActivity implements OnClickListener {
         Call<ResponseBody> call = RetrofitClient
                 .getInstance()
                 .getApi()
-                .createUser(email,email,pass1,pass2);
+                .createUser(user,email,pass1,pass2);
 
         call.enqueue(new Callback<ResponseBody>() {
             @Override

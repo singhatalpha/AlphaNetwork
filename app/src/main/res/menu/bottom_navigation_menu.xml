@@ -26,9 +26,9 @@
         android:title="">
     </item>
 
-    <item
-        android:id="@+id/ic_warning"
-        android:icon="@drawable/ic_warning"
-        android:title="">
-    </item>
+<!--    <item-->
+<!--        android:id="@+id/ic_warning"-->
+<!--        android:icon="@drawable/ic_warning"-->
+<!--        android:title="">-->
+<!--    </item>-->
 </menu>

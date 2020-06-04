@@ -3,19 +3,18 @@ package com.example.alphanetwork.Model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 public class ModelFeed{
-
-
+    private String title;
+    private List<String> media;
     private int likes = 7;
     private int comments = 1;
     private String time = "2019-08-13T13:21:08Z";
-    private int id;
-    private String title;
-    private String content;
-    private int user;
-    private List<String> media;
+    private String id;
     private ModelProfile profile;
 
 
@@ -44,11 +43,11 @@ public class ModelFeed{
         this.time = time;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -58,22 +57,6 @@ public class ModelFeed{
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public Integer getUser() {
-        return user;
-    }
-
-    public void setUser(Integer user) {
-        this.user = user;
     }
 
     public List<String> getMedia() {

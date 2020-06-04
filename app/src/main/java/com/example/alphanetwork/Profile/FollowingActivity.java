@@ -1,33 +1,18 @@
 package com.example.alphanetwork.Profile;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.Nullable;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.alphanetwork.Feed.Adapter;
-import com.example.alphanetwork.Feed.MediaAdapter;
-import com.example.alphanetwork.Feed.ViewCommentsFragment;
-import com.example.alphanetwork.MainActivity;
 import com.example.alphanetwork.Model.ModelFeed;
 import com.example.alphanetwork.Model.ModelHomeWall;
 import com.example.alphanetwork.R;
@@ -91,7 +76,7 @@ public class FollowingActivity extends AppCompatActivity {
 
         Api api = RetrofitClient.getInstance().getApi();
         Call<ModelHomeWall> call;
-        call = api.feed();
+        call = api.feed("temp","temp");
         call.enqueue(new Callback<ModelHomeWall>() {
             @Override
             public void onResponse(Call<ModelHomeWall> call, Response<ModelHomeWall> response) {

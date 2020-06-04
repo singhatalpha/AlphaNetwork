@@ -88,13 +88,13 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
         android:id="@+id/relLayout12"
         android:layout_below="@+id/relLayout11">
 
-            <android.support.v4.view.ViewPager
+            <androidx.viewpager.widget.ViewPager
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
                 android:id="@+id/view_pager_media"
                 >
 
-            </android.support.v4.view.ViewPager>
+            </androidx.viewpager.widget.ViewPager>
 
     </RelativeLayout>
 
@@ -106,7 +106,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
             android:layout_below="@+id/relLayout12">
 
 
-            <android.support.design.widget.TabLayout
+            <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tab_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -3,18 +3,15 @@ package com.example.alphanetwork.Profile;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.example.alphanetwork.MainActivity;
 import com.example.alphanetwork.R;
 
 import Utils.OnBackPressedListener;
@@ -87,7 +84,7 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         Log.d(TAG, "onCreate: started.");
         toolbar = (Toolbar) findViewById(R.id.profileToolBar);
-        profileMenu = (ImageView)findViewById(R.id.profileMenu);
+        profileMenu = (ImageView) findViewById(R.id.profileMenu);
         back = findViewById(R.id.profileback);
 
         init();
@@ -109,16 +106,11 @@ public class ProfileActivity extends AppCompatActivity {
             System.out.println("doPop");
             onBackPressedPopListener.doPop();
             onBackPressedPopListener = null;
-        }
-
-        else if (onBackPressedListener != null) {
+        } else if (onBackPressedListener != null) {
             System.out.println("doBack");
             onBackPressedListener.doBack();
             onBackPressedListener = null;
-        }
-
-
-        else {
+        } else {
             System.out.println("else back");
             super.onBackPressed();
             finish();
@@ -127,39 +119,29 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
 
-    private void init(){
-        Log.d(TAG, "init: inflating profile fragment" );
+    private void init() {
+        Log.d(TAG, "init: inflating profile fragment");
 
         Intent intent = getIntent();
-//        if(intent.hasExtra(getString(R.string.calling_activity))){
-//            Log.d(TAG, "init: searching for user object attached as intent extra");
-//            if(intent.hasExtra(getString(R.string.intent_user))){
-//                User user = intent.getParcelableExtra(getString(R.string.intent_user));
-//                if(!user.getUser_id().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())){
-//                    Log.d(TAG, "init: inflating view profile");
-//                    ViewProfileFragment fragment = new ViewProfileFragment();
-//                    Bundle args = new Bundle();
-//                    args.putParcelable(getString(R.string.intent_user),
-//                            intent.getParcelableExtra(getString(R.string.intent_user)));
-//                    fragment.setArguments(args);
-//
-//                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-//                    transaction.replace(R.id.container, fragment);
+        if (intent.hasExtra("user_id")) {
+            Log.d(TAG, "init: searching for user object attached as intent extra");
+                    Bundle bundle = intent.getExtras();
+                    String id = bundle.getString("user_id");
+
+                    Log.d(TAG, "init: inflating view profile");
+                    ViewProfileFragment fragment = new ViewProfileFragment();
+                    Bundle args = new Bundle();
+                    args.putString("user_id",id);
+                    fragment.setArguments(args);
+
+                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.container, fragment);
 //                    transaction.addToBackStack(getString(R.string.view_profile_fragment));
-//                    transaction.commit();
-//                }else{
-//                    Log.d(TAG, "init: inflating Profile");
-//                    ProfileFragment fragment = new ProfileFragment();
-//                    FragmentTransaction transaction = ProfileActivity.this.getSupportFragmentManager().beginTransaction();
-//                    transaction.replace(R.id.container, fragment);
-//                    transaction.addToBackStack(getString(R.string.profile_fragment));
-//                    transaction.commit();
-//                }
-//            }else{
-//                Toast.makeText(mContext, "something went wrong", Toast.LENGTH_SHORT).show();
-//            }
-//    }
-//        else{
+                    transaction.commit();
+
+
+        }
+        else {
             Log.d(TAG, "init: inflating Profile");
             ProfileFragment fragment = new ProfileFragment();
             FragmentTransaction transaction = ProfileActivity.this.getSupportFragmentManager().beginTransaction();
@@ -167,7 +149,9 @@ public class ProfileActivity extends AppCompatActivity {
             transaction.addToBackStack(getString(R.string.profile_fragment));
             transaction.commit();
 //        }
+//
 
+
+        }
     }
-
 }

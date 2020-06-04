@@ -3,20 +3,20 @@ package com.example.alphanetwork.Home;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.example.alphanetwork.Feed.Adapter;
 import com.example.alphanetwork.Feed.MediaAdapter;
 import com.example.alphanetwork.Feed.ViewCommentsFragment;
 import com.example.alphanetwork.Profile.ProfileActivity;
@@ -27,16 +27,34 @@ import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 
 import Utils.BottomNavigationViewHelper;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
+import com.google.android.material.tabs.TabLayout;
+import com.yayandroid.locationmanager.LocationManager;
+import com.yayandroid.locationmanager.listener.LocationListener;
+
+import androidx.viewpager.widget.ViewPager;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 
-public class Home extends AppCompatActivity implements MediaAdapter.OnFragmentInteractionListener{
+
+
+
+
+import com.yayandroid.locationmanager.base.LocationBaseActivity;
+import com.yayandroid.locationmanager.configuration.Configurations;
+import com.yayandroid.locationmanager.configuration.LocationConfiguration;
+import com.yayandroid.locationmanager.constants.FailType;
+import com.yayandroid.locationmanager.constants.ProcessType;
+import android.location.Location;
+
+
+
+
+
+
+public class Home extends LocationBaseActivity implements MediaAdapter.OnFragmentInteractionListener{
     private static final String TAG = "Home";
     private static final int ACTIVITY_NUM = 0;
 
@@ -46,6 +64,8 @@ public class Home extends AppCompatActivity implements MediaAdapter.OnFragmentIn
     private RelativeLayout mRelativeLayout;
     private ImageView profile;
     private FloatingActionButton fab;
+    private SharedPreferences sharedPref;
+    public String LONG,LAT;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -66,14 +86,7 @@ public class Home extends AppCompatActivity implements MediaAdapter.OnFragmentIn
             }
         });
 
-        if(checkPermissionArray(Permissions.permissions))
-        {
 
-
-        }
-        else {
-            verifyPermission(Permissions.permissions);
-        }
 
         fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -85,9 +98,164 @@ public class Home extends AppCompatActivity implements MediaAdapter.OnFragmentIn
             }
         });
 
+
+        sharedPref = getSharedPreferences("Location" , Context.MODE_PRIVATE);
+
+        getLocation();
+
+
+        if(checkPermissionArray(Permissions.permissions))
+        {
+
+
+        }
+        else {
+            verifyPermission(Permissions.permissions);
+        }
+
+
         setupBottomNavigationView();
         setupViewPager();
+
+
+
+
+
+
+
+
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (getLocationManager().isWaitingForLocation()
+                && !getLocationManager().isAnyDialogShowing()) {
+            Log.d(TAG, "Resumed,getting location");
+        }
+    }
+
+    @Override
+    public LocationConfiguration getLocationConfiguration() {
+        return Configurations.defaultConfiguration("Please Provide Permissions", "Please Turn on your GPS");
+    }
+    @Override
+    public void onLocationChanged(Location location) {
+        Log.d(TAG, location.toString());
+        SharedPreferences.Editor editor = sharedPref.edit();
+        Log.d(TAG, "Entering location into sharedpref");
+        LAT = String.valueOf(location.getLatitude());
+        LONG = String.valueOf(location.getLongitude());
+        editor.putString("LAT" , LAT);
+        editor.putString("LONG" , LONG);
+
+        editor.apply();
+    }
+
+    @Override
+    public void onLocationFailed(@FailType int failType) {
+
+        LONG  = sharedPref.getString("LONG" , "NULL");
+        LAT   = sharedPref.getString("LAT","NULL");
+
+        Log.e("Location ", "FAILED: ");
+        Log.d(TAG, "Saved location:"+LONG+LAT);
+
+        switch (failType) {
+            case FailType.TIMEOUT: {
+                Log.e("Location","Couldn't get location, and timeout!");
+                break;
+            }
+            case FailType.PERMISSION_DENIED: {
+                Log.e("Location","Couldn't get location, because user didn't give permission!");
+                break;
+            }
+            case FailType.NETWORK_NOT_AVAILABLE: {
+                Log.e("Location","Couldn't get location, because network is not accessible!");
+                break;
+            }
+            case FailType.GOOGLE_PLAY_SERVICES_NOT_AVAILABLE: {
+                Log.e("Location","Couldn't get location, because Google Play Services not available!");
+                break;
+            }
+            case FailType.GOOGLE_PLAY_SERVICES_CONNECTION_FAIL: {
+                Log.e("Location","Couldn't get location, because Google Play Services connection failed!");
+                break;
+            }
+            case FailType.GOOGLE_PLAY_SERVICES_SETTINGS_DIALOG: {
+                Log.e("Location","Couldn't display settingsApi dialog!");
+                break;
+            }
+            case FailType.GOOGLE_PLAY_SERVICES_SETTINGS_DENIED: {
+                Log.e("Location","Couldn't get location, because user didn't activate providers via settingsApi!");
+                break;
+            }
+            case FailType.VIEW_DETACHED: {
+                Log.e("Location","Couldn't get location, because in the process view was detached!");
+                break;
+            }
+            case FailType.VIEW_NOT_REQUIRED_TYPE: {
+                Log.e("Location","Couldn't get location, "
+                        + "because view wasn't sufficient enough to fulfill given configuration!");
+                break;
+            }
+            case FailType.UNKNOWN: {
+                Log.e("Location","Ops! Something went wrong!");
+                break;
+            }
+        }
+    }
+
+    @Override
+    public void onProcessTypeChanged(@ProcessType int processType) {
+        Log.e("Process Change ", "ProcessType");
+        switch (processType) {
+            case ProcessType.GETTING_LOCATION_FROM_GOOGLE_PLAY_SERVICES: {
+                Log.e("Process Change ","Getting Location from Google Play Services...");
+                break;
+            }
+            case ProcessType.GETTING_LOCATION_FROM_GPS_PROVIDER: {
+                Log.e("Process Change ","Getting Location from GPS...");
+                break;
+            }
+            case ProcessType.GETTING_LOCATION_FROM_NETWORK_PROVIDER: {
+                Log.e("Process Change ","Getting Location from Network...");
+                break;
+            }
+            case ProcessType.ASKING_PERMISSIONS:
+            case ProcessType.GETTING_LOCATION_FROM_CUSTOM_PROVIDER:
+                // Ignored
+                break;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -2,24 +2,22 @@ package com.example.alphanetwork.Dark;
 
 
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import com.example.alphanetwork.Model.ModelAnonymousFeed;
+import com.google.android.material.tabs.TabLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 //import android.support.v4.view.PagerAdapter;
 
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.RecyclerView;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
@@ -30,25 +28,15 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
-import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.request.target.Target;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.example.alphanetwork.Feed.MediaAdapter;
 import com.example.alphanetwork.Home.Home;
-import com.example.alphanetwork.Home.HomeWallFragment;
-import com.example.alphanetwork.MainActivity;
 import com.example.alphanetwork.Model.ModelFeed;
-import com.example.alphanetwork.Profile.AccountSettingsActivity;
-import com.example.alphanetwork.Profile.ProfileActivity;
 import com.example.alphanetwork.R;
 import Utils.Utils;
 import Utils.LikesToggle;
@@ -57,7 +45,7 @@ import Utils.LikesToggle;
 
 public class DarkAdapter extends RecyclerView.Adapter<DarkAdapter.MyViewHolder>{
 
-    private List<ModelFeed> posts;
+    private List<ModelAnonymousFeed> posts;
     private Context context;
     private FragmentManager fragmentManager;
     private static final String TAG = "Adapter";
@@ -67,7 +55,7 @@ public class DarkAdapter extends RecyclerView.Adapter<DarkAdapter.MyViewHolder>{
 
 
 
-    public DarkAdapter(List<ModelFeed> posts, Context context,FragmentManager fragmentManager) {
+    public DarkAdapter(List<ModelAnonymousFeed> posts, Context context,FragmentManager fragmentManager) {
         this.posts = posts;
         this.context = context;
         this.fragmentManager = fragmentManager;
@@ -85,7 +73,7 @@ public class DarkAdapter extends RecyclerView.Adapter<DarkAdapter.MyViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holders, int position) {
         final MyViewHolder holder = holders;
-        ModelFeed modelFeed = posts.get(position);
+        ModelAnonymousFeed modelFeed = posts.get(position);
 
 
 
@@ -290,7 +278,7 @@ public class DarkAdapter extends RecyclerView.Adapter<DarkAdapter.MyViewHolder>{
         System.out.println(posts.size());
 
 
-        ModelFeed modelFeed = posts.get(i);
+        ModelAnonymousFeed modelFeed = posts.get(i);
         List<String> urls = modelFeed.getMedia();
 
         if(urls.size() == 0)

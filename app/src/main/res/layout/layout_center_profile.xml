@@ -123,16 +123,16 @@
                     android:layout_height="350dp"
                     android:orientation="vertical">
 
-                    <Button
-                        android:id="@+id/follow"
-                        android:textColor="@color/blue"
-                        android:background="@drawable/buttonstyle"
-                        android:layout_marginTop="110dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="follow"/>
+<!--                    <Button-->
+<!--                        android:id="@+id/follow"-->
+<!--                        android:textColor="@color/blue"-->
+<!--                        android:background="@drawable/buttonstyle"-->
+<!--                        android:layout_marginTop="110dp"-->
+<!--                        android:layout_marginLeft="10dp"-->
+<!--                        android:layout_gravity="center_horizontal"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="follow"/>-->
 
 
 
@@ -163,73 +163,73 @@
                         android:textStyle="bold" />
 
 
-                    <LinearLayout
-                        android:layout_width="110dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="70dp"
-                        android:orientation="vertical"
-                        android:layout_toRightOf="@id/profile_photo">
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="110dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginLeft="10dp"-->
+<!--                        android:layout_marginTop="70dp"-->
+<!--                        android:orientation="vertical"-->
+<!--                        android:layout_toRightOf="@id/profile_photo">-->
 
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:id="@+id/imgview1"
-                        app:srcCompat="@drawable/fire"
-                        android:layout_centerHorizontal="true"
-                        android:layout_gravity="center_horizontal"
-                        >
+<!--                    <ImageView-->
+<!--                        android:layout_width="20dp"-->
+<!--                        android:layout_height="20dp"-->
+<!--                        android:id="@+id/imgview1"-->
+<!--                        app:srcCompat="@drawable/fire"-->
+<!--                        android:layout_centerHorizontal="true"-->
+<!--                        android:layout_gravity="center_horizontal"-->
+<!--                        >-->
 
-                    </ImageView>
+<!--                    </ImageView>-->
 
-                    <TextView
-                        android:id="@+id/popularity"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:text="999k"
-                        android:layout_centerHorizontal="true"
-                        android:layout_gravity="center_horizontal"
-                        android:textColor="@color/white"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/popularity"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:text="999k"-->
+<!--                        android:layout_centerHorizontal="true"-->
+<!--                        android:layout_gravity="center_horizontal"-->
+<!--                        android:textColor="@color/white"-->
+<!--                        android:textSize="15sp"-->
+<!--                        android:textStyle="bold" />-->
 
-<!--                        <ImageView-->
-<!--                            android:layout_width="30dp"-->
-<!--                            android:layout_height="30dp"-->
-<!--                            android:id="@+id/imgview2"-->
-<!--                            app:srcCompat="@drawable/fire"-->
+<!--&lt;!&ndash;                        <ImageView&ndash;&gt;-->
+<!--&lt;!&ndash;                            android:layout_width="30dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                            android:layout_height="30dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                            android:id="@+id/imgview2"&ndash;&gt;-->
+<!--&lt;!&ndash;                            app:srcCompat="@drawable/fire"&ndash;&gt;-->
+<!--&lt;!&ndash;                            android:layout_centerHorizontal="true"&ndash;&gt;-->
+<!--&lt;!&ndash;                            android:layout_gravity="center_horizontal"&ndash;&gt;-->
+<!--&lt;!&ndash;                            >&ndash;&gt;-->
+
+<!--&lt;!&ndash;                        </ImageView>&ndash;&gt;-->
+<!--                        <TextView-->
+<!--                            android:id="@+id/temp"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="Influence"-->
 <!--                            android:layout_centerHorizontal="true"-->
 <!--                            android:layout_gravity="center_horizontal"-->
-<!--                            >-->
+<!--                            android:textColor="@color/black"-->
+<!--                            android:textSize="15sp"-->
+<!--                            android:textStyle="bold" />-->
 
-<!--                        </ImageView>-->
-                        <TextView
-                            android:id="@+id/temp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Influence"
-                            android:layout_centerHorizontal="true"
-                            android:layout_gravity="center_horizontal"
-                            android:textColor="@color/black"
-                            android:textSize="15sp"
-                            android:textStyle="bold" />
+<!--                        <TextView-->
+<!--                            android:id="@+id/influence"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="40dp"-->
+<!--                            android:text="9M"-->
+<!--                            android:layout_centerHorizontal="true"-->
+<!--                            android:layout_gravity="center_horizontal"-->
+<!--                            android:textColor="@color/white"-->
+<!--                            android:textSize="15sp"-->
+<!--                            android:textStyle="bold" />-->
 
-                        <TextView
-                            android:id="@+id/influence"
-                            android:layout_width="wrap_content"
-                            android:layout_height="40dp"
-                            android:text="9M"
-                            android:layout_centerHorizontal="true"
-                            android:layout_gravity="center_horizontal"
-                            android:textColor="@color/white"
-                            android:textSize="15sp"
-                            android:textStyle="bold" />
-
-                    </LinearLayout>
+<!--                    </LinearLayout>-->
 
 
                 </RelativeLayout>
-                <android.support.v7.widget.CardView
+                <androidx.cardview.widget.CardView
                     xmlns:card_view="http://schemas.android.com/apk/res-auto"
                     android:layout_width="400dp"
                     android:layout_height="120dp"
@@ -244,7 +244,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="horizontal"
-                        android:weightSum="3">
+                        android:weightSum="2">
                         <LinearLayout
                             android:gravity="center"
                             android:orientation="vertical"
@@ -254,13 +254,14 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Posts"
+                                android:text="Influence"
                                 android:textSize="20sp"
                                 />
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="125"
+                                android:id="@+id/tv_influence"
+                                android:text="0"
                                 android:textStyle="bold"
                                 android:textSize="20sp"
                                 android:paddingTop="10dp"
@@ -277,11 +278,11 @@
                                 android:id="@+id/tvFollowers"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Followers"
+                                android:text="Popularity"
                                 android:textSize="20sp"
                                 />
                             <TextView
-                                android:id="@+id/tvFollowersCount"
+                                android:id="@+id/tv_popularity"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="1205"
@@ -291,33 +292,33 @@
                                 android:textColor="@color/blue"/>
 
                         </LinearLayout>
-                        <LinearLayout
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="match_parent">
-                            <TextView
-                                android:id="@+id/tvFollowing"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Following"
-                                android:textSize="20sp"
-                                />
-                            <TextView
-                                android:id="@+id/tvFollowingCount"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="360"
-                                android:textStyle="bold"
-                                android:textSize="20sp"
-                                android:paddingTop="10dp"
-                                android:textColor="@color/blue"/>
+<!--                        <LinearLayout-->
+<!--                            android:gravity="center"-->
+<!--                            android:orientation="vertical"-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_weight="1"-->
+<!--                            android:layout_height="match_parent">-->
+<!--                            <TextView-->
+<!--                                android:id="@+id/tvFollowing"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:text="Following"-->
+<!--                                android:textSize="20sp"-->
+<!--                                />-->
+<!--                            <TextView-->
+<!--                                android:id="@+id/tvFollowingCount"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:text="360"-->
+<!--                                android:textStyle="bold"-->
+<!--                                android:textSize="20sp"-->
+<!--                                android:paddingTop="10dp"-->
+<!--                                android:textColor="@color/blue"/>-->
 
-                        </LinearLayout>
+<!--                        </LinearLayout>-->
                     </LinearLayout>
 
-                </android.support.v7.widget.CardView>
+                </androidx.cardview.widget.CardView>
             </RelativeLayout>
 
             <LinearLayout
@@ -340,60 +341,60 @@
 
 
 
-                <android.support.v7.widget.CardView
-                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                    android:layout_width="400dp"
-                    android:layout_height="130dp"
-                    android:layout_centerHorizontal="true"
-                    card_view:cardCornerRadius="30dp"
-                    card_view:contentPadding="7dp"
-                    card_view:cardElevation="3dp"
-                    card_view:cardUseCompatPadding="true"
-                    >
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
+<!--                <androidx.cardview.widget.CardView-->
+<!--                    xmlns:card_view="http://schemas.android.com/apk/res-auto"-->
+<!--                    android:layout_width="400dp"-->
+<!--                    android:layout_height="130dp"-->
+<!--                    android:layout_centerHorizontal="true"-->
+<!--                    card_view:cardCornerRadius="30dp"-->
+<!--                    card_view:contentPadding="7dp"-->
+<!--                    card_view:cardElevation="3dp"-->
+<!--                    card_view:cardUseCompatPadding="true"-->
+<!--                    >-->
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:orientation="vertical">-->
 
-                        <RelativeLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
-                        <TextView
-                            android:id="@+id/tv_highlights"
-                            android:textStyle="bold"
-                            android:layout_gravity="center_vertical"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="20sp"
-                            android:textColor="@color/blue"
-                            android:text="Highlights"/>
+<!--                        <RelativeLayout-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content">-->
+<!--                        <TextView-->
+<!--                            android:id="@+id/tv_highlights"-->
+<!--                            android:textStyle="bold"-->
+<!--                            android:layout_gravity="center_vertical"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:textSize="20sp"-->
+<!--                            android:textColor="@color/blue"-->
+<!--                            android:text="Highlights"/>-->
 
-                        <TextView
-                            android:id="@+id/tv_highlightsVoteTotal"
-                            android:layout_alignParentEnd="true"
-                            android:layout_alignParentRight="true"
-                            android:textStyle="bold"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="15sp"
-                            android:textColor="@color/blue"
-                            android:text="100Up 20Down"
-                             />
+<!--                        <TextView-->
+<!--                            android:id="@+id/tv_highlightsVoteTotal"-->
+<!--                            android:layout_alignParentEnd="true"-->
+<!--                            android:layout_alignParentRight="true"-->
+<!--                            android:textStyle="bold"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:textSize="15sp"-->
+<!--                            android:textColor="@color/blue"-->
+<!--                            android:text="100Up 20Down"-->
+<!--                             />-->
 
-                        </RelativeLayout>
+<!--                        </RelativeLayout>-->
 
-                        <TextView
-                            android:id="@+id/tv_highlight1"
-                            android:layout_gravity="center_vertical"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="20sp"
-                            android:text="Alpha"/>
+<!--                        <TextView-->
+<!--                            android:id="@+id/tv_highlight1"-->
+<!--                            android:layout_gravity="center_vertical"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:textSize="20sp"-->
+<!--                            android:text="Alpha"/>-->
 
 
-                    </LinearLayout>
-                </android.support.v7.widget.CardView>
-                <android.support.v7.widget.CardView
+<!--                    </LinearLayout>-->
+<!--                </androidx.cardview.widget.CardView>-->
+                <androidx.cardview.widget.CardView
                     xmlns:card_view="http://schemas.android.com/apk/res-auto"
                     android:layout_width="400dp"
                     android:layout_height="130dp"
@@ -421,16 +422,16 @@
                         android:textColor="@color/blue"
                         android:text="Commitments"/>
 
-                        <TextView
-                            android:id="@+id/tv_commitmentsVoteTotal"
-                            android:layout_alignParentEnd="true"
-                            android:layout_alignParentRight="true"
-                            android:textStyle="bold"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="15sp"
-                            android:textColor="@color/blue"
-                            android:text="100+ 20-"/>
+<!--                        <TextView-->
+<!--                            android:id="@+id/tv_commitmentsVoteTotal"-->
+<!--                            android:layout_alignParentEnd="true"-->
+<!--                            android:layout_alignParentRight="true"-->
+<!--                            android:textStyle="bold"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:textSize="15sp"-->
+<!--                            android:textColor="@color/blue"-->
+<!--                            android:text="100+ 20-"/>-->
 
                         </RelativeLayout>
                     <TextView
@@ -439,53 +440,60 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="20sp"
-                        android:text="I will go to the gym everyday"/>
+                        android:text="None"/>
+                    <TextView
+                        android:id="@+id/tv_dot"
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:text="....."/>
 
                     </LinearLayout>
-                </android.support.v7.widget.CardView>
+                </androidx.cardview.widget.CardView>
 
 
-                <android.support.v7.widget.CardView
-                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                    android:layout_width="400dp"
-                    android:layout_height="130dp"
-                    android:layout_centerHorizontal="true"
-                    card_view:cardCornerRadius="30dp"
-                    card_view:contentPadding="7dp"
-                    card_view:cardElevation="3dp"
-                    card_view:cardUseCompatPadding="true"
-                    >
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
-                        <TextView
-                            android:id="@+id/tv_passions"
-                            android:textStyle="bold"
-                            android:layout_gravity="center_vertical"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="20sp"
-                            android:textColor="@color/blue"
-                            android:text="Passions"/>
-                        <TextView
-                            android:id="@+id/tv_passion1"
-                            android:layout_gravity="center_vertical"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="20sp"
-                            android:text="Entrepreneurship"/>
-                        <TextView
-                            android:id="@+id/tv_passion2"
-                            android:layout_gravity="center_vertical"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="20sp"
-                            android:text="Gymming"/>
-                    </LinearLayout>
-                </android.support.v7.widget.CardView>
+<!--                <androidx.cardview.widget.CardView-->
+<!--                    xmlns:card_view="http://schemas.android.com/apk/res-auto"-->
+<!--                    android:layout_width="400dp"-->
+<!--                    android:layout_height="130dp"-->
+<!--                    android:layout_centerHorizontal="true"-->
+<!--                    card_view:cardCornerRadius="30dp"-->
+<!--                    card_view:contentPadding="7dp"-->
+<!--                    card_view:cardElevation="3dp"-->
+<!--                    card_view:cardUseCompatPadding="true"-->
+<!--                    >-->
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:orientation="vertical">-->
+<!--                        <TextView-->
+<!--                            android:id="@+id/tv_passions"-->
+<!--                            android:textStyle="bold"-->
+<!--                            android:layout_gravity="center_vertical"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:textSize="20sp"-->
+<!--                            android:textColor="@color/blue"-->
+<!--                            android:text="Passions"/>-->
+<!--                        <TextView-->
+<!--                            android:id="@+id/tv_passion1"-->
+<!--                            android:layout_gravity="center_vertical"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:textSize="20sp"-->
+<!--                            android:text="Entrepreneurship"/>-->
+<!--                        <TextView-->
+<!--                            android:id="@+id/tv_passion2"-->
+<!--                            android:layout_gravity="center_vertical"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:textSize="20sp"-->
+<!--                            android:text="Gymming"/>-->
+<!--                    </LinearLayout>-->
+<!--                </androidx.cardview.widget.CardView>-->
 
-                <android.support.v7.widget.CardView
+                <androidx.cardview.widget.CardView
                     android:layout_width="400dp"
                     android:layout_height="200dp"
                     android:layout_centerHorizontal="true"
@@ -502,12 +510,13 @@
                         <TextView
                             android:id="@+id/tv_crew"
                             android:textStyle="bold"
-                            android:layout_gravity="center_vertical"
+                            android:layout_gravity="center_horizontal"
+
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="20sp"
                             android:textColor="@color/blue"
-                            android:text="Crew"/>
+                            android:text="Pack"/>
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -515,121 +524,122 @@
                             android:orientation="horizontal"
                             android:layout_marginTop="10dp">
 
-                            <RelativeLayout
-                                android:layout_width="90dp"
+<!--                            <RelativeLayout-->
+<!--                                android:layout_width="90dp"-->
+<!--                                android:layout_height="match_parent"-->
+<!--                                android:orientation="vertical">-->
+
+<!--                                <de.hdodenhof.circleimageview.CircleImageView-->
+<!--                                    android:id="@+id/crew1"-->
+<!--                                    android:gravity="center_horizontal"-->
+<!--                                    android:layout_width="70dp"-->
+<!--                                    android:layout_height="70dp"-->
+<!--                                    android:src="@drawable/dp"-->
+<!--                                    android:layout_centerHorizontal="true"-->
+<!--                                    />-->
+
+<!--                                <TextView-->
+<!--                                    android:id="@+id/tv_crew1"-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="20dp"-->
+<!--                                    android:layout_below="@+id/crew1"-->
+<!--                                    android:layout_marginTop="5dp"-->
+<!--                                    android:autoSizeMaxTextSize="15sp"-->
+<!--                                    android:autoSizeMinTextSize="8sp"-->
+<!--                                    android:autoSizeTextType="uniform"-->
+<!--                                    android:layout_centerHorizontal="true"-->
+<!--                                    android:gravity="center_horizontal"-->
+<!--                                    android:text="Canada"-->
+<!--                                    android:textColor="#000" />-->
+<!--                            </RelativeLayout>-->
+
+<!--                            <RelativeLayout-->
+<!--                                android:layout_width="90dp"-->
+<!--                                android:layout_height="match_parent"-->
+<!--                                android:orientation="vertical">-->
+
+<!--                                <de.hdodenhof.circleimageview.CircleImageView-->
+<!--                                    android:id="@+id/crew2"-->
+<!--                                    android:gravity="center_horizontal"-->
+<!--                                    android:layout_width="70dp"-->
+<!--                                    android:layout_height="70dp"-->
+<!--                                    android:src="@drawable/dp"-->
+<!--                                    android:layout_centerHorizontal="true"-->
+<!--                                    />-->
+
+<!--                                <TextView-->
+<!--                                    android:id="@+id/tv_crew2"-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="20dp"-->
+<!--                                    android:layout_below="@+id/crew2"-->
+<!--                                    android:layout_marginTop="5dp"-->
+<!--                                    android:autoSizeMaxTextSize="15sp"-->
+<!--                                    android:autoSizeMinTextSize="8sp"-->
+<!--                                    android:autoSizeTextType="uniform"-->
+<!--                                    android:layout_centerHorizontal="true"-->
+<!--                                    android:gravity="center_horizontal"-->
+<!--                                    android:text="Canada"-->
+<!--                                    android:textColor="#000" />-->
+<!--                            </RelativeLayout>-->
+
+<!--                            <RelativeLayout-->
+<!--                                android:layout_width="90dp"-->
+<!--                                android:layout_height="match_parent"-->
+<!--                                android:orientation="vertical">-->
+
+<!--                                <de.hdodenhof.circleimageview.CircleImageView-->
+<!--                                    android:id="@+id/crew3"-->
+<!--                                    android:gravity="center_horizontal"-->
+<!--                                    android:layout_width="70dp"-->
+<!--                                    android:layout_height="70dp"-->
+<!--                                    android:src="@drawable/dp"-->
+<!--                                    android:layout_centerHorizontal="true"-->
+<!--                                    />-->
+
+<!--                                <TextView-->
+<!--                                    android:id="@+id/tv_crew3"-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="20dp"-->
+<!--                                    android:layout_below="@+id/crew3"-->
+<!--                                    android:layout_marginTop="5dp"-->
+<!--                                    android:autoSizeMaxTextSize="15sp"-->
+<!--                                    android:autoSizeMinTextSize="8sp"-->
+<!--                                    android:autoSizeTextType="uniform"-->
+<!--                                    android:layout_centerHorizontal="true"-->
+<!--                                    android:gravity="center_horizontal"-->
+<!--                                    android:text="Canada"-->
+<!--                                    android:textColor="#000" />-->
+<!--                            </RelativeLayout>-->
+
+                            <androidx.appcompat.widget.LinearLayoutCompat
+                                android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:orientation="vertical">
+                                android:orientation="horizontal"
+                                android:weightSum="2">
 
                                 <de.hdodenhof.circleimageview.CircleImageView
-                                    android:id="@+id/crew1"
+                                    android:id="@+id/imgView_pack"
                                     android:gravity="center_horizontal"
-                                    android:layout_width="70dp"
-                                    android:layout_height="70dp"
+                                    android:layout_width="100dp"
+                                    android:layout_height="100dp"
                                     android:src="@drawable/dp"
                                     android:layout_centerHorizontal="true"
+                                    android:layout_weight="1"
                                     />
 
                                 <TextView
-                                    android:id="@+id/tv_crew1"
+                                    android:id="@+id/tv_pack"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="20dp"
-                                    android:layout_below="@+id/crew1"
-                                    android:layout_marginTop="5dp"
-                                    android:autoSizeMaxTextSize="15sp"
+                                    android:layout_height="100dp"
+                                    android:autoSizeMaxTextSize="20sp"
                                     android:autoSizeMinTextSize="8sp"
                                     android:autoSizeTextType="uniform"
                                     android:layout_centerHorizontal="true"
-                                    android:gravity="center_horizontal"
-                                    android:text="Canada"
+                                    android:gravity="center_horizontal|center_vertical"
+                                    android:text="Janta Dal"
+                                    android:layout_weight="1"
                                     android:textColor="#000" />
-                            </RelativeLayout>
-
-                            <RelativeLayout
-                                android:layout_width="90dp"
-                                android:layout_height="match_parent"
-                                android:orientation="vertical">
-
-                                <de.hdodenhof.circleimageview.CircleImageView
-                                    android:id="@+id/crew2"
-                                    android:gravity="center_horizontal"
-                                    android:layout_width="70dp"
-                                    android:layout_height="70dp"
-                                    android:src="@drawable/dp"
-                                    android:layout_centerHorizontal="true"
-                                    />
-
-                                <TextView
-                                    android:id="@+id/tv_crew2"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="20dp"
-                                    android:layout_below="@+id/crew2"
-                                    android:layout_marginTop="5dp"
-                                    android:autoSizeMaxTextSize="15sp"
-                                    android:autoSizeMinTextSize="8sp"
-                                    android:autoSizeTextType="uniform"
-                                    android:layout_centerHorizontal="true"
-                                    android:gravity="center_horizontal"
-                                    android:text="Canada"
-                                    android:textColor="#000" />
-                            </RelativeLayout>
-
-                            <RelativeLayout
-                                android:layout_width="90dp"
-                                android:layout_height="match_parent"
-                                android:orientation="vertical">
-
-                                <de.hdodenhof.circleimageview.CircleImageView
-                                    android:id="@+id/crew3"
-                                    android:gravity="center_horizontal"
-                                    android:layout_width="70dp"
-                                    android:layout_height="70dp"
-                                    android:src="@drawable/dp"
-                                    android:layout_centerHorizontal="true"
-                                    />
-
-                                <TextView
-                                    android:id="@+id/tv_crew3"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="20dp"
-                                    android:layout_below="@+id/crew3"
-                                    android:layout_marginTop="5dp"
-                                    android:autoSizeMaxTextSize="15sp"
-                                    android:autoSizeMinTextSize="8sp"
-                                    android:autoSizeTextType="uniform"
-                                    android:layout_centerHorizontal="true"
-                                    android:gravity="center_horizontal"
-                                    android:text="Canada"
-                                    android:textColor="#000" />
-                            </RelativeLayout>
-
-                            <RelativeLayout
-                                android:layout_width="90dp"
-                                android:layout_height="match_parent"
-                                android:orientation="vertical">
-
-                                <de.hdodenhof.circleimageview.CircleImageView
-                                    android:id="@+id/crew4"
-                                    android:gravity="center_horizontal"
-                                    android:layout_width="70dp"
-                                    android:layout_height="70dp"
-                                    android:src="@drawable/dp"
-                                    android:layout_centerHorizontal="true"
-                                    />
-
-                                <TextView
-                                    android:id="@+id/tv_crew4"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="20dp"
-                                    android:layout_below="@+id/crew4"
-                                    android:layout_marginTop="5dp"
-                                    android:autoSizeMaxTextSize="15sp"
-                                    android:autoSizeMinTextSize="8sp"
-                                    android:autoSizeTextType="uniform"
-                                    android:layout_centerHorizontal="true"
-                                    android:gravity="center_horizontal"
-                                    android:text="Canada"
-                                    android:textColor="#000" />
-                            </RelativeLayout>
+                            </androidx.appcompat.widget.LinearLayoutCompat>
 
                         </LinearLayout>
 
@@ -639,7 +649,80 @@
 
 
                     </LinearLayout>
-                </android.support.v7.widget.CardView>
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="400dp"
+                    android:layout_height="200dp"
+                    android:layout_centerHorizontal="true"
+                    app:cardCornerRadius="30dp"
+                    app:contentPadding="7dp"
+                    app:cardElevation="3dp"
+                    app:cardUseCompatPadding="true"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_asdasdas"
+                            android:textStyle="bold"
+                            android:layout_gravity="center_horizontal"
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="20sp"
+                            android:textColor="@color/blue"
+                            android:text="Party"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="10dp">
+
+
+                            <androidx.appcompat.widget.LinearLayoutCompat
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:weightSum="2">
+
+                                <de.hdodenhof.circleimageview.CircleImageView
+                                    android:id="@+id/imgView_party"
+                                    android:gravity="center_horizontal"
+                                    android:layout_width="100dp"
+                                    android:layout_height="100dp"
+                                    android:src="@drawable/dp"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_weight="1"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/tv_party"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="100dp"
+                                    android:autoSizeMaxTextSize="20sp"
+                                    android:autoSizeMinTextSize="8sp"
+                                    android:autoSizeTextType="uniform"
+                                    android:layout_centerHorizontal="true"
+                                    android:gravity="center_horizontal|center_vertical"
+                                    android:text="BJP"
+                                    android:layout_weight="1"
+                                    android:textColor="#000" />
+                            </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        </LinearLayout>
+
+
+
+
+
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
                 </LinearLayout>
 <!--                <LinearLayout-->
 <!--                    android:layout_marginTop="25dp"-->

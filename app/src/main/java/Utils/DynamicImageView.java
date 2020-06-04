@@ -3,9 +3,8 @@ package Utils;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
-import android.widget.ImageView;
 
-public class DynamicImageView extends android.support.v7.widget.AppCompatImageView {
+public class DynamicImageView extends androidx.appcompat.widget.AppCompatImageView {
 
     public DynamicImageView(final Context context, final AttributeSet attrs) {
         super(context, attrs);

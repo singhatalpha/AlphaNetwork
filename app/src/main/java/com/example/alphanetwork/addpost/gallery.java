@@ -4,13 +4,12 @@ package com.example.alphanetwork.addpost;
 
 
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -24,11 +23,8 @@ import com.example.alphanetwork.R;
 import com.example.alphanetwork.addpost.Files.FilePaths;
 import com.example.alphanetwork.addpost.Files.FileSearch;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class gallery extends AppCompatActivity {
@@ -95,9 +91,9 @@ public class gallery extends AppCompatActivity {
 
         SelectImgBTn= findViewById(R.id.noOfSelectImgBtn);
 
-        if(post.NoOfSlecteImg>0){
-            SelectImgBTn.setText("Selected"+ " " +post.NoOfSlecteImg +" Images");
-        }
+//        if(post.NoOfSlecteImg>0){
+//            SelectImgBTn.setText(post.NoOfSlecteImg);
+//        }
 
         SelectImgBTn.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,23 +1,22 @@
 package com.example.alphanetwork.Feed;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import com.google.android.material.tabs.TabLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 //import android.support.v4.view.PagerAdapter;
 
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.RecyclerView;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
@@ -29,22 +28,14 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
-import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.request.target.Target;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.example.alphanetwork.Home.Home;
-import com.example.alphanetwork.Home.HomeWallFragment;
-import com.example.alphanetwork.MainActivity;
 import com.example.alphanetwork.Model.ModelFeed;
-import com.example.alphanetwork.Profile.AccountSettingsActivity;
 import com.example.alphanetwork.Profile.ProfileActivity;
 import com.example.alphanetwork.R;
 import Utils.Utils;
@@ -82,7 +73,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holders, int position) {
         final MyViewHolder holder = holders;
-        ModelFeed modelFeed = posts.get(position);
+        final ModelFeed modelFeed = posts.get(position);
 
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.placeholder(Utils.getRandomDrawbleColor());
@@ -230,7 +221,29 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
 
 
 
+        holder.imgView_proPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                Intent intent = new Intent(context, ProfileActivity.class);
+
+                intent.putExtra("user_id", modelFeed.getId()) ;
+                context.startActivity(intent);
+
+            }
+        });
+
+
+        holder.tv_name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(context, ProfileActivity.class);
+                intent.putExtra("user_id", modelFeed.getId()) ;
+                context.startActivity(intent);
+
+            }
+        });
 
 
 
@@ -247,7 +260,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
 
 
         holder.tv_name.setText(modelFeed.getProfile().getUser());
-        holder.tv_time.setText(Utils.DateFormat(modelFeed.getTime()));
+        holder.tv_time.setText(Utils.DateToTimeFormat(modelFeed.getTime()));
         holder.tv_likes.setText(String.valueOf(modelFeed.getLikes()));
         holder.tv_comments.setText(String.valueOf(modelFeed.getComments()));
         holder.tv_status.setText(modelFeed.getTitle());
@@ -423,31 +436,11 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
 
                     //going to need to do something else?
                     ((Home)context).hideLayout();
-
                 }
             });
 
 
-            imgView_proPic.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
 
-                    Intent intent = new Intent(context, ProfileActivity.class);
-                    context.startActivity(intent);
-
-                }
-            });
-
-
-            tv_name.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    Intent intent = new Intent(context, ProfileActivity.class);
-                    context.startActivity(intent);
-
-                }
-            });
 
 
 

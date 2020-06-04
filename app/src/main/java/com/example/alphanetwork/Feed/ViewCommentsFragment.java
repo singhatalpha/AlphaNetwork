@@ -2,23 +2,17 @@ package com.example.alphanetwork.Feed;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import android.util.Log;
-import android.view.GestureDetector;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -26,25 +20,11 @@ import com.example.alphanetwork.Home.Home;
 import com.example.alphanetwork.Model.CommentFeed;
 import com.example.alphanetwork.Model.Comments;
 import com.example.alphanetwork.R;
-import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.TimeZone;
 
-import com.example.alphanetwork.Feed.Adapter;
-import com.example.alphanetwork.Feed.MediaAdapter;
-import com.example.alphanetwork.Feed.ViewCommentsFragment;
-import com.example.alphanetwork.Model.ModelFeed;
 import com.example.alphanetwork.Retrofit.Api;
-import com.example.alphanetwork.Model.ModelHomeWall;
 import com.example.alphanetwork.Retrofit.RetrofitClient;
 
 import retrofit2.Call;

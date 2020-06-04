@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:id="@+id/toolbar"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_height="?actionBarSize"
-        android:background="@color/design_default_color_primary"
-        android:titleTextColor="#FFFFFF">
+        android:background="@drawable/gradientbackground"
+        android:titleTextColor="@color/grey">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -19,11 +19,20 @@
             <Button
                 android:id="@+id/share"
                 android:layout_width="wrap_content"
+                android:textColor="@color/blue"
+                android:background="@drawable/buttonstyle"
                 android:text="Share"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/shareanonymous"
+                android:layout_width="wrap_content"
+                android:textColor="@color/blue"
+                android:background="@drawable/buttonstyle"
+                android:text="Share Anonymously"
                 android:layout_height="wrap_content" />
         </LinearLayout>
 
-    </android.support.v7.widget.Toolbar>
+    </androidx.appcompat.widget.Toolbar>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"
@@ -33,7 +42,7 @@
         android:layout_alignParentBottom="true"
         >
 
-        <android.support.v7.widget.AppCompatImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="60dp"
             android:layout_marginStart="15dp"
             android:id="@+id/gallery"
@@ -41,22 +50,24 @@
             android:layout_alignParentStart="true"
             android:layout_marginEnd="5dp"
             android:layout_height="60dp">
-        </android.support.v7.widget.AppCompatImageView>
+        </androidx.appcompat.widget.AppCompatImageView>
         <ProgressBar
-            android:layout_width="55dp"
+            android:layout_width="50dp"
             android:layout_marginLeft="5dp"
             style="?android:attr/progressBarStyleHorizontal"
+
             android:background="@drawable/drawable_circle_dark_blue"
             android:progressDrawable="@drawable/drawable_circle_yellow"
+
             android:layout_marginRight="5dp"
             android:layout_alignParentEnd="true"
             android:indeterminate="false"
             android:id="@+id/editTextPrgBar"
             android:max="120"
-            android:progress="0"
+            android:progress="100"
             android:rotation="-90"
             android:layout_marginEnd="15dp"
-            android:layout_height="55dp">
+            android:layout_height="50dp">
         </ProgressBar>
     </RelativeLayout>
     <ScrollView
@@ -107,14 +118,14 @@
 
 
             </LinearLayout>
-            <android.support.v4.view.ViewPager
+            <androidx.viewpager.widget.ViewPager
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:id="@+id/viewpager"
                 android:layout_gravity="right">
 
 
-            </android.support.v4.view.ViewPager>
+            </androidx.viewpager.widget.ViewPager>
 
         </LinearLayout>
 

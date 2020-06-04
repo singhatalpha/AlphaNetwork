@@ -2,20 +2,19 @@ package com.example.alphanetwork.addpost;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.media.ExifInterface;
 import android.media.MediaMetadataRetriever;
-import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.VideoView;
+import android.widget.Toast;
 
 
 import com.bumptech.glide.Glide;
@@ -28,20 +27,21 @@ import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.Date;
 
 import Utils.SquareImageView;
 
 import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
+import static java.lang.String.valueOf;
 
 public class GridviewAdapter extends RecyclerView.Adapter<ViewHolderItem> {
 
     private final Context mContext;
     private final ArrayList<String> imageuris;
     public static int TYPE=1;
-    public static int LIMIT_IMGAES=3;
+    public static int LIMIT_IMGAES=4;
+
     private final  String mAppend;
     private final  String TAG = "gridview";
 
@@ -99,13 +99,16 @@ public class GridviewAdapter extends RecyclerView.Adapter<ViewHolderItem> {
             duration = duration/1000;
             int minutes = (int) (duration/60);
             int seconds = (int) (duration -(minutes * 60));
-            String time = String.valueOf(minutes) + ":" + String.valueOf(seconds);
+            String time = valueOf(minutes) + ":" + valueOf(seconds);
             viewHolderItem.timeduration.setText(time);
+
 
             viewHolderItem.imageView.setOnClickListener(new View.OnClickListener() {
                 String TrueImageUrl = mAppend + imgURL;
                 @Override
                 public void onClick(View v) {
+
+
 
                     if(post.NoOfSlecteImg<LIMIT_IMGAES){
 
@@ -167,7 +170,7 @@ public class GridviewAdapter extends RecyclerView.Adapter<ViewHolderItem> {
 //
 //                    ((Activity) mContext).finish();
 
-                    gallery.SelectImgBTn.setText("Selected"+ " " +post.NoOfSlecteImg +" Images");
+                    gallery.SelectImgBTn.setText("Selected"+ " " +post.NoOfSlecteImg+" Images");
 
                 }
             });
@@ -204,6 +207,7 @@ public class GridviewAdapter extends RecyclerView.Adapter<ViewHolderItem> {
             });
 
 
+
             viewHolderItem.imageView.setOnClickListener(new View.OnClickListener() {
                 String TrueImageUrl = mAppend + imgURL;
                 @Override
@@ -217,15 +221,15 @@ public class GridviewAdapter extends RecyclerView.Adapter<ViewHolderItem> {
                             viewHolderItem.imageView.setAlpha(0.4f);
                             viewHolderItem.tick.setVisibility(View.VISIBLE);
                             viewHolderItem.tick.setAlpha(0.6f);
-                            post.NoOfSlecteImg++;
+
                             gallery.SelectedImgUrls.add(TrueImageUrl);
                             post.urls.add(imgURL);
+                            post.NoOfSlecteImg = post.urls.size();
                             EditProfileFragment.urls.add(imgURL);
-
                             File file = new File(TrueImageUrl);
                             Date lastModDate = new Date(file.lastModified());
-                            Log.e("File last modified @ : ",lastModDate.toString());
-
+                            Log.d(TAG,"Selected: "+ post.NoOfSlecteImg);
+                            Log.d(TAG,imgURL);
 
 
 
@@ -236,27 +240,29 @@ public class GridviewAdapter extends RecyclerView.Adapter<ViewHolderItem> {
                             viewHolderItem.selected=0;
                             viewHolderItem.imageView.setAlpha(1.0f);
                             viewHolderItem.tick.setVisibility(View.INVISIBLE);
-                            post.NoOfSlecteImg--;
                             gallery.SelectedImgUrls.remove(TrueImageUrl);
                             post.urls.remove(imgURL);
+                            post.NoOfSlecteImg = post.urls.size();
                             EditProfileFragment.urls.remove(imgURL);
+                            Log.d(TAG,"UNSELECTED!!: "+ post.NoOfSlecteImg);
+                            Log.d(TAG,imgURL);
 
                         }
 
                     }
 
                     else {
-                        if(viewHolderItem.selected==1){
-                            viewHolderItem.selected=0;
-                            viewHolderItem.imageView.setAlpha(1.0f);
-                            viewHolderItem.tick.setVisibility(View.INVISIBLE);
-                            post.NoOfSlecteImg--;
-                            gallery.SelectedImgUrls.remove(TrueImageUrl);
-                            post.urls.remove(imgURL);
-                            EditProfileFragment.urls.remove(imgURL);
+//                        if(viewHolderItem.selected==1){
+//                            viewHolderItem.selected=0;
+//                            viewHolderItem.imageView.setAlpha(1.0f);
+//                            viewHolderItem.tick.setVisibility(View.INVISIBLE);
+//                            post.NoOfSlecteImg--;
+//                            gallery.SelectedImgUrls.remove(TrueImageUrl);
+//                            post.urls.remove(imgURL);
+//                            EditProfileFragment.urls.remove(imgURL);
+//                        }
 
-
-                        }
+                        Toast.makeText(mContext, "You can upload only 5 images", Toast.LENGTH_LONG).show();
 
                     }
 
@@ -268,20 +274,18 @@ public class GridviewAdapter extends RecyclerView.Adapter<ViewHolderItem> {
 //
 //                    ((Activity) mContext).finish();
 
-                    gallery.SelectImgBTn.setText("Selected"+ " " +post.NoOfSlecteImg +" Images");
+//                    gallery.SelectImgBTn.setText(post.NoOfSlecteImg);
 
                 }
             });
 
         }
 
-        if (viewHolderItem.selected==1){
-            viewHolderItem.imageView.setAlpha(0.4f);
-            viewHolderItem.tick.setVisibility(View.VISIBLE);
-            viewHolderItem.tick.setAlpha(0.6f);
-
-
-        }
+//        if (viewHolderItem.selected==1){
+//            viewHolderItem.imageView.setAlpha(0.4f);
+//            viewHolderItem.tick.setVisibility(View.VISIBLE);
+//            viewHolderItem.tick.setAlpha(0.6f);
+//        }
 
 
 

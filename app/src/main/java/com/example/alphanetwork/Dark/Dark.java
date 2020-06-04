@@ -5,16 +5,13 @@ package com.example.alphanetwork.Dark;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.alphanetwork.Feed.MediaAdapter;
-import com.example.alphanetwork.Home.HomeLocalWallFragment;
-import com.example.alphanetwork.Home.HomePagerAdapter;
-import com.example.alphanetwork.Home.HomeWallFragment;
 import com.example.alphanetwork.R;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
@@ -22,13 +19,8 @@ import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import Utils.BottomNavigationViewHelper;
 
 
-
-
-
-
-import Utils.BottomNavigationViewHelper;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
+import com.google.android.material.tabs.TabLayout;
+import androidx.viewpager.widget.ViewPager;
 
 
 public class Dark extends AppCompatActivity implements MediaAdapter.OnFragmentInteractionListener{

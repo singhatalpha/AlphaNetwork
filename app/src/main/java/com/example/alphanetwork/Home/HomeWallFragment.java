@@ -2,25 +2,23 @@ package com.example.alphanetwork.Home;
 
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -28,14 +26,11 @@ import android.widget.Toast;
 
 import com.example.alphanetwork.Feed.Adapter;
 import com.example.alphanetwork.Feed.MediaAdapter;
-import com.example.alphanetwork.Feed.ViewCommentsFragment;
 import com.example.alphanetwork.Model.ModelFeed;
 import com.example.alphanetwork.Model.ModelHomeWall;
 import com.example.alphanetwork.R;
 import com.example.alphanetwork.Retrofit.Api;
 import com.example.alphanetwork.Retrofit.RetrofitClient;
-
-import com.example.alphanetwork.addpost.post;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +40,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class HomeWallFragment extends android.support.v4.app.Fragment implements SwipeRefreshLayout.OnRefreshListener, MediaAdapter.OnFragmentInteractionListener{
+public class HomeWallFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, MediaAdapter.OnFragmentInteractionListener{
 
 
 
@@ -61,7 +56,8 @@ public class HomeWallFragment extends android.support.v4.app.Fragment implements
     private TextView errorTitle, errorMessage;
     private Button btnRetry;
 
-
+    public String LONG,LAT;
+    private SharedPreferences sharedPref;
 
     @Nullable
     @Override
@@ -81,60 +77,63 @@ public class HomeWallFragment extends android.support.v4.app.Fragment implements
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setNestedScrollingEnabled(false);
-        onLoadingSwipeRefresh();
 
+        sharedPref = getActivity().getSharedPreferences("Location" , Context.MODE_PRIVATE);
 
-
-        //FOr testing interceptor token
-
-
-//        SharedPreferences sharedPref = getActivity().getSharedPreferences("Login" , Context.MODE_PRIVATE);
-//        SharedPreferences.Editor editor = sharedPref.edit();
-////        String s = "52f29b7492ca7c80b1e7b63057d41b0ac419ad51";
-//        String s = "9054f7aa9305e012b3c2300408c3dfdf390fcddf";
-//        editor.putString("token" , s);
-//        editor.apply();
 
         return view;
-
     }
 
-    public void LoadJson() {
 
+
+    public void LoadJson() {
         swipeRefreshLayout.setRefreshing(true);
 
 
-        Api api = RetrofitClient.getInstance().getApi();
-        Call<ModelHomeWall> call;
-        call = api.feed();
-        call.enqueue(new Callback<ModelHomeWall>() {
-            @Override
-            public void onResponse(Call<ModelHomeWall> call, Response<ModelHomeWall> response) {
-                if(response.isSuccessful() && response.body().getStatus()!=null){
 
-                    feed = response.body().getPosts();
-                    System.out.println(feed);
-                    adapter = new Adapter(feed, getActivity(), getActivity().getSupportFragmentManager());
-                    recyclerView.setAdapter(adapter);
-                    adapter.notifyDataSetChanged();
 
-                    swipeRefreshLayout.setRefreshing(false);
 
-                } else {
-                    swipeRefreshLayout.setRefreshing(false);
-                    Toast.makeText(getActivity(), "No Response", Toast.LENGTH_LONG).show();
+        LONG  = sharedPref.getString("LONG" , "NULL");
+        LAT   = sharedPref.getString("LAT","NULL");
+        System.out.println(LONG);
+        if(LONG=="NULL"){
+            Toast.makeText(getActivity(), "Please Enable Location, We need location for the feed", Toast.LENGTH_LONG).show();
+        }
+        else {
+
+
+            Api api = RetrofitClient.getInstance().getApi();
+            Call<ModelHomeWall> call;
+            call = api.feed(LONG,LAT);
+            call.enqueue(new Callback<ModelHomeWall>() {
+                @Override
+                public void onResponse(Call<ModelHomeWall> call, Response<ModelHomeWall> response) {
+                    if (response.isSuccessful() && response.body().getStatus() != null) {
+                        System.out.println(response.body());
+                        feed = response.body().getPosts();
+                        System.out.println(feed);
+                        adapter = new Adapter(feed, getActivity(), getActivity().getSupportFragmentManager());
+                        recyclerView.setAdapter(adapter);
+                        adapter.notifyDataSetChanged();
+
+                        swipeRefreshLayout.setRefreshing(false);
+
+                    } else {
+                        swipeRefreshLayout.setRefreshing(false);
+                        Toast.makeText(getActivity(), "No Response", Toast.LENGTH_LONG).show();
+
+                    }
+
 
                 }
 
+                @Override
+                public void onFailure(Call<ModelHomeWall> call, Throwable t) {
+                    Toast.makeText(getActivity(), "onFailure is triggered", Toast.LENGTH_LONG).show();
+                }
 
-            }
-
-            @Override
-            public void onFailure(Call<ModelHomeWall> call, Throwable t) {
-                Toast.makeText(getActivity(), "onFailure is triggered", Toast.LENGTH_LONG).show();
-            }
-
-        });
+            });
+        }
 
     }
 

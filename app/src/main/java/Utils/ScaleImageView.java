@@ -3,12 +3,11 @@ package Utils;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
-import android.widget.ImageView;
 
 /**
  * ImageView that keeps aspect ratio when scaled
  */
-public class ScaleImageView extends android.support.v7.widget.AppCompatImageView {
+public class ScaleImageView extends androidx.appcompat.widget.AppCompatImageView {
 
     public ScaleImageView(Context context) {
         super(context);

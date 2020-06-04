@@ -2,6 +2,7 @@ package Utils;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.icu.util.IndianCalendar;
 
 import org.ocpsoft.prettytime.PrettyTime;
 
@@ -10,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Random;
+import java.util.TimeZone;
 
 public class Utils {
 
@@ -31,11 +33,11 @@ public class Utils {
     }
 
     public static String DateToTimeFormat(String oldstringDate){
-        PrettyTime p = new PrettyTime(new Locale(getCountry()));
+        PrettyTime p = new PrettyTime(new Locale("US"));
         String isTime = null;
         try {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'",
-                    Locale.ENGLISH);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.sss'Z'", Locale.ENGLISH);
+            sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
             Date date = sdf.parse(oldstringDate);
             isTime = p.format(date);
         } catch (ParseException e) {
@@ -49,7 +51,8 @@ public class Utils {
         String newDate;
         SimpleDateFormat dateFormat = new SimpleDateFormat("E, d MMM yyyy", new Locale(getCountry()));
         try {
-            Date date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").parse(oldstringDate);
+            Date date = new SimpleDateFormat("yyyy-mm-dd'T'hh:mm:ss'Z'").parse(oldstringDate);
+//            Date date = new SimpleDateFormat()
             newDate = dateFormat.format(date);
         } catch (ParseException e) {
             e.printStackTrace();
@@ -60,8 +63,10 @@ public class Utils {
     }
 
     public static String getCountry(){
-        Locale locale = Locale.getDefault();
-        String country = String.valueOf(locale.getCountry());
+//        Locale locale = Locale.getDefault();
+//        String country = String.valueOf(locale.getCountry());
+        String country = "US";
         return country.toLowerCase();
+
     }
 }

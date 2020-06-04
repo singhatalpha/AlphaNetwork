@@ -4,6 +4,8 @@
 <!--    <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>-->
 
 
+    <string name="user_id">UserID</string>
+
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>

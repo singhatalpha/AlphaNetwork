@@ -3,11 +3,11 @@ package com.example.alphanetwork.Profile;
 
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.view.LayoutInflaterCompat;
+
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.view.LayoutInflaterCompat;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
@@ -15,7 +15,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,13 +23,7 @@ import com.bumptech.glide.Glide;
 import com.example.alphanetwork.Model.Comments;
 import com.example.alphanetwork.R;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
-import java.util.TimeZone;
 
 import Utils.LikesToggle;
 import de.hdodenhof.circleimageview.CircleImageView;

@@ -5,8 +5,8 @@ import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
+import androidx.annotation.NonNull;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import android.view.MenuItem;
 
 import com.example.alphanetwork.Home.Home;
@@ -52,10 +52,10 @@ public class BottomNavigationViewHelper {
                         context.startActivity(intent4);
                         break;
 
-                    case R.id.ic_warning:
-                        Intent intent5 = new Intent(context, Dark.class);//ACTIVITY_NUM = 4
-                        context.startActivity(intent5);
-                        break;
+//                    case R.id.ic_warning:
+//                        Intent intent5 = new Intent(context, Dark.class);//ACTIVITY_NUM = 4
+//                        context.startActivity(intent5);
+//                        break;
 
                 }
 

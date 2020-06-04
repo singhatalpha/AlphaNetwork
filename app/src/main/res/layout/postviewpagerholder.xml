@@ -9,22 +9,22 @@
     <Utils.SquareImageView
         android:id="@+id/displayImage"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="300dp"
         android:layout_alignParentBottom="true"
         android:layout_gravity="right"
         android:layout_marginBottom="15dp">
 
     </Utils.SquareImageView>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:id="@+id/displayImageCloseBtn"
-        android:layout_alignParentRight="true"
-        android:layout_height="wrap_content"
-        android:text="close"
-        >
+<!--    <Button-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:id="@+id/displayImageCloseBtn"-->
+<!--        android:layout_alignParentRight="true"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="close"-->
+<!--        >-->
 
-    </Button>
+<!--    </Button>-->
 
 
 

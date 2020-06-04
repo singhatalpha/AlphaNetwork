@@ -16,7 +16,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
@@ -63,13 +63,13 @@
             android:layout_marginTop="2dp"
             android:layout_below="@+id/relLayout11">
 
-            <android.support.v4.view.ViewPager
+            <androidx.viewpager.widget.ViewPager
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
                 android:id="@+id/view_pager_media"
                 >
 
-            </android.support.v4.view.ViewPager>
+            </androidx.viewpager.widget.ViewPager>
 
         </RelativeLayout>
 
@@ -81,7 +81,7 @@
             android:layout_below="@+id/relLayout12">
 
 
-            <android.support.design.widget.TabLayout
+            <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tab_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -127,7 +127,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="99M"
+                    android:text="0"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     android:id="@+id/tv_likescount"
@@ -187,7 +187,7 @@
         </RelativeLayout>
 
     </RelativeLayout>
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
 
 

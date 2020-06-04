@@ -3,6 +3,7 @@ package com.example.alphanetwork.Retrofit;
 
 //import com.example.alphanetwork.Model.CommentFeed;
 import com.example.alphanetwork.Model.CommentFeed;
+import com.example.alphanetwork.Model.ModelAnonymousWall;
 import com.example.alphanetwork.Model.ModelHomeWall;
 import com.example.alphanetwork.Model.ModelViewProfile;
 import com.example.alphanetwork.Model.ViewProfile;
@@ -20,6 +21,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Query;
 
 
 public interface Api {
@@ -28,7 +30,7 @@ public interface Api {
 
 
     @FormUrlEncoded
-    @POST("rest-auth/registration/")
+    @POST("users/register")
     Call<ResponseBody> createUser(
         @Field("username") String username,
 //        @Field("email") String email,
@@ -39,21 +41,44 @@ public interface Api {
     );
 
     @FormUrlEncoded
-    @POST("rest-auth/login/")
+    @POST("users/login")
     Call<ResponseBody> userLogin(
-            @Field("username") String username,
+//            @Field("username") String username,
             @Field("email") String email,
             @Field("password") String password
     );
 
+    @FormUrlEncoded
+    @POST("users/login/google")
+    Call<ResponseBody> googleLogin(
+
+            @Field("email") String email,
+            @Field("id") String id
+    );
+
 
     @Multipart
-    @POST("feed/feed_m/")
+    @POST("articles/addpost")
     Call<ResponseBody> addPost(
             @Part("title") RequestBody title,
+            @Part("longitude") RequestBody longitude,
+            @Part("latitude") RequestBody latitude,
 //            @Part("description") RequestBody description,
-            @Part List<MultipartBody.Part> file
+            @Part List<MultipartBody.Part> image
+
     );
+
+    @Multipart
+    @POST("articles/addanonymouspost")
+    Call<ResponseBody> addAnonymousPost(
+            @Part("title") RequestBody title,
+            @Part("longitude") RequestBody longitude,
+            @Part("latitude") RequestBody latitude,
+//            @Part("description") RequestBody description,
+            @Part List<MultipartBody.Part> image
+    );
+
+
 
     @Multipart
     @PATCH("feed/profile/")
@@ -72,16 +97,40 @@ public interface Api {
             @Field ("email") RequestBody email
     );
 
-    @GET("feed/profile/")
+    @GET("profiles/")
     Call<ModelViewProfile> getProfile();
+
+    @GET("profiles/view")
+    Call<ModelViewProfile> getViewProfile(
+            @Query("id") String id
+    );
 
 
 //    @GET("feed/profile2/")
 //    Call<ModelViewProfile> getProfile();
 
 
-    @GET("feed/feed_i/")
-    Call<ModelHomeWall> feed();
+    @GET("articles/feed")
+    Call<ModelHomeWall> feed(
+            @Query("longitude") String longitude,
+            @Query("latitude") String latitude
+    );
+
+    @GET("articles/anonymousfeed")
+    Call<ModelAnonymousWall> anonymousfeed(
+            @Query("longitude") String longitude,
+            @Query("latitude") String latitude
+    );
+
+    @GET("articles/feedgrid")
+    Call<ModelHomeWall> feedgrid(
+            @Query("id") String id
+    );
+
+    @GET("articles/myfeedgrid")
+    Call<ModelHomeWall> myfeedgrid();
+
+
 
     @GET("feed/comments/1/")
     Call<CommentFeed> comments();

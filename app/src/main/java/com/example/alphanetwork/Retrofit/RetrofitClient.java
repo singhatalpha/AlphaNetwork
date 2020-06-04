@@ -3,7 +3,7 @@ package com.example.alphanetwork.Retrofit;
 import android.app.Activity;
 import android.content.Context;
 
-import com.example.alphanetwork.MainActivity;
+//import com.example.alphanetwork.MainActivity;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -12,7 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitClient {
 
 //    private static final String BASE_URL = "http://10.7.8.35:8000/";
-    private static final String BASE_URL = "https://alpha-hero.herokuapp.com";
+    private static final String BASE_URL = "http://192.168.43.99:3000/api/";
 //    private static final String BASE_URL = "http://10.7.17.155:8000";
 
 

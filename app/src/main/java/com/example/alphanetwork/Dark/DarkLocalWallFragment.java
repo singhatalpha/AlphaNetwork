@@ -4,11 +4,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +19,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.alphanetwork.Feed.Adapter;
 import com.example.alphanetwork.Feed.MediaAdapter;
+import com.example.alphanetwork.Model.ModelAnonymousFeed;
+import com.example.alphanetwork.Model.ModelAnonymousWall;
 import com.example.alphanetwork.Model.ModelFeed;
 import com.example.alphanetwork.Model.ModelHomeWall;
 import com.example.alphanetwork.R;
@@ -34,7 +36,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class DarkLocalWallFragment extends android.support.v4.app.Fragment implements SwipeRefreshLayout.OnRefreshListener, MediaAdapter.OnFragmentInteractionListener{
+public class DarkLocalWallFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, MediaAdapter.OnFragmentInteractionListener{
 
 
 
@@ -42,13 +44,16 @@ public class DarkLocalWallFragment extends android.support.v4.app.Fragment imple
     private static final String TAG = "DarkLocalFragment";
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
-    private List<ModelFeed> feed = new ArrayList<>();
+    private List<ModelAnonymousFeed> feed = new ArrayList<>();
     private DarkAdapter adapter;
     private SwipeRefreshLayout swipeRefreshLayout;
     private RelativeLayout errorLayout;
     private ImageView errorImage;
     private TextView errorTitle, errorMessage;
     private Button btnRetry;
+    private SharedPreferences sharedPref;
+    public String LONG,LAT;
+
 
 
     @Nullable
@@ -69,6 +74,8 @@ public class DarkLocalWallFragment extends android.support.v4.app.Fragment imple
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setNestedScrollingEnabled(false);
+        sharedPref = getActivity().getSharedPreferences("Location" , Context.MODE_PRIVATE);
+
         onLoadingSwipeRefresh();
 
         return view;
@@ -79,39 +86,44 @@ public class DarkLocalWallFragment extends android.support.v4.app.Fragment imple
 
         swipeRefreshLayout.setRefreshing(true);
 
+        LONG  = sharedPref.getString("LONG" , "NULL");
+        LAT   = sharedPref.getString("LAT","NULL");
+        if(LONG=="NULL"){
+            Toast.makeText(getActivity(), "Please Enable Location, We need location for the feed", Toast.LENGTH_LONG).show();
+        }
+        else {
+            Api api = RetrofitClient.getInstance().getApi();
+            Call<ModelAnonymousWall> call;
+            call = api.anonymousfeed(LONG,LAT);
+            call.enqueue(new Callback<ModelAnonymousWall>() {
+                @Override
+                public void onResponse(Call<ModelAnonymousWall> call, Response<ModelAnonymousWall> response) {
+                    if (response.isSuccessful() && response.body().getStatus() != null) {
 
-        Api api = RetrofitClient.getInstance().getApi();
-        Call<ModelHomeWall> call;
-        call = api.feed();
-        call.enqueue(new Callback<ModelHomeWall>() {
-            @Override
-            public void onResponse(Call<ModelHomeWall> call, Response<ModelHomeWall> response) {
-                if(response.isSuccessful() && response.body().getStatus()!=null){
+                        feed = response.body().getPosts();
+                        System.out.println(feed);
+                        adapter = new DarkAdapter(feed, getActivity(), getActivity().getSupportFragmentManager());
+                        recyclerView.setAdapter(adapter);
+                        adapter.notifyDataSetChanged();
 
-                    feed = response.body().getPosts();
-                    System.out.println(feed);
-                    adapter = new DarkAdapter(feed, getActivity(), getActivity().getSupportFragmentManager());
-                    recyclerView.setAdapter(adapter);
-                    adapter.notifyDataSetChanged();
+                        swipeRefreshLayout.setRefreshing(false);
 
-                    swipeRefreshLayout.setRefreshing(false);
+                    } else {
+                        swipeRefreshLayout.setRefreshing(false);
+                        Toast.makeText(getActivity(), "No Response", Toast.LENGTH_LONG).show();
 
-                } else {
-                    swipeRefreshLayout.setRefreshing(false);
-                    Toast.makeText(getActivity(), "No Response", Toast.LENGTH_LONG).show();
+                    }
+
 
                 }
 
+                @Override
+                public void onFailure(Call<ModelAnonymousWall> call, Throwable t) {
+                    Toast.makeText(getActivity(), "onFailure is triggered", Toast.LENGTH_LONG).show();
+                }
 
-            }
-
-            @Override
-            public void onFailure(Call<ModelHomeWall> call, Throwable t) {
-                Toast.makeText(getActivity(), "onFailure is triggered", Toast.LENGTH_LONG).show();
-            }
-
-        });
-
+            });
+        }
     }
 
 

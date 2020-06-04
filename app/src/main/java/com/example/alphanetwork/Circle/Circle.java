@@ -3,20 +3,25 @@ package com.example.alphanetwork.Circle;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 //import com.example.alphanetwork.Circle.CircleChatFragment;
 import com.example.alphanetwork.R;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.internal.GoogleApiAvailabilityCache;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 
 import Utils.BottomNavigationViewHelper;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
+import com.google.android.material.tabs.TabLayout;
+import androidx.viewpager.widget.ViewPager;
 
 public class Circle extends AppCompatActivity{
     private static final String TAG = "Circle";
@@ -33,6 +38,7 @@ public class Circle extends AppCompatActivity{
         setupBottomNavigationView();
         setupViewPager();
     }
+
 
     private void setupViewPager(){
         CirclePagerAdapter adapter = new CirclePagerAdapter(getSupportFragmentManager());

@@ -5,19 +5,26 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import androidx.fragment.app.Fragment;
+
 import com.example.alphanetwork.Login.user_login;
 import com.example.alphanetwork.R;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 import Utils.MyApp;
 
 
-public class CircleEventsFragment extends android.support.v4.app.Fragment {
+public class CircleEventsFragment extends Fragment {
     private static final String TAG = "CircleEventsFragment";
     private Button logout;
     private SharedPreferences sharedpref;
@@ -34,10 +41,19 @@ public class CircleEventsFragment extends android.support.v4.app.Fragment {
                 SharedPreferences.Editor editor = sharedpref.edit();
                 editor.clear();
                 editor.commit();
+
+                GoogleSignInOptions gso = new GoogleSignInOptions.
+                        Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).
+                        build();
+
+                GoogleSignInClient googleSignInClient = GoogleSignIn.getClient(context,gso);
+                googleSignInClient.signOut();
+
                 Intent mainIntent = new Intent(getActivity(), user_login.class);
                 startActivity(mainIntent);
             }
         });
         return view;
     }
+
 }
