@@ -224,6 +224,7 @@ public class GridviewAdapter extends RecyclerView.Adapter<ViewHolderItem> {
 
                             gallery.SelectedImgUrls.add(TrueImageUrl);
                             post.urls.add(imgURL);
+                            EditProfileFragment.urls.add(imgURL);
                             post.NoOfSlecteImg = post.urls.size();
                             EditProfileFragment.urls.add(imgURL);
                             File file = new File(TrueImageUrl);
@@ -242,6 +243,7 @@ public class GridviewAdapter extends RecyclerView.Adapter<ViewHolderItem> {
                             viewHolderItem.tick.setVisibility(View.INVISIBLE);
                             gallery.SelectedImgUrls.remove(TrueImageUrl);
                             post.urls.remove(imgURL);
+                            EditProfileFragment.urls.remove(imgURL);
                             post.NoOfSlecteImg = post.urls.size();
                             EditProfileFragment.urls.remove(imgURL);
                             Log.d(TAG,"UNSELECTED!!: "+ post.NoOfSlecteImg);

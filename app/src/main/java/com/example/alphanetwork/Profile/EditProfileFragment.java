@@ -1,6 +1,7 @@
 package com.example.alphanetwork.Profile;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,9 +14,16 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
+import com.bumptech.glide.Glide;
+import com.example.alphanetwork.Model.ModelFeed;
+import com.example.alphanetwork.Model.ModelHomeWall;
+import com.example.alphanetwork.Model.ModelViewProfile;
+import com.example.alphanetwork.Model.ViewProfile;
 import com.example.alphanetwork.R;
+import com.example.alphanetwork.Retrofit.Api;
 import com.example.alphanetwork.Retrofit.RetrofitClient;
 import com.example.alphanetwork.addpost.gallery;
 
@@ -51,6 +59,7 @@ public class EditProfileFragment extends Fragment {
     private TextView mChangeProfilePhoto;
     private CircleImageView mProfilePhoto;
     public static List<String> urls = new ArrayList<>();
+    private ViewProfile vp;
 
 
     //vars
@@ -62,19 +71,23 @@ public class EditProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_editprofile, container, false);
         mProfilePhoto = (CircleImageView) view.findViewById(R.id.profile_photo);
-        mPhone = view.findViewById(R.id.phoneNumber);
-        mEmail = view.findViewById(R.id.email);
+//        mPhone = view.findViewById(R.id.phoneNumber);
+//        mEmail = view.findViewById(R.id.email);
         mUsername = (EditText) view.findViewById(R.id.username);
         mChangeProfilePhoto = (TextView) view.findViewById(R.id.changeProfilePhoto);
         mChangeProfilePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                urls.clear();
                 Intent i = new Intent(getActivity(), gallery.class);
                 i.putExtra(getString(R.string.calling_activity), getString(R.string.profile_activity));
                 getActivity().startActivity(i);
+
             }
         });
 
+
+        loadData();
 
         
         //back arrow for navigating back to "ProfileActivity"
@@ -83,6 +96,7 @@ public class EditProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onClick: navigating back to ProfileActivity");
+                urls.clear();
                 getActivity().finish();
             }
         });
@@ -104,47 +118,108 @@ public class EditProfileFragment extends Fragment {
     }
 
 
+    @Override
+    public void onResume() {
+        if (urls.size() != 0) {
 
+//            File file = new File(urls.get(0));
+            System.out.println("The url in ON RESUME IS :" );
+            Glide.with(getActivity())
+                    .load(new File(urls.get(0))) // Uri of the picture
+                    .into(mProfilePhoto);
+
+        }
+        super.onResume();
+    }
+
+
+
+
+    private void loadData() {
+
+        Api api = RetrofitClient.getInstance().getApi();
+        Call<ModelViewProfile> call;
+        call = api.getProfile();
+        call.enqueue(new Callback<ModelViewProfile>() {
+            @Override
+            public void onResponse(Call<ModelViewProfile> call, Response<ModelViewProfile> response) {
+                if(response.isSuccessful() && response.body()!=null){
+
+                    System.out.println(response.body());
+                    System.out.println(vp);
+                    vp = response.body().getProfile();
+                    mUsername.setText(vp.getUsername());
+
+
+
+
+                    Glide.with(getActivity())
+                            .load(vp.getPhoto())
+                            .placeholder(R.drawable.dp)
+                            .into(mProfilePhoto);
+//        mFollowingCount.setText(viewProfile.getFollowing());
+
+
+
+                } else {
+
+                    Toast.makeText(getActivity(), "No Response", Toast.LENGTH_LONG).show();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ModelViewProfile> call, Throwable t) {
+                Toast.makeText(getActivity(), "onFailure is triggered", Toast.LENGTH_LONG).show();
+            }
+
+        });
+
+
+
+    }
 
 
     private void saveProfileSettings() throws IOException {
 
         final String user = mUsername.getText().toString();
-        final String mail = mEmail.getText().toString();
-        final String phoneNumber = mPhone.getText().toString();
 
 
 
+        List<MultipartBody.Part> parts = null;
 
 
 //pass it like this
 
         RequestBody username =
                 RequestBody.create(MediaType.parse("multipart/form-data"), user);
-        RequestBody phone =
-                RequestBody.create(MediaType.parse("multipart/form-data"), phoneNumber);
-        RequestBody email =
-                RequestBody.create(MediaType.parse("multipart/form-data"), mail);
+//        RequestBody phone =
+//                RequestBody.create(MediaType.parse("multipart/form-data"), phoneNumber);
+//        RequestBody email =
+//                RequestBody.create(MediaType.parse("multipart/form-data"), mail);
 
         if (urls.size() != 0) {
+            parts = new ArrayList<>();
 
+            System.out.println("The urls are :" + urls);
 
-                System.out.println("The urls are :" + urls);
-
-                File file = new File(urls.get(0));
+            File file = new File(urls.get(0));
 
 //                RequestBody requestFile =
 //                        RequestBody.create(MediaType.parse("multipart/form-data"), file);
 
-                RequestBody requestFile =
-                        RequestBody.create(MediaType.parse("multipart/form-data"),new Compressor(getActivity()).compressToFile(file));
+            RequestBody requestFile =
+                    RequestBody.create(MediaType.parse("multipart/form-data"), new Compressor(getActivity()).compressToFile(file));
 
 // MultipartBody.Part is used to send also the actual file name
-                MultipartBody.Part body = MultipartBody.Part.createFormData("photo", file.getName(), requestFile);
+            MultipartBody.Part body = MultipartBody.Part.createFormData("media", file.getName(), requestFile);
+            parts.add(body);
+        }
+
             Call<ResponseBody> call = RetrofitClient
                     .getInstance()
                     .getApi()
-                    .updateProfile(body,username,phone,email);
+                    .updateProfile(parts,username);
             call.enqueue(new Callback<ResponseBody>() {
 
                 @Override
@@ -163,29 +238,7 @@ public class EditProfileFragment extends Fragment {
             });
 
         }
-        else{
-            Call<ResponseBody> call = RetrofitClient
-                    .getInstance()
-                    .getApi()
-                    .updateProfileWithoutPic(username,phone,email);
 
-            call.enqueue(new Callback<ResponseBody>() {
-                @Override
-                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                    String m = response.message();
-                    System.out.println(m);
-
-                    Log.v("Upload", "success");
-                }
-
-
-                @Override
-                public void onFailure(Call<ResponseBody> call, Throwable t) {
-                    Log.e("Upload error:", t.getMessage());
-                }
-            });
-
-        }
 
 
 
@@ -193,70 +246,3 @@ public class EditProfileFragment extends Fragment {
 
 
 
-    /**
-     * Check is @param username already exists in teh database
-     * @param username
-     */
-//    private void checkIfUsernameExists(final String username) {
-//        Log.d(TAG, "checkIfUsernameExists: Checking if  " + username + " already exists.");
-//
-//        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
-//        Query query = reference
-//                .child(getString(R.string.dbname_users))
-//                .orderByChild(getString(R.string.field_username))
-//                .equalTo(username);
-//        query.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//
-//                if(!dataSnapshot.exists()){
-//                    //add the username
-//                    mFirebaseMethods.updateUsername(username);
-//                    Toast.makeText(getActivity(), "saved username.", Toast.LENGTH_SHORT).show();
-//
-//                }
-//                for(DataSnapshot singleSnapshot: dataSnapshot.getChildren()){
-//                    if (singleSnapshot.exists()){
-//                        Log.d(TAG, "checkIfUsernameExists: FOUND A MATCH: " + singleSnapshot.getValue(User.class).getUsername());
-//                        Toast.makeText(getActivity(), "That username already exists.", Toast.LENGTH_SHORT).show();
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
-//    }
-
-//    private void setProfileWidgets(UserSettings userSettings){
-//
-//
-//        mUserSettings = userSettings;
-//        User user = userSettings.getUser();
-//        UserAccountSettings settings = userSettings.getSettings();
-//        UniversalImageLoader.setImage(settings.getProfile_photo(), mProfilePhoto, null, "");
-//        mDisplayName.setText(settings.getDisplay_name());
-//        mUsername.setText(settings.getUsername());
-//        mWebsite.setText(settings.getWebsite());
-//        mDescription.setText(settings.getDescription());
-//        mEmail.setText(userSettings.getUser().getEmail());
-//        mPhoneNumber.setText(String.valueOf(userSettings.getUser().getPhone_number()));
-//
-//        mChangeProfilePhoto.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Log.d(TAG, "onClick: changing profile photo");
-//                Intent intent = new Intent(getActivity(), ShareActivity.class);
-//                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); //268435456
-//                getActivity().startActivity(intent);
-//                getActivity().finish();
-//            }
-//        });
-//    }
-//
-
-
-
-}

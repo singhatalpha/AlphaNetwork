@@ -20,6 +20,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Part;
 import retrofit2.http.Query;
 
@@ -81,21 +82,19 @@ public interface Api {
 
 
     @Multipart
-    @PATCH("feed/profile/")
+    @PATCH("user")
     Call<ResponseBody> updateProfile(
-        @Part MultipartBody.Part photo,
-        @Part ("username") RequestBody username,
-        @Part ("phone") RequestBody phone,
-        @Part ("email") RequestBody email
+        @Part List<MultipartBody.Part> photo,
+        @Part ("username") RequestBody username
     );
 
 
-    @PATCH("feed/profile/")
-    Call<ResponseBody> updateProfileWithoutPic(
-            @Field ("username") RequestBody username,
-            @Field ("phone") RequestBody phone,
-            @Field ("email") RequestBody email
-    );
+//    @PATCH("feed/profile/")
+//    Call<ResponseBody> updateProfileWithoutPic(
+//            @Field ("username") RequestBody username,
+//            @Field ("phone") RequestBody phone,
+//            @Field ("email") RequestBody email
+//    );
 
     @GET("profiles/")
     Call<ModelViewProfile> getProfile();
@@ -129,6 +128,7 @@ public interface Api {
 
     @GET("articles/myfeedgrid")
     Call<ModelHomeWall> myfeedgrid();
+
 
 
 

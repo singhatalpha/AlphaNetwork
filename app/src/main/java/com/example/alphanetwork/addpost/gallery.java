@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 
 
+import com.example.alphanetwork.Profile.AccountSettingsActivity;
 import com.example.alphanetwork.Profile.EditProfileFragment;
 import com.example.alphanetwork.R;
 import com.example.alphanetwork.addpost.Files.FilePaths;
@@ -61,7 +62,7 @@ public class gallery extends AppCompatActivity {
             toolbar.setNavigationOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    startActivity(new Intent(getApplicationContext(),post.class));
+//                    startActivity(new Intent(getApplicationContext(), AccountSettingsActivity.class));
                     finish();
                 }
             });

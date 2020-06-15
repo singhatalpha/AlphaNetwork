@@ -26,13 +26,13 @@
 
             </Spinner>
 
-            <Button
-                android:id="@+id/share"
-                android:layout_width="wrap_content"
-                android:background="@drawable/buttonstyle"
-                android:textColor="@color/blue"
-                android:text="Share"
-                android:layout_height="wrap_content" />
+<!--            <Button-->
+<!--                android:id="@+id/share"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:background="@drawable/buttonstyle"-->
+<!--                android:textColor="@color/blue"-->
+<!--                android:text="Share"-->
+<!--                android:layout_height="wrap_content" />-->
 
 
         </LinearLayout>

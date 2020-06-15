@@ -26,8 +26,10 @@
         android:layout_alignParentLeft="true"
         android:layout_gravity="right|bottom"
         android:layout_marginBottom="80dp"
-        android:layout_marginRight="20dp"
-        app:srcCompat="@android:drawable/ic_menu_add" />
+        android:layout_marginRight="25dp"
+        app:backgroundTint="#05D5F5"
+        app:borderWidth="0dp"
+        app:srcCompat="@drawable/ic_write" />
 
 
 
