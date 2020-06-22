@@ -4,6 +4,7 @@ package com.example.alphanetwork.Retrofit;
 //import com.example.alphanetwork.Model.CommentFeed;
 import com.example.alphanetwork.Model.CommentFeed;
 import com.example.alphanetwork.Model.ModelAnonymousWall;
+import com.example.alphanetwork.Model.ModelFeed;
 import com.example.alphanetwork.Model.ModelHomeWall;
 import com.example.alphanetwork.Model.ModelViewProfile;
 import com.example.alphanetwork.Model.ViewProfile;
@@ -129,11 +130,32 @@ public interface Api {
     @GET("articles/myfeedgrid")
     Call<ModelHomeWall> myfeedgrid();
 
+    @FormUrlEncoded
+    @POST("articles/like")
+    Call<ResponseBody> like(
+            @Field("id") String id,
+            @Field("type") String type
+    );
+    @FormUrlEncoded
+    @POST("articles/dislike")
+    Call<ResponseBody> dislike(
+            @Field("id") String id,
+            @Field("type") String type
+    );
 
+    @FormUrlEncoded
+    @POST("articles/addcomment")
+    Call<ResponseBody> addcomment(
+            @Field("id") String id,
+            @Field("comment") String comment,
+            @Field("type") String type
+            );
 
-
-    @GET("feed/comments/1/")
-    Call<CommentFeed> comments();
+    @GET("articles/comments")
+    Call<CommentFeed> getcomments(
+            @Query("id") String id,
+            @Query("type") String type
+    );
 
 
 }

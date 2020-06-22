@@ -6,12 +6,17 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.os.Parcelable;
+import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,7 +61,7 @@ public class HomeLocalWallFragment extends Fragment implements SwipeRefreshLayou
     private Button btnRetry;
     private SharedPreferences sharedPref;
     public String LONG,LAT;
-
+    private Bundle mBundleRecyclerViewState;
 
 
     @Nullable
@@ -84,6 +89,34 @@ public class HomeLocalWallFragment extends Fragment implements SwipeRefreshLayou
         return view;
 
     }
+
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+        if (mBundleRecyclerViewState != null) {
+            Parcelable listState = mBundleRecyclerViewState.getParcelable("state");
+            recyclerView.getLayoutManager().onRestoreInstanceState(listState);
+        }
+    }
+
+
+    public void onSaveInstanceState(Bundle state) {
+        super.onSaveInstanceState(state);
+
+
+        mBundleRecyclerViewState = new Bundle();
+        Parcelable listState = recyclerView.getLayoutManager().onSaveInstanceState();
+        mBundleRecyclerViewState.putParcelable("state", listState);
+    }
+//
+//    public void onRestoreInstanceState(Bundle state) {
+//        super.onRestoreInstanceState(state);
+//
+//        /if (mBundleRecyclerViewState != null) {
+//            Parcelable listState = mBundleRecyclerViewState.getParcelable("state");
+//            recyclerView.getLayoutManager().onRestoreInstanceState(listState);
+//        }
+//    }
 
     public void LoadJson() {
 

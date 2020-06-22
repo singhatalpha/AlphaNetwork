@@ -3,6 +3,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/white_grey_border_bottom"
         >
 

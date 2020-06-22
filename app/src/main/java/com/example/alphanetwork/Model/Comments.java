@@ -9,11 +9,12 @@ import java.util.List;
 public class Comments {
 
     private String id;
-    private String comment;private String commented_date;
-    private int likes_count;
-    private int unlikes_count;
-    private int user;
-    private int feed;
+    private String comment;
+    private String commented_date;
+    private int likes;
+
+//    private int user;
+//    private int feed;
     private ModelProfile profile;
 
 
@@ -42,36 +43,30 @@ public class Comments {
     }
 
     public int getLikes_count() {
-        return likes_count;
+        return likes;
     }
 
-    public void setLikes_count(int likes_count) {
-        this.likes_count = likes_count;
+    public void setLikes_count(int likes) {
+        this.likes = likes;
     }
 
-    public int getUnlikes_count() {
-        return unlikes_count;
-    }
 
-    public void setUnlikes_count(int unlikes_count) {
-        this.unlikes_count = unlikes_count;
-    }
 
-    public int getUser() {
-        return user;
-    }
-
-    public void setUser(int user) {
-        this.user = user;
-    }
-
-    public int getFeed() {
-        return feed;
-    }
-
-    public void setFeed(int feed) {
-        this.feed = feed;
-    }
+//    public int getUser() {
+//        return user;
+//    }
+//
+//    public void setUser(int user) {
+//        this.user = user;
+//    }
+//
+//    public int getFeed() {
+//        return feed;
+//    }
+//
+//    public void setFeed(int feed) {
+//        this.feed = feed;
+//    }
 
     public ModelProfile getProfile() {
         return profile;

@@ -9,20 +9,14 @@ import java.util.List;
 public class CommentFeed {
 
 
-    private int size;
+
 
     @SerializedName("comments")
     @Expose
     private List<Comments> comments;
 
 
-    public int getSize() {
-        return size;
-    }
 
-    public void setSize(int size) {
-        this.size = size;
-    }
 
     public List<Comments> getComments() {
         return comments;

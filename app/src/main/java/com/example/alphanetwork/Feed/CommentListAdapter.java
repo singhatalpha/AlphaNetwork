@@ -24,6 +24,7 @@ import com.example.alphanetwork.R;
 import java.util.List;
 
 import Utils.LikesToggle;
+import Utils.Utils;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
@@ -37,6 +38,7 @@ public class CommentListAdapter extends ArrayAdapter<Comments> {
 
     private LayoutInflater mInflater;
     private int layoutResource;
+    private List<Comments> commenties;
     private Context mContext;
 
     public CommentListAdapter(@NonNull Context context, @LayoutRes int resource,
@@ -45,9 +47,10 @@ public class CommentListAdapter extends ArrayAdapter<Comments> {
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mContext = context;
         layoutResource = resource;
+        this.commenties = objects;
     }
 
-    public static class ViewHolder{
+    public static class ViewHolder {
         TextView comment, username, timestamp, reply, likes;
         CircleImageView profileImage;
         ImageView like, dislike, liked, disliked;
@@ -63,19 +66,17 @@ public class CommentListAdapter extends ArrayAdapter<Comments> {
 
         final ViewHolder holder;
 
-        if(convertView == null){
+        if (convertView == null) {
             convertView = mInflater.inflate(layoutResource, parent, false);
             holder = new ViewHolder();
 
             holder.comment = (TextView) convertView.findViewById(R.id.comment);
             holder.username = (TextView) convertView.findViewById(R.id.comment_username);
             holder.timestamp = (TextView) convertView.findViewById(R.id.comment_time_posted);
-            holder.reply = (TextView) convertView.findViewById(R.id.comment_reply);
-            holder.likes =  convertView.findViewById(R.id.likes_count);
+//            holder.reply = (TextView) convertView.findViewById(R.id.comment_reply);
+            holder.likes = convertView.findViewById(R.id.likes_count);
 
             holder.profileImage = (CircleImageView) convertView.findViewById(R.id.comment_profile_image);
-
-
 
 
             holder.like = (ImageView) convertView.findViewById(R.id.comment_like);
@@ -84,7 +85,7 @@ public class CommentListAdapter extends ArrayAdapter<Comments> {
             holder.liked = convertView.findViewById(R.id.comment_liked);
 
             convertView.setTag(holder);
-        }else{
+        } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
@@ -92,20 +93,16 @@ public class CommentListAdapter extends ArrayAdapter<Comments> {
         holder.comment.setText(getItem(position).getComment());
 
 
-
         holder.username.setText(getItem(position).getProfile().getUser());
-        holder.timestamp.setText(getItem(position).getCommented_date());
+        holder.timestamp.setText(Utils.DateToTimeFormat(getItem(position).getCommented_date()));
         Glide.with(mContext).load(getItem(position).getProfile().getPhoto()).dontAnimate().into(holder.profileImage);
 
         System.out.println(getItem(position).getLikes_count());
         holder.likes.setText(String.valueOf(getItem(position).getLikes_count()));
 
 
-
-
-
-        holder.lGestureDetector = new GestureDetector(mContext,new lGestureListener(holder,position));
-        holder.dGestureDetector = new GestureDetector(mContext,new dGestureListener(holder,position));
+        holder.lGestureDetector = new GestureDetector(mContext, new lGestureListener(holder, position));
+        holder.dGestureDetector = new GestureDetector(mContext, new dGestureListener(holder, position));
 
 
         holder.liked.setVisibility(View.GONE);
@@ -150,15 +147,6 @@ public class CommentListAdapter extends ArrayAdapter<Comments> {
         });
 
 
-
-
-
-
-
-
-
-
-
         //set the timestamp difference
 //        String timestampDifference = getTimestampDifference(getItem(position));
 //        if(!timestampDifference.equals("0")){
@@ -166,7 +154,6 @@ public class CommentListAdapter extends ArrayAdapter<Comments> {
 //        }else{
 //            holder.timestamp.setText("today");
 //        }
-
 
 
 //        try{
@@ -184,33 +171,11 @@ public class CommentListAdapter extends ArrayAdapter<Comments> {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public class lGestureListener extends GestureDetector.SimpleOnGestureListener{
+    public class lGestureListener extends GestureDetector.SimpleOnGestureListener {
         ViewHolder holder;
         final int position;
 
-        public lGestureListener(ViewHolder holder, final int position){
+        public lGestureListener(ViewHolder holder, final int position) {
             this.holder = holder;
             this.position = position;
 
@@ -223,28 +188,33 @@ public class CommentListAdapter extends ArrayAdapter<Comments> {
 
         @Override
         public boolean onDoubleTap(MotionEvent e) {
-            holder.liking.toggleLike();
+
+            String id = commenties.get(position).getId();
+            System.out.println(id);
+            System.out.println(position);
+            holder.liking.toggleLike(id,"comment");
             return true;
         }
 
         @Override
         public boolean onSingleTapConfirmed(MotionEvent e) {
-            holder.liking.toggleLike();
+            String id = commenties.get(position).getId();
+            System.out.println(id);
+            System.out.println(position);
+            holder.liking.toggleLike(id,"comment");
             return true;
         }
 
 
-
-
     }
 
-    public class dGestureListener extends GestureDetector.SimpleOnGestureListener{
+    public class dGestureListener extends GestureDetector.SimpleOnGestureListener {
 
 
         ViewHolder holder;
         final int position;
 
-        public dGestureListener(ViewHolder holder, final int position){
+        public dGestureListener(ViewHolder holder, final int position) {
             this.holder = holder;
             this.position = position;
 
@@ -258,18 +228,21 @@ public class CommentListAdapter extends ArrayAdapter<Comments> {
 
         @Override
         public boolean onDoubleTap(MotionEvent e) {
-            holder.liking.toggleDisLike();
+            String id = commenties.get(position).getId();
+            holder.liking.toggleDisLike(id,"comment");
             return true;
         }
 
         @Override
         public boolean onSingleTapConfirmed(MotionEvent e) {
-            holder.liking.toggleDisLike();
+            String id = commenties.get(position).getId();
+            holder.liking.toggleDisLike(id,"comment");
             return true;
         }
 
 
     }
+}
 
 
 
@@ -309,4 +282,4 @@ public class CommentListAdapter extends ArrayAdapter<Comments> {
 //        }
 //        return difference;
 //    }
-}
+

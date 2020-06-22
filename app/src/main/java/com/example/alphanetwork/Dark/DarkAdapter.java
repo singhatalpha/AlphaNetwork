@@ -244,6 +244,7 @@ public class DarkAdapter extends RecyclerView.Adapter<DarkAdapter.MyViewHolder>{
         holder.tv_likes.setText(String.valueOf(modelFeed.getLikes()));
 //        holder.tv_comments.setText(modelFeed.getComments() + " comments");
         holder.tv_status.setText(modelFeed.getTitle());
+        holder.tv_comments.setText(String.valueOf(modelFeed.getComments()));
 
 //        Glide.with(context).load(modelFeed.getProfile().getPhoto()).dontAnimate().into(holder.imgView_proPic);
 
@@ -386,6 +387,12 @@ public class DarkAdapter extends RecyclerView.Adapter<DarkAdapter.MyViewHolder>{
             imgView_like.setVisibility(View.VISIBLE);
             imgView_disliked.setVisibility(View.GONE);
             imgView_dislike.setVisibility(View.VISIBLE);
+
+
+
+
+
+
             like = new LikesToggle(imgView_like,imgView_liked,imgView_dislike,imgView_disliked);
             likeToggle();
             dislikeToggle();
@@ -395,24 +402,27 @@ public class DarkAdapter extends RecyclerView.Adapter<DarkAdapter.MyViewHolder>{
 
             //comments
 
-//            tv_comments.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//
-//                    ((Home)context).onCommentThreadSelected();
-//
-//                    //going to need to do something else?
-//                    ((Home)context).hideLayout();
-//
-//                }
-//            });
+            tv_comments.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    String id = posts.get(position).getPostid();
+
+                    ((Home)context).onCommentThreadSelected(id,"anony");
+
+                    //going to need to do something else?
+                    ((Home)context).hideLayout();
+
+                }
+            });
 
 
             imgView_comments.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-                    ((Home)context).onCommentThreadSelected();
+                    int position = getAdapterPosition();
+                    String id = posts.get(position).getPostid();
+                    ((Home)context).onCommentThreadSelected(id,"anony");
 
                     //going to need to do something else?
                     ((Home)context).hideLayout();
@@ -512,13 +522,17 @@ public class DarkAdapter extends RecyclerView.Adapter<DarkAdapter.MyViewHolder>{
 
             @Override
             public boolean onDoubleTap(MotionEvent e) {
-                like.toggleLike();
+                int position = getAdapterPosition();
+                String id = posts.get(position).getPostid();
+                like.toggleLike(id,"anony");
                 return true;
             }
 
             @Override
             public boolean onSingleTapConfirmed(MotionEvent e) {
-                like.toggleLike();
+                int position = getAdapterPosition();
+                String id = posts.get(position).getPostid();
+                like.toggleLike(id,"anony");
                 return true;
             }
 
@@ -536,13 +550,17 @@ public class DarkAdapter extends RecyclerView.Adapter<DarkAdapter.MyViewHolder>{
 
             @Override
             public boolean onDoubleTap(MotionEvent e) {
-                like.toggleDisLike();
+                int position = getAdapterPosition();
+                String id = posts.get(position).getPostid();
+                like.toggleDisLike(id,"anony");
                 return true;
             }
 
             @Override
             public boolean onSingleTapConfirmed(MotionEvent e) {
-                like.toggleDisLike();
+                int position = getAdapterPosition();
+                String id = posts.get(position).getPostid();
+                like.toggleDisLike(id,"anony");
                 return true;
             }
 

@@ -11,13 +11,23 @@ import java.util.List;
 public class ModelFeed{
     private String title;
     private List<String> media;
-    private int likes = 7;
-    private int comments = 1;
-    private String time = "2019-08-13T13:21:08Z";
+    private int likes ;
+    private int comments ;
+    private String time ;
     private String id;
+    private String postid;
+
+
+
+
     private ModelProfile profile;
 
+    public String getPostid() {
+        return postid;
+    }
 
+    public void setPostid(String postid) {
+        this.postid = postid;}
 
     public int getLikes() {
         return likes;

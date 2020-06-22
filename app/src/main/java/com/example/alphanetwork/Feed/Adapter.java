@@ -406,6 +406,13 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
             imgView_like.setVisibility(View.VISIBLE);
             imgView_disliked.setVisibility(View.GONE);
             imgView_dislike.setVisibility(View.VISIBLE);
+
+
+
+
+
+
+
             like = new LikesToggle(imgView_like,imgView_liked,imgView_dislike,imgView_disliked);
             likeToggle();
             dislikeToggle();
@@ -418,8 +425,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
             tv_comments.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-                    ((Home)context).onCommentThreadSelected();
+                    int position = getAdapterPosition();
+                    String post = posts.get(position).getPostid();
+                    ((Home)context).onCommentThreadSelected(post,"post");
 
                     //going to need to do something else?
                     ((Home)context).hideLayout();
@@ -431,8 +439,10 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
             imgView_comments.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    String post = posts.get(position).getPostid();
 
-                    ((Home)context).onCommentThreadSelected();
+                    ((Home)context).onCommentThreadSelected(post,"post");
 
                     //going to need to do something else?
                     ((Home)context).hideLayout();
@@ -512,13 +522,21 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
 
             @Override
             public boolean onDoubleTap(MotionEvent e) {
-                like.toggleLike();
+                int position = getAdapterPosition();
+                String id = posts.get(position).getPostid();
+
+
+                like.toggleLike(id,"post");
                 return true;
             }
 
             @Override
             public boolean onSingleTapConfirmed(MotionEvent e) {
-                like.toggleLike();
+                int position = getAdapterPosition();
+                String id = posts.get(position).getPostid();
+
+
+                like.toggleLike(id,"post");
                 return true;
             }
 
@@ -536,13 +554,19 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
 
             @Override
             public boolean onDoubleTap(MotionEvent e) {
-                like.toggleDisLike();
+                int position = getAdapterPosition();
+                String id = posts.get(position).getPostid();
+
+                like.toggleDisLike(id,"post");
                 return true;
             }
 
             @Override
             public boolean onSingleTapConfirmed(MotionEvent e) {
-                like.toggleDisLike();
+                int position = getAdapterPosition();
+                String id = posts.get(position).getPostid();
+
+                like.toggleDisLike(id,"post");
                 return true;
             }
 

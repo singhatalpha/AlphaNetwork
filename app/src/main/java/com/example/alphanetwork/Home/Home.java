@@ -8,11 +8,15 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
+
+import com.example.alphanetwork.Model.ModelFeed;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -66,6 +70,7 @@ public class Home extends LocationBaseActivity implements MediaAdapter.OnFragmen
     private FloatingActionButton fab;
     private SharedPreferences sharedPref;
     public String LONG,LAT;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -125,6 +130,16 @@ public class Home extends LocationBaseActivity implements MediaAdapter.OnFragmen
 
 
     }
+
+    public void onRestoreInstanceState(Bundle state) {
+        super.onRestoreInstanceState(state);
+
+        if (state != null) {
+            Parcelable listState = state.getParcelable("state");
+            mViewPager.onRestoreInstanceState(listState);
+        }
+    }
+
 
     @Override
     protected void onResume() {
@@ -259,8 +274,9 @@ public class Home extends LocationBaseActivity implements MediaAdapter.OnFragmen
 
 
 
-    public void onCommentThreadSelected() {
-        ViewCommentsFragment fragment = new ViewCommentsFragment();
+    public void onCommentThreadSelected(String id,String type) {
+
+        ViewCommentsFragment fragment = new ViewCommentsFragment(id,type);
         FragmentManager fragmentManager = getSupportFragmentManager();
         Bundle args = new Bundle();
         args.putString("YourKey", "YourValue");

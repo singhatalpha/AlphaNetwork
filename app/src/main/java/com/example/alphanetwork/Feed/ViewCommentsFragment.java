@@ -17,16 +17,24 @@ import android.widget.Toast;
 
 
 import com.example.alphanetwork.Home.Home;
+import com.example.alphanetwork.Login.Registration;
 import com.example.alphanetwork.Model.CommentFeed;
 import com.example.alphanetwork.Model.Comments;
+import com.example.alphanetwork.Model.ModelFeed;
 import com.example.alphanetwork.R;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.example.alphanetwork.Retrofit.Api;
 import com.example.alphanetwork.Retrofit.RetrofitClient;
+import com.google.gson.Gson;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -46,8 +54,14 @@ public class ViewCommentsFragment extends Fragment {
     private ImageView mBackArrow, mCheckMark;
     private EditText mComment;
     private ListView mListView;
+    private String id;
+    private String type;
 
-    //vars
+    public ViewCommentsFragment(String id,String type) {
+        this.type = type;
+        this.id = id;
+    }
+//vars
 
     private List<Comments> commentfeed = new ArrayList<>();
     private Context mContext;
@@ -63,7 +77,7 @@ public class ViewCommentsFragment extends Fragment {
         mContext = getActivity();
 
 
-        String value = getArguments().getString("YourKey");
+//        String value = getArguments().getString("YourKey");
         setupWidgets();
         LoadJson();
 
@@ -131,13 +145,67 @@ public class ViewCommentsFragment extends Fragment {
 
     private void addNewComment(String newComment) {
         Log.d(TAG, "addNewComment: adding new comment: " + newComment);
+//        Gson gson = new Gson();
+//        String json = gson.toJson(id);
+        Call<ResponseBody> call = RetrofitClient
+                .getInstance()
+                .getApi()
+                .addcomment(id,newComment,type);
 
-//        String commentID = myRef.push().getKey();
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                String s = null;
+//                System.out.println(s);
+                System.out.println(response.code());
+                try {
+                    if(response.code() == 200) {
+                        Toast.makeText(getActivity(), "Comment Added", Toast.LENGTH_LONG).show();
+                    }
+                    else
+                    {
+//                        System.out.println("else");
 
-//        Comment comment = new Comment();
-//        comment.setComment(newComment);
-//        comment.setDate_created(getTimestamp());
-//        comment.setUser_id(FirebaseAuth.getInstance().getCurrentUser().getUid());
+
+                        s = response.errorBody().string();
+//                        JSONObject jsonObject = new JSONObject(s);
+
+//                        Toast.makeText(Registration.this, s, Toast.LENGTH_LONG).show();
+
+
+
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                if(s!= null)
+                {
+                    try {
+
+                        JSONObject jsonObject = new JSONObject(s);
+//                        Toast.makeText(Registration.this, jsonObject.getString("detail"), Toast.LENGTH_LONG).show();
+
+
+                    }
+                    catch (JSONException e)
+                    {
+                        e.printStackTrace();
+                    }
+
+
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                Toast.makeText(getActivity(),t.getMessage(),Toast.LENGTH_LONG).show();
+
+            }
+        });
 
 
 
@@ -156,7 +224,7 @@ public class ViewCommentsFragment extends Fragment {
 
         Api api = RetrofitClient.getInstance().getApi();
         Call<CommentFeed> call;
-        call = api.comments();
+        call = api.getcomments(id,type);
         call.enqueue(new Callback<CommentFeed>() {
             @Override
             public void onResponse(Call<CommentFeed> call, Response<CommentFeed> response) {
