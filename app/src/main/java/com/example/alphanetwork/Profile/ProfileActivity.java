@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -86,6 +87,7 @@ public class ProfileActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.profileToolBar);
         profileMenu = (ImageView) findViewById(R.id.profileMenu);
         back = findViewById(R.id.profileback);
+
 
         init();
 

@@ -66,7 +66,7 @@ public class Home extends LocationBaseActivity implements MediaAdapter.OnFragmen
     private ViewPager mViewPager;
     private FrameLayout mFrameLayout;
     private RelativeLayout mRelativeLayout;
-    private ImageView profile;
+    private ImageView profile,ranking;
     private FloatingActionButton fab;
     private SharedPreferences sharedPref;
     public String LONG,LAT;
@@ -82,11 +82,18 @@ public class Home extends LocationBaseActivity implements MediaAdapter.OnFragmen
         mFrameLayout = (FrameLayout) findViewById(R.id.fragmentcontainer);
         mRelativeLayout = (RelativeLayout) findViewById(R.id.relLayoutParent);
         profile = findViewById(R.id.profile);
-
+        ranking = findViewById(R.id.ranking);
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(Home.this, ProfileActivity.class);
+                startActivity(i);
+            }
+        });
+        ranking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Home.this, RankingActivity.class);
                 startActivity(i);
             }
         });
@@ -321,8 +328,8 @@ public class Home extends LocationBaseActivity implements MediaAdapter.OnFragmen
         TabLayout tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
-        tabLayout.getTabAt(0).setText("Global");
-        tabLayout.getTabAt(1).setText("Local");
+        tabLayout.getTabAt(0).setText("Local");
+        tabLayout.getTabAt(1).setText("Anonymous");
 //        tabLayout.getTabAt(2).setIcon(R.drawable.ic_live);
     }
 

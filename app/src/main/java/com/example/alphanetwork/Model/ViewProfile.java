@@ -14,9 +14,19 @@ public class ViewProfile
     private String username;
     private int influence;
     private int popularity;
+
+    public String getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
+    }
+
     private List<String> commitment;
     private ProfilePack pack;
     private ProfileParty party;
+    private String user_id;
 
 
 //    private String post_count;

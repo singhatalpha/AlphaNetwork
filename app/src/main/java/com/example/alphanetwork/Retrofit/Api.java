@@ -6,7 +6,10 @@ import com.example.alphanetwork.Model.CommentFeed;
 import com.example.alphanetwork.Model.ModelAnonymousWall;
 import com.example.alphanetwork.Model.ModelFeed;
 import com.example.alphanetwork.Model.ModelHomeWall;
+import com.example.alphanetwork.Model.ModelNotification;
+import com.example.alphanetwork.Model.ModelPack;
 import com.example.alphanetwork.Model.ModelViewProfile;
+import com.example.alphanetwork.Model.SearchFeed;
 import com.example.alphanetwork.Model.ViewProfile;
 
 import java.util.List;
@@ -156,6 +159,72 @@ public interface Api {
             @Query("id") String id,
             @Query("type") String type
     );
+
+    @GET("users/search")
+    Call<SearchFeed> search(
+            @Query("name") String name
+    );
+
+    @GET("users/getpack")
+    Call<ModelPack> getpack(
+    );
+
+    @GET("users/checkpack")
+    Call<ResponseBody> checkpack(
+    );
+    @GET("users/getparty")
+    Call<ModelPack> getparty(
+    );
+
+    @GET("users/checkparty")
+    Call<ResponseBody> checkparty(
+    );
+
+
+    @Multipart
+    @POST("users/createpack")
+    Call<ResponseBody> createpack(
+            @Part List<MultipartBody.Part> photo,
+            @Part ("name") RequestBody name
+    );
+    @Multipart
+    @POST("users/createparty")
+    Call<ResponseBody> createparty(
+            @Part List<MultipartBody.Part> photo,
+            @Part ("name") RequestBody name
+    );
+
+    @GET("users/getnotification")
+    Call<ModelNotification> getnotification(
+    );
+
+    @FormUrlEncoded
+    @POST("users/send")
+    Call<ResponseBody> send(
+            @Field("type") String type,
+            @Field("user_id") String user_id,
+            @Field("id") String id
+
+    );
+
+    @FormUrlEncoded
+    @POST("users/accept")
+    Call<ResponseBody> accept(
+            @Field("id") String id,
+            @Field("type") String type,
+            @Field("p_id") String p_id
+    );
+
+    @GET("users/getalpharanking")
+    Call<SearchFeed> getalpharanking(
+
+    );
+    @GET("users/getpackranking")
+    Call<SearchFeed> getpackranking(
+
+    );
+
+
 
 
 }

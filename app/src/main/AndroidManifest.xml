@@ -42,7 +42,11 @@
         <activity android:name=".Notification.Notification" />
         <activity android:name=".Dark.Dark" />
         <activity android:name=".Home.Home" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".Home.RankingActivity" />
+        <activity android:name=".Profile.PackActivity" />
+        <activity android:name=".Profile.CreatePackActivity" />
+        <activity android:name=".Profile.PartyActivity" />
+        <activity android:name=".Profile.CreatePartyActivity" />
         <activity android:name=".Login.user_login" />
         <activity android:name=".Login.Registration" />
         <activity android:name=".Profile.ProfileActivity" />

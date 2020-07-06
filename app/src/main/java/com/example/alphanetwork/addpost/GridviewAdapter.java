@@ -18,6 +18,8 @@ import android.widget.Toast;
 
 
 import com.bumptech.glide.Glide;
+import com.example.alphanetwork.Profile.CreatePackActivity;
+import com.example.alphanetwork.Profile.CreatePartyActivity;
 import com.example.alphanetwork.Profile.EditProfileFragment;
 import com.example.alphanetwork.R;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -223,8 +225,18 @@ public class GridviewAdapter extends RecyclerView.Adapter<ViewHolderItem> {
                             viewHolderItem.tick.setAlpha(0.6f);
 
                             gallery.SelectedImgUrls.add(TrueImageUrl);
+
+
+
+
                             post.urls.add(imgURL);
                             EditProfileFragment.urls.add(imgURL);
+                            CreatePackActivity.urls.add(imgURL);
+                            CreatePartyActivity.urls.add(imgURL);
+
+
+
+
                             post.NoOfSlecteImg = post.urls.size();
                             EditProfileFragment.urls.add(imgURL);
                             File file = new File(TrueImageUrl);
@@ -242,8 +254,17 @@ public class GridviewAdapter extends RecyclerView.Adapter<ViewHolderItem> {
                             viewHolderItem.imageView.setAlpha(1.0f);
                             viewHolderItem.tick.setVisibility(View.INVISIBLE);
                             gallery.SelectedImgUrls.remove(TrueImageUrl);
+
+
+
+
                             post.urls.remove(imgURL);
                             EditProfileFragment.urls.remove(imgURL);
+                            CreatePackActivity.urls.remove(imgURL);
+                            CreatePartyActivity.urls.remove(imgURL);
+
+
+
                             post.NoOfSlecteImg = post.urls.size();
                             EditProfileFragment.urls.remove(imgURL);
                             Log.d(TAG,"UNSELECTED!!: "+ post.NoOfSlecteImg);

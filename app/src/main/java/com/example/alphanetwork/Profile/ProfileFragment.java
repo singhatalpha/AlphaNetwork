@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 
 import com.bumptech.glide.Glide;
+import com.example.alphanetwork.Home.Home;
 import com.example.alphanetwork.Model.ModelFeed;
 import com.example.alphanetwork.Model.ModelHomeWall;
 import com.example.alphanetwork.Model.ModelViewProfile;
@@ -122,6 +123,35 @@ public class ProfileFragment extends Fragment {
         mPartyname = (TextView) view.findViewById(R.id.tv_party);
         mPackimage =  view.findViewById(R.id.imgView_pack);
         mPartyimage = view.findViewById(R.id.imgView_party);
+
+        mPackimage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =  new Intent(getActivity(), PackActivity.class);
+                startActivity(intent);
+            }
+        });
+        mPackname.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =  new Intent(getActivity(), PackActivity.class);
+                startActivity(intent);
+            }
+        });
+        mPartyimage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =  new Intent(getActivity(), PartyActivity.class);
+                startActivity(intent);
+            }
+        });
+        mPartyname.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =  new Intent(getActivity(), PartyActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
 
@@ -243,7 +273,8 @@ public class ProfileFragment extends Fragment {
             public void onClick(View v) {
                 Log.d(TAG, "onClick: navigating back to 'Home activity'");
 //                getFragmentManager().popBackStack();
-                getActivity().finish();
+                Intent intent = new Intent(getActivity(), Home.class);
+                startActivity(intent);
 
             }
         });

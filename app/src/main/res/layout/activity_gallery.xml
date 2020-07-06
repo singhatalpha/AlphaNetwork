@@ -49,19 +49,19 @@
             >
 
         </androidx.recyclerview.widget.RecyclerView>
-        <Button
-            android:layout_width="70dp"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/noOfSelectImgBtn"
-            android:text="OK"
-            android:textColor="@color/blue"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/buttonstyle"
-            android:shadowColor="@color/light_grey"
-            android:layout_alignParentBottom="true"
-            android:layout_height="70dp">
+<!--        <Button-->
+<!--            android:layout_width="70dp"-->
+<!--            android:layout_centerHorizontal="true"-->
+<!--            android:id="@+id/noOfSelectImgBtn"-->
+<!--            android:text="OK"-->
+<!--            android:textColor="@color/blue"-->
+<!--            android:layout_marginBottom="20dp"-->
+<!--            android:background="@drawable/buttonstyle"-->
+<!--            android:shadowColor="@color/light_grey"-->
+<!--            android:layout_alignParentBottom="true"-->
+<!--            android:layout_height="70dp">-->
 
-        </Button>
+<!--        </Button>-->
 
     </RelativeLayout>
 

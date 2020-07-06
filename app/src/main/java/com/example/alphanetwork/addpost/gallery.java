@@ -19,6 +19,8 @@ import android.widget.Spinner;
 
 
 import com.example.alphanetwork.Profile.AccountSettingsActivity;
+import com.example.alphanetwork.Profile.CreatePackActivity;
+import com.example.alphanetwork.Profile.CreatePartyActivity;
 import com.example.alphanetwork.Profile.EditProfileFragment;
 import com.example.alphanetwork.R;
 import com.example.alphanetwork.addpost.Files.FilePaths;
@@ -48,17 +50,13 @@ public class gallery extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
 
-
-
-
-
-
-
         post.urls.clear();
         EditProfileFragment.urls.clear();
+        CreatePackActivity.urls.clear();
+        CreatePartyActivity.urls.clear();
         Intent intent = getIntent();
         if(intent.hasExtra(getString(R.string.calling_activity))){
-            Log.d(TAG, "getIncomingIntent: received incoming intent from " + getString(R.string.profile_activity));
+            Log.d(TAG, "getIncomingIntent: received incoming intent from ");
             toolbar.setNavigationOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -90,21 +88,21 @@ public class gallery extends AppCompatActivity {
 
         init();
 
-        SelectImgBTn= findViewById(R.id.noOfSelectImgBtn);
-
-//        if(post.NoOfSlecteImg>0){
-//            SelectImgBTn.setText(post.NoOfSlecteImg);
-//        }
-
-        SelectImgBTn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent i = new Intent(gallery.this,post.class);
-                gallery.this.startActivity(i);
-
-            }
-        });
+//        SelectImgBTn= findViewById(R.id.noOfSelectImgBtn);
+//
+////        if(post.NoOfSlecteImg>0){
+////            SelectImgBTn.setText(post.NoOfSlecteImg);
+////        }
+//
+//        SelectImgBTn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                Intent i = new Intent(gallery.this,post.class);
+//                gallery.this.startActivity(i);
+//
+//            }
+//        });
 
 
 
