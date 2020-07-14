@@ -345,6 +345,10 @@ public class post extends AppCompatActivity {
                     String m = response.message();
                     System.out.println(m);
                     if(response.code()==200){
+                        post.urls.clear();
+                        gallery.SelectedImgUrls.clear();
+                        post.NoOfSlecteImg = 0;
+                        views.clear();
                         Intent i = new Intent(post.this, Home.class);
                         startActivity(i);
                     }

@@ -106,8 +106,8 @@
 
                     <ImageView
                         android:id="@+id/image_liked"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="10dp"
                         android:visibility="invisible"
@@ -115,8 +115,8 @@
 
                     <ImageView
                         android:id="@+id/image_like"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="10dp"
                         android:visibility="visible"
@@ -130,17 +130,17 @@
                     android:layout_height="wrap_content"
                     android:text="0"
                     android:textColor="@color/black"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:id="@+id/tv_likescount"
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/likeLayout11"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="4dp"
                     />
 
                 <ImageView
                     android:id="@+id/image_disliked"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/tv_likescount"
                     android:layout_marginLeft="10dp"
@@ -150,8 +150,8 @@
 
                 <ImageView
                     android:id="@+id/image_dislike"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/tv_likescount"
                     android:layout_marginLeft="10dp"
@@ -169,7 +169,7 @@
                 android:text="200k"
                 android:textColor="@color/black"
                 android:layout_centerVertical="true"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:layout_toRightOf="@+id/likeLayout"
                 android:layout_marginLeft="20dp"
                 android:id="@+id/tv_comments"
@@ -177,8 +177,8 @@
 
             <ImageView
                 android:id="@+id/speech_bubble"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="20dp"
                 android:layout_toRightOf="@+id/tv_comments"
@@ -187,8 +187,8 @@
 
             <ImageView
                 android:id="@+id/ivEllipses"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="20dp"

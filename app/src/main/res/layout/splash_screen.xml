@@ -129,23 +129,23 @@
                     android:layout_centerVertical="true"
                     android:layout_centerHorizontal="true"
                     android:layout_marginLeft="20dp"
-                    android:layout_width="300dp"
-                    android:layout_height="300dp"
-                    android:src="@drawable/dp"/>
+                    android:layout_width="350dp"
+                    android:layout_height="350dp"
+                    android:src="@drawable/alpha"/>
 
-                <TextView
-                    android:id="@+id/display_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/profile_photo"
+<!--                <TextView-->
+<!--                    android:id="@+id/display_name"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_below="@+id/profile_photo"-->
 
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginTop="8dp"
-                    android:layout_centerHorizontal="true"
-                    android:text="Alpha Network"
-                    android:textColor="#FDFFFFFF"
-                    android:textSize="27sp"
-                    android:textStyle="bold" />
+<!--                    android:layout_gravity="center_vertical"-->
+<!--                    android:layout_marginTop="8dp"-->
+<!--                    android:layout_centerHorizontal="true"-->
+<!--                    android:text="Alpha Network"-->
+<!--                    android:textColor="#FDFFFFFF"-->
+<!--                    android:textSize="27sp"-->
+<!--                    android:textStyle="bold" />-->
 
 
 

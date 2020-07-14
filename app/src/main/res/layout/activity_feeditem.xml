@@ -26,7 +26,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                 android:layout_marginTop="15dp"
                 android:layout_marginLeft="20dp"
                 android:layout_centerVertical="true"
-
+                android:src="@drawable/alphanotext"
                 app:civ_border_width="1dp"
                 app:civ_border_color="#FF000000"
                 />
@@ -40,7 +40,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:text="Vikram Singh Nain.."
                 android:maxLength="18"
                 android:layout_toRightOf="@+id/imgView_proPic"
@@ -52,7 +52,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:textSize="18sp"
 
                 android:maxLength="18"
                 android:layout_toRightOf="@+id/tv_name"
@@ -65,8 +65,8 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
 
             <ImageView
                 android:id="@+id/ivEllipses"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="20dp"
@@ -145,8 +145,8 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
 
                 <ImageView
                     android:id="@+id/image_liked"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
                     android:visibility="invisible"
@@ -154,8 +154,8 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
 
                 <ImageView
                     android:id="@+id/image_like"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
                     android:visibility="visible"
@@ -167,19 +167,20 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="5k"
+                    android:text="0"
                     android:textColor="@color/black"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:id="@+id/tv_likescount"
                     android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
                     android:layout_toRightOf="@+id/likeLayout11"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="4dp"
                     />
 
                 <ImageView
                     android:id="@+id/image_disliked"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/tv_likescount"
                     android:layout_marginLeft="10dp"
@@ -189,8 +190,8 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
 
                 <ImageView
                     android:id="@+id/image_dislike"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/tv_likescount"
                     android:layout_marginLeft="10dp"
@@ -209,7 +210,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                 android:text="200k"
                 android:textColor="@color/black"
                 android:layout_centerVertical="true"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:layout_toRightOf="@+id/likeLayout"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="10dp"
@@ -218,8 +219,8 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
 
             <ImageView
                 android:id="@+id/speech_bubble"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/tv_comments"
                 android:visibility="visible"
@@ -231,7 +232,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                 android:layout_height="wrap_content"
                 android:text="3 DAYS AGO"
                 android:textColor="@color/grey"
-                android:textSize="18sp"
+                android:textSize="12sp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:id="@+id/tv_time"

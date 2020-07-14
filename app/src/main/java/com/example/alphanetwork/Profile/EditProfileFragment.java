@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.alphanetwork.Model.ModelFeed;
 import com.example.alphanetwork.Model.ModelHomeWall;
 import com.example.alphanetwork.Model.ModelViewProfile;
@@ -155,7 +156,8 @@ public class EditProfileFragment extends Fragment {
 
                     Glide.with(getActivity())
                             .load(vp.getPhoto())
-                            .placeholder(R.drawable.dp)
+                            .placeholder(R.drawable.alphanotext)
+                            .diskCacheStrategy(DiskCacheStrategy.ALL)
                             .into(mProfilePhoto);
 //        mFollowingCount.setText(viewProfile.getFollowing());
 
@@ -225,6 +227,9 @@ public class EditProfileFragment extends Fragment {
                 @Override
                 public void onResponse(Call<ResponseBody> call,
                                        Response<ResponseBody> response) {
+                    if(response.isSuccessful()) {
+                        Toast.makeText(getActivity(), "Done", Toast.LENGTH_LONG).show();
+                    }
                     String m = response.message();
                     System.out.println(m);
 

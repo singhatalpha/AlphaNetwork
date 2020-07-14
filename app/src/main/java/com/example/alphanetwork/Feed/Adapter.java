@@ -430,7 +430,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
                 public void onClick(View v) {
                     int position = getAdapterPosition();
                     String post = posts.get(position).getPostid();
-                    ((Home)context).onCommentThreadSelected(post,"post");
+                    ((Home)context).onCommentThreadSelected(post,"comment");
 
                     //going to need to do something else?
                     ((Home)context).hideLayout();
@@ -445,7 +445,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
                     int position = getAdapterPosition();
                     String post = posts.get(position).getPostid();
 
-                    ((Home)context).onCommentThreadSelected(post,"post");
+                    ((Home)context).onCommentThreadSelected(post,"comment");
 
                     //going to need to do something else?
                     ((Home)context).hideLayout();

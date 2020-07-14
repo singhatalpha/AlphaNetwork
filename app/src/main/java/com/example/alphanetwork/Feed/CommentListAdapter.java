@@ -203,6 +203,7 @@ public class CommentListAdapter extends ArrayAdapter<Comments> {
             String id = commenties.get(position).getId();
             System.out.println(id);
             System.out.println(position);
+            System.out.println(type);
             holder.liking.toggleLike(id,type);
             return true;
         }

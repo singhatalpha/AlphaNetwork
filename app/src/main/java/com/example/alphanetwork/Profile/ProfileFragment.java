@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.alphanetwork.Home.Home;
 import com.example.alphanetwork.Model.ModelFeed;
 import com.example.alphanetwork.Model.ModelHomeWall;
@@ -411,7 +412,8 @@ public class ProfileFragment extends Fragment {
 
                             Glide.with(getActivity())
                                     .load(vp.getPack().getPackimage())
-                                    .placeholder(R.drawable.dp)
+                                    .placeholder(R.drawable.alpha)
+                                    .diskCacheStrategy(DiskCacheStrategy.ALL)
                                     .into(mPackimage);
 //        mFollowingCount.setText(viewProfile.getFollowing());
                             mProgressBar.setVisibility(View.GONE);
@@ -419,7 +421,8 @@ public class ProfileFragment extends Fragment {
 
                         Glide.with(getActivity())
                                 .load(vp.getParty().getPartyimage())
-                                .placeholder(R.drawable.dp)
+                                .placeholder(R.drawable.alpha)
+                                .diskCacheStrategy(DiskCacheStrategy.ALL)
                                 .into(mPartyimage);
 //        mFollowingCount.setText(viewProfile.getFollowing());
                         mProgressBar.setVisibility(View.GONE);
@@ -428,7 +431,8 @@ public class ProfileFragment extends Fragment {
 
                         Glide.with(getActivity())
                                 .load(vp.getPhoto())
-                                .placeholder(R.drawable.dp)
+                                .placeholder(R.drawable.alpha)
+                                .diskCacheStrategy(DiskCacheStrategy.ALL)
                                 .into(mProfilePhoto);
 //        mFollowingCount.setText(viewProfile.getFollowing());
                         mProgressBar.setVisibility(View.GONE);

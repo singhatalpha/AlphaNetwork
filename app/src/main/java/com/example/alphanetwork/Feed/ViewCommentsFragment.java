@@ -161,6 +161,7 @@ public class ViewCommentsFragment extends Fragment {
                 try {
                     if(response.code() == 200) {
                         Toast.makeText(mContext, "Comment Added", Toast.LENGTH_LONG).show();
+                        LoadJson();
                     }
                     else
                     {
