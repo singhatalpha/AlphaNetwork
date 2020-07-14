@@ -264,8 +264,11 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
         holder.tv_likes.setText(String.valueOf(modelFeed.getLikes()));
         holder.tv_comments.setText(String.valueOf(modelFeed.getComments()));
         holder.tv_status.setText(modelFeed.getTitle());
+        holder.tv_position.setText(modelFeed.getProfile().getPosition());
 
-        Glide.with(context).load(modelFeed.getProfile().getPhoto()).dontAnimate().into(holder.imgView_proPic);
+        Glide.with(context).load(modelFeed.getProfile().getPhoto()).dontAnimate()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(holder.imgView_proPic);
 
 
 //        if (modelFeed.getProfile().getPhoto() == null) {
@@ -355,7 +358,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
-        TextView tv_name, tv_time, tv_likes, tv_comments, tv_status;
+        TextView tv_name, tv_time, tv_likes, tv_comments, tv_status,tv_position;
         ImageView imgView_proPic, imgView_postPic, imgView_comments, imgView_back;
         ProgressBar progressBar;
         ViewPager vp;
@@ -380,7 +383,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
 //            imgView_postPic = (ImageView) itemView.findViewById(R.id.imgView_postPic);
             vp = itemView.findViewById(R.id.view_pager_media);
             tl = itemView.findViewById(R.id.tab_layout);
-
+            tv_position = itemView.findViewById(R.id.tv_position);
             tv_name = (TextView) itemView.findViewById(R.id.tv_name);
             tv_time = (TextView) itemView.findViewById(R.id.tv_time);
             tv_likes = (TextView) itemView.findViewById(R.id.tv_likescount);

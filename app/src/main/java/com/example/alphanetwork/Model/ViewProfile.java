@@ -14,6 +14,7 @@ public class ViewProfile
     private String username;
     private int influence;
     private int popularity;
+    private String position;
 
     public String getUser_id() {
         return user_id;
@@ -23,7 +24,7 @@ public class ViewProfile
         this.user_id = user_id;
     }
 
-    private List<String> commitment;
+    private String commitment;
     private ProfilePack pack;
     private ProfileParty party;
     private String user_id;
@@ -34,8 +35,25 @@ public class ViewProfile
 //    private String following_count;
 
 
+    public void setPopularity(int popularity) {
+        this.popularity = popularity;
+    }
 
+    public String getPosition() {
+        return position;
+    }
 
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    public String getCommitment() {
+        return commitment;
+    }
+
+    public void setCommitment(String commitment) {
+        this.commitment = commitment;
+    }
 
     public int getInfluence() {
         return influence;
@@ -49,16 +67,7 @@ public class ViewProfile
         return popularity;
     }
 
-    public void setPopularity(int popularity) {
-        this.popularity = popularity;
-    }
-    public List<String> getCommitment() {
-        return commitment;
-    }
 
-    public void setCommitment(List<String> commitment) {
-        this.commitment = commitment;
-    }
 
     public ProfilePack getPack() {
         return pack;

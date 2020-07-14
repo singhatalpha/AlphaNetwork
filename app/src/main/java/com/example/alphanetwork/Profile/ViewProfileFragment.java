@@ -56,7 +56,7 @@ public class ViewProfileFragment extends Fragment {
 
 
     //widgets
-    private TextView mDisplayName, mInfluence, mPopularity, mCommitment, mPackname, mPartyname;
+    private TextView mDisplayName, mInfluence, mPopularity, mCommitment, mPackname, mPartyname, mCommitment1, position ;
     private ProgressBar mProgressBar;
     private CircleImageView mProfilePhoto, mPackimage,mPartyimage;
     private ExpandableHeightGridView gridView;
@@ -82,13 +82,13 @@ public class ViewProfileFragment extends Fragment {
 
 
 
-        ((ProfileActivity)getActivity()).setOnBackPressedListener(new BaseBackPressedListener(getActivity()));
+//        ((ProfileActivity)getActivity()).setOnBackPressedListener(new BaseBackPressedListener(getActivity()));
 
 
 
         mDisplayName = (TextView) view.findViewById(R.id.display_name);
 //        mUsername = (TextView) view.findViewById(R.id.username);
-
+        position = (TextView) view.findViewById(R.id.position);
         mProfilePhoto = (CircleImageView) view.findViewById(R.id.profile_photo);
 
         mProgressBar = (ProgressBar) view.findViewById(R.id.profileProgressBar);
@@ -116,6 +116,7 @@ public class ViewProfileFragment extends Fragment {
         mPopularity = view.findViewById(R.id.tv_popularity);
 
         mCommitment = (TextView) view.findViewById(R.id.tv_commitments);
+        mCommitment1 = view.findViewById(R.id.tv_commitment1);
 
 
         mPackname = (TextView) view.findViewById(R.id.tv_pack);
@@ -226,10 +227,10 @@ public class ViewProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                ViewProfileFragment fragment = new ViewProfileFragment();
+                ViewCommitmentsFragment fragment = new ViewCommitmentsFragment();
                 FragmentManager fragmentManager = getFragmentManager();
                 Bundle args = new Bundle();
-                args.putString("onClick", "Commitments");
+                args.putString("user_id",user_id);
                 fragment.setArguments(args);
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.container, fragment);
@@ -368,11 +369,15 @@ public class ViewProfileFragment extends Fragment {
                         mInfluence.setText(""+vp.getInfluence());
                         mPopularity.setText(""+vp.getPopularity());
                         if(!vp.getCommitment().isEmpty()) {
-                            mCommitment.setText(vp.getCommitment().get(0));
+                            mCommitment1.setText(vp.getCommitment());
                         }
                         mPackname.setText(vp.getPack().getPackname());
                         mPartyname.setText(vp.getParty().getPartyname());
-
+                        System.out.println(vp.getPosition());
+                        if(!vp.getPosition().isEmpty()){
+                            position.setVisibility(View.VISIBLE);
+                            position.setText(vp.getPosition());
+                        }
 
                         Glide.with(getActivity())
                                 .load(vp.getPack().getPackimage())

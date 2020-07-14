@@ -344,12 +344,18 @@ public class post extends AppCompatActivity {
                                        Response<ResponseBody> response) {
                     String m = response.message();
                     System.out.println(m);
+                    if(response.code()==200){
+                        Intent i = new Intent(post.this, Home.class);
+                        startActivity(i);
+                    }
 
                     Log.v("Upload", "success");
                 }
 
                 @Override
                 public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    Toast.makeText(getApplication(), "Couldn't reach the server", Toast.LENGTH_LONG).show();
+
                     Log.e("Upload error:", t.getMessage());
                 }
             });
@@ -420,12 +426,17 @@ public class post extends AppCompatActivity {
                                        Response<ResponseBody> response) {
                     String m = response.message();
                     System.out.println(m);
+                    if(response.code()==200){
+                        Intent i = new Intent(post.this, Home.class);
+                        startActivity(i);
+                    }
 
                     Log.v("Upload", "success");
                 }
 
                 @Override
                 public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    Toast.makeText(getApplication(), "Couldn't reach the server", Toast.LENGTH_LONG).show();
                     Log.e("Upload error:", t.getMessage());
                 }
             });

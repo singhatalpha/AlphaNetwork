@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.alphanetwork.Home.Home;
 import com.example.alphanetwork.R;
 
 import Utils.OnBackPressedListener;
@@ -93,31 +94,33 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
 
-    public void setOnBackPressedListener(OnBackPressedListener onBackPressedListener) {
-        this.onBackPressedListener = onBackPressedListener;
-    }
-
-    public void setOnBackPressedPopListener(OnBackPressedPopListener onBackPressedPopListener) {
-        this.onBackPressedPopListener = onBackPressedPopListener;
-    }
+//    public void setOnBackPressedListener(OnBackPressedListener onBackPressedListener) {
+//        this.onBackPressedListener = onBackPressedListener;
+//    }
+//
+//    public void setOnBackPressedPopListener(OnBackPressedPopListener onBackPressedPopListener) {
+//        this.onBackPressedPopListener = onBackPressedPopListener;
+//    }
 
     @Override
     public void onBackPressed() {
 
-        if (onBackPressedPopListener != null) {
-            System.out.println("doPop");
-            onBackPressedPopListener.doPop();
-            onBackPressedPopListener = null;
-        } else if (onBackPressedListener != null) {
-            System.out.println("doBack");
-            onBackPressedListener.doBack();
-            onBackPressedListener = null;
-        } else {
-            System.out.println("else back");
-            super.onBackPressed();
-            finish();
+//        if (onBackPressedPopListener != null) {
+//            System.out.println("doPop");
+//            onBackPressedPopListener.doPop();
+//            onBackPressedPopListener = null;
+//        } else if (onBackPressedListener != null) {
+//            System.out.println("doBack");
+//            onBackPressedListener.doBack();
+//            onBackPressedListener = null;
+//        } else {
+//            System.out.println("else back");
+//            super.onBackPressed();
+//        finish();
+        Intent intent =  new Intent(this, Home.class);
+        startActivity(intent);
 
-        }
+//        }
 
     }
 

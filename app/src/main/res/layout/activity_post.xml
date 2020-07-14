@@ -21,14 +21,14 @@
                 android:layout_width="wrap_content"
                 android:textColor="@color/blue"
                 android:background="@drawable/buttonstyle"
-                android:text="Share"
+                android:text="Post"
                 android:layout_height="wrap_content" />
             <Button
                 android:id="@+id/shareanonymous"
                 android:layout_width="wrap_content"
                 android:textColor="@color/blue"
                 android:background="@drawable/buttonstyle"
-                android:text="Share Anonymously"
+                android:text="Post Anonymously"
                 android:layout_height="wrap_content" />
         </LinearLayout>
 

@@ -41,12 +41,25 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
-                android:text="mitch.tabian"
+                android:text="Vikram Singh Nain.."
+                android:maxLength="18"
                 android:layout_toRightOf="@+id/imgView_proPic"
                 android:layout_marginLeft="10dp"
                 android:layout_centerVertical="true"
                 android:id="@+id/tv_name"
                 android:textColor="@color/black"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+
+                android:maxLength="18"
+                android:layout_toRightOf="@+id/tv_name"
+                android:layout_marginLeft="12dp"
+                android:layout_centerVertical="true"
+                android:id="@+id/tv_position"
+                android:textColor="#35E4DE"
                 />
 
 
@@ -79,7 +92,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
             android:layout_marginTop="5dp"
             android:text="This is Status"
             android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
     </RelativeLayout>
 
 
@@ -120,6 +133,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
             <RelativeLayout
                 android:id="@+id/likeLayout"
                 android:layout_width="wrap_content"
+                android:layout_marginStart="20dp"
                 android:layout_height="match_parent">
 
 
@@ -198,6 +212,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                 android:textSize="18sp"
                 android:layout_toRightOf="@+id/likeLayout"
                 android:layout_marginLeft="20dp"
+                android:layout_marginRight="10dp"
                 android:id="@+id/tv_comments"
                 />
 

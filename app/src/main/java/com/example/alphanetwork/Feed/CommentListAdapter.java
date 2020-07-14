@@ -40,14 +40,16 @@ public class CommentListAdapter extends ArrayAdapter<Comments> {
     private int layoutResource;
     private List<Comments> commenties;
     private Context mContext;
+    private String type;
 
     public CommentListAdapter(@NonNull Context context, @LayoutRes int resource,
-                              @NonNull List<Comments> objects) {
+                              @NonNull List<Comments> objects, String type) {
         super(context, resource, objects);
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mContext = context;
         layoutResource = resource;
         this.commenties = objects;
+        this.type = type;
     }
 
     public static class ViewHolder {
@@ -98,7 +100,7 @@ public class CommentListAdapter extends ArrayAdapter<Comments> {
         Glide.with(mContext).load(getItem(position).getProfile().getPhoto()).dontAnimate().into(holder.profileImage);
 
         System.out.println(getItem(position).getLikes_count());
-        holder.likes.setText(String.valueOf(getItem(position).getLikes_count()));
+        holder.likes.setText(String.valueOf(getItem(position).getLikes_count())+" likes");
 
 
         holder.lGestureDetector = new GestureDetector(mContext, new lGestureListener(holder, position));
@@ -192,7 +194,7 @@ public class CommentListAdapter extends ArrayAdapter<Comments> {
             String id = commenties.get(position).getId();
             System.out.println(id);
             System.out.println(position);
-            holder.liking.toggleLike(id,"comment");
+            holder.liking.toggleLike(id,type);
             return true;
         }
 
@@ -201,7 +203,7 @@ public class CommentListAdapter extends ArrayAdapter<Comments> {
             String id = commenties.get(position).getId();
             System.out.println(id);
             System.out.println(position);
-            holder.liking.toggleLike(id,"comment");
+            holder.liking.toggleLike(id,type);
             return true;
         }
 
@@ -229,14 +231,14 @@ public class CommentListAdapter extends ArrayAdapter<Comments> {
         @Override
         public boolean onDoubleTap(MotionEvent e) {
             String id = commenties.get(position).getId();
-            holder.liking.toggleDisLike(id,"comment");
+            holder.liking.toggleDisLike(id,type);
             return true;
         }
 
         @Override
         public boolean onSingleTapConfirmed(MotionEvent e) {
             String id = commenties.get(position).getId();
-            holder.liking.toggleDisLike(id,"comment");
+            holder.liking.toggleDisLike(id,type);
             return true;
         }
 

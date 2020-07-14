@@ -524,7 +524,7 @@ public class DarkAdapter extends RecyclerView.Adapter<DarkAdapter.MyViewHolder>{
             public boolean onDoubleTap(MotionEvent e) {
                 int position = getAdapterPosition();
                 String id = posts.get(position).getPostid();
-                like.toggleLike(id,"anony");
+                like.toggleLike(id,"anonymous");
                 return true;
             }
 
@@ -532,7 +532,7 @@ public class DarkAdapter extends RecyclerView.Adapter<DarkAdapter.MyViewHolder>{
             public boolean onSingleTapConfirmed(MotionEvent e) {
                 int position = getAdapterPosition();
                 String id = posts.get(position).getPostid();
-                like.toggleLike(id,"anony");
+                like.toggleLike(id,"anonymous");
                 return true;
             }
 
@@ -552,7 +552,7 @@ public class DarkAdapter extends RecyclerView.Adapter<DarkAdapter.MyViewHolder>{
             public boolean onDoubleTap(MotionEvent e) {
                 int position = getAdapterPosition();
                 String id = posts.get(position).getPostid();
-                like.toggleDisLike(id,"anony");
+                like.toggleDisLike(id,"anonymous");
                 return true;
             }
 
@@ -560,7 +560,7 @@ public class DarkAdapter extends RecyclerView.Adapter<DarkAdapter.MyViewHolder>{
             public boolean onSingleTapConfirmed(MotionEvent e) {
                 int position = getAdapterPosition();
                 String id = posts.get(position).getPostid();
-                like.toggleDisLike(id,"anony");
+                like.toggleDisLike(id,"anonymous");
                 return true;
             }
 

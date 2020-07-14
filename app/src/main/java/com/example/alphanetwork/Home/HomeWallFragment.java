@@ -31,6 +31,11 @@ import com.example.alphanetwork.Model.ModelHomeWall;
 import com.example.alphanetwork.R;
 import com.example.alphanetwork.Retrofit.Api;
 import com.example.alphanetwork.Retrofit.RetrofitClient;
+import com.google.gson.Gson;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,10 +56,6 @@ public class HomeWallFragment extends Fragment implements SwipeRefreshLayout.OnR
     private List<ModelFeed> feed = new ArrayList<>();
     private Adapter adapter;
     private SwipeRefreshLayout swipeRefreshLayout;
-    private RelativeLayout errorLayout;
-    private ImageView errorImage;
-    private TextView errorTitle, errorMessage;
-    private Button btnRetry;
 
     public String LONG,LAT;
     private SharedPreferences sharedPref;
@@ -66,7 +67,7 @@ public class HomeWallFragment extends Fragment implements SwipeRefreshLayout.OnR
 
 
 
-
+        Toast.makeText(getActivity(), "Please swipe down to Refresh.", Toast.LENGTH_LONG).show();
 
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
@@ -78,7 +79,39 @@ public class HomeWallFragment extends Fragment implements SwipeRefreshLayout.OnR
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setNestedScrollingEnabled(false);
 
+
         sharedPref = getActivity().getSharedPreferences("Location" , Context.MODE_PRIVATE);
+
+
+
+
+
+
+
+        String f = sharedPref.getString("feed","NULL");
+
+        if (!f.equals("NULL")) {
+
+            System.out.println("CAME INTO sharedpref feed thingy");
+            System.out.println(f);
+            Gson gson = new Gson();
+            feed = gson.fromJson(f, ModelHomeWall.class).getPosts();
+            adapter = new Adapter(feed, getActivity(), getActivity().getSupportFragmentManager());
+            recyclerView.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+            swipeRefreshLayout.setRefreshing(false);
+
+        }
+        else{
+            LoadJson();
+        }
+
+
+
+
+
+
+
 
 
         return view;
@@ -86,12 +119,9 @@ public class HomeWallFragment extends Fragment implements SwipeRefreshLayout.OnR
 
 
 
+
     public void LoadJson() {
         swipeRefreshLayout.setRefreshing(true);
-
-
-
-
 
         LONG  = sharedPref.getString("LONG" , "NULL");
         LAT   = sharedPref.getString("LAT","NULL");
@@ -109,7 +139,26 @@ public class HomeWallFragment extends Fragment implements SwipeRefreshLayout.OnR
                 @Override
                 public void onResponse(Call<ModelHomeWall> call, Response<ModelHomeWall> response) {
                     if (response.isSuccessful() && response.body().getStatus() != null) {
-                        System.out.println(response.body());
+
+
+
+
+
+
+
+                        Gson gson = new Gson();
+                        String json = gson.toJson(response.body());
+                        SharedPreferences.Editor editor = sharedPref.edit();
+                        editor.putString("feed" , json);
+                        editor.apply();
+
+
+
+
+
+
+
+
                         feed = response.body().getPosts();
                         System.out.println(feed);
                         adapter = new Adapter(feed, getActivity(), getActivity().getSupportFragmentManager());

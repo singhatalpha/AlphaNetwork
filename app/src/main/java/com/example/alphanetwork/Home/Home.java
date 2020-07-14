@@ -52,10 +52,7 @@ import com.yayandroid.locationmanager.configuration.LocationConfiguration;
 import com.yayandroid.locationmanager.constants.FailType;
 import com.yayandroid.locationmanager.constants.ProcessType;
 import android.location.Location;
-
-
-
-
+import android.widget.TextView;
 
 
 public class Home extends LocationBaseActivity implements MediaAdapter.OnFragmentInteractionListener{
@@ -69,6 +66,7 @@ public class Home extends LocationBaseActivity implements MediaAdapter.OnFragmen
     private ImageView profile,ranking;
     private FloatingActionButton fab;
     private SharedPreferences sharedPref;
+    private TextView message;
     public String LONG,LAT;
 
 
@@ -126,6 +124,11 @@ public class Home extends LocationBaseActivity implements MediaAdapter.OnFragmen
         }
 
 
+
+        message = findViewById(R.id.message);
+        //CALL API TO SEE IF THERE'S A MESSAGE LIKE UPDATING THE App.
+
+
         setupBottomNavigationView();
         setupViewPager();
 
@@ -138,14 +141,8 @@ public class Home extends LocationBaseActivity implements MediaAdapter.OnFragmen
 
     }
 
-    public void onRestoreInstanceState(Bundle state) {
-        super.onRestoreInstanceState(state);
 
-        if (state != null) {
-            Parcelable listState = state.getParcelable("state");
-            mViewPager.onRestoreInstanceState(listState);
-        }
-    }
+
 
 
     @Override

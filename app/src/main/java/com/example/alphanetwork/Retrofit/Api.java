@@ -3,12 +3,15 @@ package com.example.alphanetwork.Retrofit;
 
 //import com.example.alphanetwork.Model.CommentFeed;
 import com.example.alphanetwork.Model.CommentFeed;
+import com.example.alphanetwork.Model.CommitmentFeed;
 import com.example.alphanetwork.Model.ModelAnonymousWall;
 import com.example.alphanetwork.Model.ModelFeed;
 import com.example.alphanetwork.Model.ModelHomeWall;
 import com.example.alphanetwork.Model.ModelNotification;
 import com.example.alphanetwork.Model.ModelPack;
 import com.example.alphanetwork.Model.ModelViewProfile;
+import com.example.alphanetwork.Model.PackFeed;
+import com.example.alphanetwork.Model.PackRanking;
 import com.example.alphanetwork.Model.SearchFeed;
 import com.example.alphanetwork.Model.ViewProfile;
 
@@ -220,9 +223,50 @@ public interface Api {
 
     );
     @GET("users/getpackranking")
-    Call<SearchFeed> getpackranking(
+    Call<PackRanking> getpackranking(
 
     );
+
+    @GET("users/getcommitments")
+    Call<CommitmentFeed> getcommitments(
+
+    );
+    @GET("users/viewcommitments")
+    Call<CommitmentFeed> viewcommitments(
+            @Query("id") String id
+
+    );
+
+    @FormUrlEncoded
+    @POST("users/addcommitment")
+    Call<ResponseBody> addcommitment(
+            @Field("commitment") String commitment
+    );
+    @FormUrlEncoded
+    @POST("users/remove")
+    Call<ResponseBody> remove(
+            @Field("type") String type,
+            @Field("id") String id,
+            @Field("pos") int pos
+    );
+
+    @FormUrlEncoded
+    @POST("users/promote")
+    Call<ResponseBody> promote(
+            @Field("type") String type,
+            @Field("id") String id,
+            @Field("pos") int pos
+    );
+
+    @FormUrlEncoded
+    @POST("users/demote")
+    Call<ResponseBody> demote(
+            @Field("type") String type,
+            @Field("id") String id,
+            @Field("pos") int pos
+    );
+
+
 
 
 

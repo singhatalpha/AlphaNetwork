@@ -37,7 +37,7 @@ public class Utils {
         String isTime = null;
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.sss'Z'", Locale.ENGLISH);
-            sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
+            sdf.setTimeZone(TimeZone.getTimeZone("GMT+0:11"));
             Date date = sdf.parse(oldstringDate);
             isTime = p.format(date);
         } catch (ParseException e) {

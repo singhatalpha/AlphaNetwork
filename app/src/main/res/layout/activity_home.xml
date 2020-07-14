@@ -126,7 +126,17 @@
             android:id="@+id/relLayout2"
             android:layout_below="@+id/relLayout1"
             >
-
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="Welcome to Alpha App,Please Swipe down to load feed."
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="50dp"
+                android:visibility="gone"
+                android:id="@+id/message"
+                android:textSize="20sp"/>
 
             <include layout="@layout/layout_center_viewpager"/>
 

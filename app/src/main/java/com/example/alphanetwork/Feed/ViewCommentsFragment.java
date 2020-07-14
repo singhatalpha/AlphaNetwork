@@ -101,7 +101,7 @@ public class ViewCommentsFragment extends Fragment {
                     mComment.setText("");
                     closeKeyboard();
                 } else {
-                    Toast.makeText(getActivity(), "you can't post a blank comment", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, "you can't post a blank comment", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -137,7 +137,7 @@ public class ViewCommentsFragment extends Fragment {
     private void closeKeyboard() {
         View view = getActivity().getCurrentFocus();
         if (view != null) {
-            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
@@ -160,7 +160,7 @@ public class ViewCommentsFragment extends Fragment {
                 System.out.println(response.code());
                 try {
                     if(response.code() == 200) {
-                        Toast.makeText(getActivity(), "Comment Added", Toast.LENGTH_LONG).show();
+                        Toast.makeText(mContext, "Comment Added", Toast.LENGTH_LONG).show();
                     }
                     else
                     {
@@ -202,7 +202,7 @@ public class ViewCommentsFragment extends Fragment {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
 
-                Toast.makeText(getActivity(),t.getMessage(),Toast.LENGTH_LONG).show();
+                Toast.makeText(mContext,"Couldn't reach the server",Toast.LENGTH_LONG).show();
 
             }
         });
@@ -233,13 +233,13 @@ public class ViewCommentsFragment extends Fragment {
                     commentfeed = response.body().getComments();
 
                     CommentListAdapter adapter = new CommentListAdapter(mContext,
-                            R.layout.layout_comment, commentfeed);
+                            R.layout.layout_comment, commentfeed,type);
 
                     mListView.setAdapter(adapter);
 
                 } else {
 
-                    Toast.makeText(getActivity(), "No Response", Toast.LENGTH_LONG).show();
+                    Toast.makeText(mContext, "No Response", Toast.LENGTH_LONG).show();
 
                 }
 
@@ -247,7 +247,7 @@ public class ViewCommentsFragment extends Fragment {
 
             @Override
             public void onFailure(Call<CommentFeed> call, Throwable t) {
-                Toast.makeText(getActivity(), "onFailure for Comments is triggered", Toast.LENGTH_LONG).show();
+                Toast.makeText(mContext, "Couldn't reach the server", Toast.LENGTH_LONG).show();
             }
 
         });
