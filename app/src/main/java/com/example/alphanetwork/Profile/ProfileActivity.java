@@ -2,19 +2,29 @@ package com.example.alphanetwork.Profile;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.alphanetwork.Feed.MediaAdapter;
+import com.example.alphanetwork.Feed.ViewCommentsFragment;
 import com.example.alphanetwork.Home.Home;
+import com.example.alphanetwork.Model.ModelFeed;
 import com.example.alphanetwork.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import Utils.OnBackPressedListener;
 import Utils.OnBackPressedPopListener;
@@ -30,7 +40,7 @@ import Utils.OnBackPressedPopListener;
 //        ViewPostFragment.OnCommentThreadSelectedListener,
 //        ViewProfileFragment.OnGridImageSelectedListener
 
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity implements ProfileFragment.OnGridImageSelectedListener, MediaAdapter.OnFragmentInteractionListener,ViewProfileFragment.OnGridImageSelectedListener {
 
     private static final String TAG = "ProfileActivity";
 
@@ -49,23 +59,21 @@ public class ProfileActivity extends AppCompatActivity {
 //        transaction.commit();
 //    }
 
-//    @Override
-//    public void onGridImageSelected(Photo photo, int activityNumber) {
-//        Log.d(TAG, "onGridImageSelected: selected an image gridview: " + photo.toString());
-//
-//        ViewPostFragment fragment = new ViewPostFragment();
-//        Bundle args = new Bundle();
-//        args.putParcelable(getString(R.string.photo), photo);
-//        args.putInt(getString(R.string.activity_number), activityNumber);
-//
-//        fragment.setArguments(args);
-//
-//        FragmentTransaction transaction  = getSupportFragmentManager().beginTransaction();
-//        transaction.replace(R.id.container, fragment);
-//        transaction.addToBackStack(getString(R.string.view_post_fragment));
-//        transaction.commit();
-//
-//    }
+    @Override
+    public void onGridImageSelected(List<ModelFeed> feed, int position) {
+        Log.d(TAG, "onGridImageSelected: selected an image gridview: " );
+        System.out.println(position);
+        ViewPostFragment fragment = new ViewPostFragment();
+        Bundle args = new Bundle();
+        args.putParcelableArrayList("feed", (ArrayList<? extends Parcelable>) feed);
+        args.putInt("position",position);
+        fragment.setArguments(args);
+        FragmentTransaction transaction  = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.container, fragment);
+        transaction.addToBackStack("viewpostfragment");
+        transaction.commit();
+
+    }
 
 
     private static final int ACTIVITY_NUM = 4;
@@ -93,6 +101,18 @@ public class ProfileActivity extends AppCompatActivity {
         init();
 
     }
+    public void onCommentThreadSelected(String id,String type) {
+
+        ViewPostCommentFragment fragment = new ViewPostCommentFragment(id,type);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        Bundle args = new Bundle();
+        args.putString("YourKey", "YourValue");
+        fragment.setArguments(args);
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.container, fragment);
+        fragmentTransaction.addToBackStack("ViewPostFragment");
+        fragmentTransaction.commit();
+    }
 
 //    public void setOnBackPressedListener(OnBackPressedListener onBackPressedListener) {
 //        this.onBackPressedListener = onBackPressedListener;
@@ -105,20 +125,38 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-//        if (onBackPressedPopListener != null) {
-//            System.out.println("doPop");
-//            onBackPressedPopListener.doPop();
-//            onBackPressedPopListener = null;
-//        } else if (onBackPressedListener != null) {
-//            System.out.println("doBack");
-//            onBackPressedListener.doBack();
-//            onBackPressedListener = null;
-//        } else {
-//            System.out.println("else back");
+        if (onBackPressedPopListener != null) {
+            System.out.println("doPop");
+            onBackPressedPopListener.doPop();
+            onBackPressedPopListener = null;
+        } else if (onBackPressedListener != null) {
+            System.out.println("doBack");
+            onBackPressedListener.doBack();
+            onBackPressedListener = null;
+        } else {
+            System.out.println("else back");
 //            super.onBackPressed();
+            Intent intent =  new Intent(this, Home.class);
+            startActivity(intent);
+//            finish();
+        }
+
+
+//        int count = getSupportFragmentManager().getBackStackEntryCount();
+//
+//        if (count == 0) {
+////            super.onBackPressed();
+//            Intent intent =  new Intent(this, Home.class);
+//            startActivity(intent);
+//            finish();
+//        } else {
+//            getSupportFragmentManager().popBackStack();
+//        }
+
+//        super.onBackPressed();
+//        Intent intent =  new Intent(this, Home.class);
+//        startActivity(intent);
 //        finish();
-        Intent intent =  new Intent(this, Home.class);
-        startActivity(intent);
 
 //        }
 
@@ -126,7 +164,6 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void init() {
         Log.d(TAG, "init: inflating profile fragment");
-
         Intent intent = getIntent();
         if (intent.hasExtra("user_id")) {
             Log.d(TAG, "init: searching for user object attached as intent extra");
@@ -159,4 +196,11 @@ public class ProfileActivity extends AppCompatActivity {
 
         }
     }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
+
+
 }

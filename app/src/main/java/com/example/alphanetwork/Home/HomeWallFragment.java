@@ -67,7 +67,6 @@ public class HomeWallFragment extends Fragment implements SwipeRefreshLayout.OnR
 
 
 
-        Toast.makeText(getActivity(), "Please swipe down to Refresh.", Toast.LENGTH_LONG).show();
 
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
@@ -92,8 +91,7 @@ public class HomeWallFragment extends Fragment implements SwipeRefreshLayout.OnR
 
         if (!f.equals("NULL")) {
 
-            System.out.println("CAME INTO sharedpref feed thingy");
-            System.out.println(f);
+
             Gson gson = new Gson();
             feed = gson.fromJson(f, ModelHomeWall.class).getPosts();
             adapter = new Adapter(feed, getActivity(), getActivity().getSupportFragmentManager());
@@ -102,9 +100,13 @@ public class HomeWallFragment extends Fragment implements SwipeRefreshLayout.OnR
             swipeRefreshLayout.setRefreshing(false);
 
         }
-        else{
-            LoadJson();
+        else {
+            Toast.makeText(getActivity(), "Please use swipe down to Refresh.", Toast.LENGTH_SHORT).show();
+
         }
+
+        LoadJson();
+
 
 
 

@@ -85,14 +85,14 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
 //        if(modelFeed.getMedia().size()!=0) {
 //            holder.imgView_postPic.setVisibility(View.VISIBLE);
 //            System.out.println(modelFeed.getMedia().get(0).getFile_data() );
-//            System.out.println("Konda is anaconda" );
+//
 //            Glide.with(context)
 //                    .load(modelFeed.getMedia().get(0).getFile_data())
 //                    .apply(requestOptions)
 //                    .listener(new RequestListener<Drawable>() {
 //                        @Override
 //                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-//                            System.out.println("Konda is in LoadFailed" );
+//
 //                            System.out.println(e);
 //                            holder.progressBar.setVisibility(View.GONE);
 //                            return false;
@@ -100,7 +100,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
 //
 //                        @Override
 //                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-//                            System.out.println("Konda is onResourceReady" );
+//
 ////                            holder.progressBar.setVisibility(View.GONE);
 //                            return false;
 //                        }
@@ -173,7 +173,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
         }
         else
         {
-            System.out.println(holder.vp);
+//            System.out.println(holder.vp);
 //        System.out.println("veiw holder : " + holder);
             holder.vp.setId(position+1);
             holder.vp.setAdapter(receive);
@@ -189,10 +189,10 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
             @Override
             public void onPageSelected(int position) {
 //                System.out.println(viewPager);
-                System.out.println("view pager");
+//                System.out.println("view pager");
 
                 MediaAdapter one = (MediaAdapter) receive.mediaFragments.get(holder.vp.getCurrentItem());
-                System.out.println("fragement : " + one);
+//                System.out.println("fragement : " + one);
                 if(one.link.endsWith(".mp4")){
                     one.bar.setVisibility(View.VISIBLE);
                     one.mVideo.setMediaController(MediaAdapter.mediaController);
@@ -297,8 +297,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
 
     public PagerAdapter addData(int i)
     {
-        System.out.println(i);
-        System.out.println(posts.size());
+//        System.out.println(i);
+//        System.out.println(posts.size());
 
 
         ModelFeed modelFeed = posts.get(i);
@@ -318,7 +318,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
 
         for(int j = 0; j < urls.size(); j++)
         {
-            System.out.println(urls.get(j));
+//            System.out.println(urls.get(j));
             one = MediaAdapter.newInstance(urls.get(j));
             pagerAdapter.mediaFragments.add(one);
 
@@ -444,9 +444,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
                 public void onClick(View v) {
                     int position = getAdapterPosition();
                     String post = posts.get(position).getPostid();
-
                     ((Home)context).onCommentThreadSelected(post,"comment");
-
                     //going to need to do something else?
                     ((Home)context).hideLayout();
                 }

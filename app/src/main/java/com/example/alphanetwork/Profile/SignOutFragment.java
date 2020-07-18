@@ -1,5 +1,8 @@
 package com.example.alphanetwork.Profile;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,7 +15,13 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.alphanetwork.Login.user_login;
 import com.example.alphanetwork.R;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+
+import Utils.MyApp;
 
 
 /**
@@ -23,7 +32,8 @@ public class SignOutFragment extends Fragment {
 
     private static final String TAG = "SignOutFragment";
 
-
+    private SharedPreferences sharedpref;
+    private Context context = MyApp.getContext();
 
     private ProgressBar mProgressBar;
     private TextView tvSignout, tvSigningOut;
@@ -47,9 +57,22 @@ public class SignOutFragment extends Fragment {
                 Log.d(TAG, "onClick: attempting to sign out.");
                 mProgressBar.setVisibility(View.VISIBLE);
                 tvSigningOut.setVisibility(View.VISIBLE);
+                sharedpref = context.getSharedPreferences("Login",Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedpref.edit();
+                editor.clear();
+                editor.apply();
 
+                GoogleSignInOptions gso = new GoogleSignInOptions.
+                        Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).
+                        build();
+
+                GoogleSignInClient googleSignInClient = GoogleSignIn.getClient(context,gso);
+                googleSignInClient.signOut();
+
+                Intent mainIntent = new Intent(getActivity(), user_login.class);
+                startActivity(mainIntent);
 //                mAuth.signOut();
-                getActivity().finish();
+//                getActivity().finish();
             }
         });
 

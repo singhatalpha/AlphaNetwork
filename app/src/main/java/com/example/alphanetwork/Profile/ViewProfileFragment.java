@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -42,13 +43,14 @@ import retrofit2.Response;
 
 public class ViewProfileFragment extends Fragment {
 
-    private static final String TAG = "ProfileFragment";
+    private static final String TAG = "ViewProfileFragment";
 
 
-//    public interface OnGridImageSelectedListener{
-//        void onGridImageSelected(Photo photo, int activityNumber);
-//    }
-//    OnGridImageSelectedListener mOnGridImageSelectedListener;
+    public interface OnGridImageSelectedListener{
+        void onGridImageSelected(List<ModelFeed> feed, int position);
+    }
+
+    OnGridImageSelectedListener mOnGridImageSelectedListener;
 
     private static final int ACTIVITY_NUM = 4;
     private static final int NUM_GRID_COLUMNS = 3;
@@ -259,15 +261,15 @@ public class ViewProfileFragment extends Fragment {
         return view;
     }
 
-//    @Override
-//    public void onAttach(Context context) {
-//        try{
-//            mOnGridImageSelectedListener = (OnGridImageSelectedListener) getActivity();
-//        }catch (ClassCastException e){
-//            Log.e(TAG, "onAttach: ClassCastException: " + e.getMessage() );
-//        }
-//        super.onAttach(context);
-//    }
+    @Override
+    public void onAttach(Context context) {
+        try{
+            mOnGridImageSelectedListener = (OnGridImageSelectedListener) getActivity();
+        }catch (ClassCastException e){
+            Log.e(TAG, "onAttach: ClassCastException: " + e.getMessage() );
+        }
+        super.onAttach(context);
+    }
 
     private void setupGridView(String user_id){
         Log.d(TAG, "setupGridView: Setting up image grid.");
@@ -339,12 +341,12 @@ public class ViewProfileFragment extends Fragment {
 
 
 
-//                gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                    @Override
-//                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                        mOnGridImageSelectedListener.onGridImageSelected(photos.get(position), ACTIVITY_NUM);
-//                    }
-//                });
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                mOnGridImageSelectedListener.onGridImageSelected(feed, position);
+            }
+        });
     }
 
 

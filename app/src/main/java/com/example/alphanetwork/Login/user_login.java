@@ -127,7 +127,8 @@ public class user_login extends AppCompatActivity {
 
             String idToken = account.getEmail();
             String id = account.getId();
-            Log.w(TAG,"HERE COMES THE TOKEN FELLASSSSSSS::::::::::::" + idToken);
+            Log.w(TAG,"HERE COMES THE TOKEN ::::::::::::" + idToken);
+            Toast.makeText(this, "Logging in, please wait.", Toast.LENGTH_LONG).show();
             // Signed in successfully, show authenticated UI.
             googlelogin(idToken,id);
         } catch (ApiException e) {
@@ -191,7 +192,7 @@ public class user_login extends AppCompatActivity {
                         editor.apply();
                         String temp = sharedPref.getString("token" , "NULL");
 
-                        Toast.makeText(user_login.this, temp + " " + "sharedpref", Toast.LENGTH_LONG).show();
+
 
                         //redirect to home activity if successful
                         Intent intent = new Intent(user_login.this, Home.class);
@@ -270,7 +271,7 @@ public class user_login extends AppCompatActivity {
                         editor.apply();
                         String temp = sharedPref.getString("token" , "NULL");
 
-                        Toast.makeText(user_login.this, temp + " " + "sharedpref", Toast.LENGTH_LONG).show();
+//                        Toast.makeText(user_login.this, temp + " " + "sharedpref", Toast.LENGTH_LONG).show();
 
                         //redirect to home activity if successful
                         Intent intent = new Intent(user_login.this, Home.class);

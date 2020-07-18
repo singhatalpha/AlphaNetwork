@@ -158,7 +158,7 @@ public class MediaAdapter extends Fragment {
 //                        .dontAnimate()
 //                        .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
 //                        .into(mImage);
-
+                
                 Glide.with(getActivity())
                         .load(link)
                         .apply(requestOptions)
@@ -166,14 +166,14 @@ public class MediaAdapter extends Fragment {
                         .listener(new RequestListener<Drawable>() {
                             @Override
                             public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                                System.out.println("Glide Load Failed Fellas....Hate glide" );
+//                                System.out.println("Glide Load Failed Fellas....Hate glide" );
                                 System.out.println(e);
                                 return false;
                             }
 
                             @Override
                             public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                                System.out.println("Glide worked...damn" );
+//                                System.out.println("Glide worked...damn" );
                                 bar.setVisibility(View.GONE);
 
                                 return false;

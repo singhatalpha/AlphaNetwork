@@ -6,9 +6,10 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class ModelFeed{
+public class ModelFeed implements Parcelable {
     private String title;
     private List<String> media;
     private int likes ;
@@ -21,6 +22,44 @@ public class ModelFeed{
 
 
     private ModelProfile profile;
+
+    protected ModelFeed(Parcel in) {
+        title = in.readString();
+        media = in.createStringArrayList();
+        likes = in.readInt();
+        comments = in.readInt();
+        time = in.readString();
+        id = in.readString();
+        postid = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(title);
+        dest.writeStringList(media);
+        dest.writeInt(likes);
+        dest.writeInt(comments);
+        dest.writeString(time);
+        dest.writeString(id);
+        dest.writeString(postid);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<ModelFeed> CREATOR = new Creator<ModelFeed>() {
+        @Override
+        public ModelFeed createFromParcel(Parcel in) {
+            return new ModelFeed(in);
+        }
+
+        @Override
+        public ModelFeed[] newArray(int size) {
+            return new ModelFeed[size];
+        }
+    };
 
     public String getPostid() {
         return postid;
@@ -94,14 +133,14 @@ public class ModelFeed{
         this.profile = profile;
     }
 
-//    @Override
-//    public int describeContents() {
-//        return 0;
-//    }
-//
-//    @Override
-//    public void writeToParcel(Parcel dest, int flags) {
-//        dest.writeString(media);
-//
+//    public ModelFeed(String title, List<String> media, int likes, int comments, String time, String id, String postid, ModelProfile profile) {
+//        this.title = title;
+//        this.media = media;
+//        this.likes = likes;
+//        this.comments = comments;
+//        this.time = time;
+//        this.id = id;
+//        this.postid = postid;
+//        this.profile = profile;
 //    }
 }

@@ -307,10 +307,15 @@ public class Home extends LocationBaseActivity implements MediaAdapter.OnFragmen
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+//        super.onBackPressed();
+
         if(mFrameLayout.getVisibility() == View.VISIBLE){
             showLayout();
         }
+        else{
+            finishAffinity();
+        }
+
     }
 
 

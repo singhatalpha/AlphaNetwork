@@ -87,27 +87,62 @@ public class HomeLocalWallFragment extends Fragment implements SwipeRefreshLayou
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setNestedScrollingEnabled(false);
         sharedPref = getActivity().getSharedPreferences("Location" , Context.MODE_PRIVATE);
-
         String f = sharedPref.getString("darkfeed","NULL");
 
         if (!f.equals("NULL")) {
-
-            System.out.println("CAME INTO sharedpref feed thingy");
-            System.out.println(f);
             Gson gson = new Gson();
             feed = gson.fromJson(f, ModelAnonymousWall.class).getPosts();
             adapter = new DarkAdapter(feed, getActivity(), getActivity().getSupportFragmentManager());
             recyclerView.setAdapter(adapter);
             adapter.notifyDataSetChanged();
             swipeRefreshLayout.setRefreshing(false);
-
-        }
-        else{
             LoadJson();
         }
+        else{
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
+            builder1.setMessage("Anonymous feed contains content some people may not like. User discretion advised. Are you sure you want to continue?");
+            builder1.setCancelable(true);
+
+            builder1.setPositiveButton(
+                    "Yes",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+
+                            dialog.cancel();
+                            LoadJson();
+                        }
+                    });
+
+            builder1.setNegativeButton(
+                    "No",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            swipeRefreshLayout.setRefreshing(false);
+                            dialog.cancel();
+                        }
+                    });
+
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
+        }
+
+
+
+
 
         return view;
 
+    }
+
+
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+
+
+        //INSERT CUSTOM CODE HERE
     }
 
 //    @Override
@@ -208,31 +243,7 @@ public class HomeLocalWallFragment extends Fragment implements SwipeRefreshLayou
     @Override
     public void onRefresh() {
 
-        AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
-        builder1.setMessage("Anonymous feed contains content some people may not like. User discretion advised. Are you sure you want to continue?");
-        builder1.setCancelable(true);
-
-        builder1.setPositiveButton(
-                "Yes",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-
-                        dialog.cancel();
-                        LoadJson();
-                    }
-                });
-
-        builder1.setNegativeButton(
-                "No",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        swipeRefreshLayout.setRefreshing(false);
-                        dialog.cancel();
-                    }
-                });
-
-        AlertDialog alert11 = builder1.create();
-        alert11.show();
+        LoadJson();
     }
 
     private void onLoadingSwipeRefresh(){

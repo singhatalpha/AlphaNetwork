@@ -80,14 +80,14 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.MyViewHold
 //        if(modelFeed.getMedia().size()!=0) {
 //            holder.imgView_postPic.setVisibility(View.VISIBLE);
 //            System.out.println(modelFeed.getMedia().get(0).getFile_data() );
-//            System.out.println("Konda is anaconda" );
+//
 //            Glide.with(context)
 //                    .load(modelFeed.getMedia().get(0).getFile_data())
 //                    .apply(requestOptions)
 //                    .listener(new RequestListener<Drawable>() {
 //                        @Override
 //                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-//                            System.out.println("Konda is in LoadFailed" );
+//
 //                            System.out.println(e);
 //                            holder.progressBar.setVisibility(View.GONE);
 //                            return false;
@@ -95,7 +95,7 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.MyViewHold
 //
 //                        @Override
 //                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-//                            System.out.println("Konda is onResourceReady" );
+//
 ////                            holder.progressBar.setVisibility(View.GONE);
 //                            return false;
 //                        }

@@ -26,6 +26,7 @@
 
 
 
+
         >
 
 
@@ -78,6 +79,7 @@
             android:id="@+id/relLayout2"
             android:layout_width="match_parent"
             android:layout_height="40dp"
+
             android:layout_below="@+id/relLayout12">
 
 
@@ -87,6 +89,7 @@
                 android:layout_height="wrap_content"
                 app:tabBackground="@drawable/tab_selector"
                 app:tabGravity="center"
+
                 app:tabIndicatorHeight="0dp"
                 app:tabMaxWidth="10dp" />
 
@@ -94,7 +97,7 @@
             <RelativeLayout
                 android:id="@+id/likeLayout"
                 android:layout_width="wrap_content"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="20dp"
                 android:layout_height="match_parent">
 
 
@@ -106,21 +109,21 @@
 
                     <ImageView
                         android:id="@+id/image_liked"
-                        android:layout_width="18dp"
-                        android:layout_height="18dp"
+                        android:layout_width="25dp"
+                        android:layout_height="match_parent"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="10dp"
                         android:visibility="invisible"
-                        app:srcCompat="@drawable/ic_liked" />
+                        app:srcCompat="@mipmap/ic_redheart" />
 
                     <ImageView
                         android:id="@+id/image_like"
-                        android:layout_width="18dp"
-                        android:layout_height="18dp"
+                        android:layout_width="25dp"
+                        android:layout_height="match_parent"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="10dp"
                         android:visibility="visible"
-                        app:srcCompat="@drawable/ic_like" />
+                        app:srcCompat="@mipmap/ic_heart" />
 
                 </RelativeLayout>
 
@@ -129,7 +132,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0"
-                    android:textColor="@color/black"
+                    android:textColor="@color/dark_grey"
                     android:textSize="16sp"
                     android:id="@+id/tv_likescount"
                     android:layout_centerVertical="true"
@@ -139,59 +142,65 @@
 
                 <ImageView
                     android:id="@+id/image_disliked"
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
+                    android:layout_width="25dp"
+                    android:layout_height="match_parent"
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/tv_likescount"
                     android:layout_marginLeft="10dp"
                     android:visibility="invisible"
-                    app:srcCompat="@drawable/ic_disliked" />
+                    app:srcCompat="@mipmap/ic_redheartdislike" />
 
 
                 <ImageView
                     android:id="@+id/image_dislike"
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
+                    android:layout_width="25dp"
+                    android:layout_height="match_parent"
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/tv_likescount"
                     android:layout_marginLeft="10dp"
                     android:visibility="visible"
-                    app:srcCompat="@drawable/ic_dislike" />
+                    app:srcCompat="@mipmap/ic_heartdislike" />
 
 
 
 
             </RelativeLayout>
 
+            <RelativeLayout
+                android:layout_width="120dp"
+
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/likeLayout"
+                android:layout_height="match_parent">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="200k"
-                android:textColor="@color/black"
+                android:text="200"
+                android:textColor="@color/dark_grey"
                 android:layout_centerVertical="true"
+                android:layout_marginStart="25dp"
                 android:textSize="16sp"
-                android:layout_toRightOf="@+id/likeLayout"
-                android:layout_marginLeft="20dp"
                 android:id="@+id/tv_comments"
                 />
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/speech_bubble"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="20dp"
-                android:layout_toRightOf="@+id/tv_comments"
+                android:layout_marginStart="20dp"
+                android:layout_toEndOf="@+id/tv_comments"
                 android:visibility="visible"
-                app:srcCompat="@drawable/ic_comment" />
+                app:srcCompat="@mipmap/ic_roundcomment" />
+            </RelativeLayout>
 
             <ImageView
                 android:id="@+id/ivEllipses"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="20dp"
+                android:layout_marginEnd="20dp"
                 android:icon="@drawable/ic_ellipses"
                 app:srcCompat="@drawable/ic_ellipses" />
 

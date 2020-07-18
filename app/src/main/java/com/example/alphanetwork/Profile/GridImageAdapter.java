@@ -89,7 +89,7 @@ public class GridImageAdapter extends ArrayAdapter<String>{
                     .listener(new RequestListener<Drawable>() {
                         @Override
                         public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                            System.out.println("Konda is in LoadFailed" );
+
                             System.out.println(e);
                             holder.mProgressBar.setVisibility(View.GONE);
                             return false;
@@ -97,7 +97,7 @@ public class GridImageAdapter extends ArrayAdapter<String>{
 
                         @Override
                         public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                            System.out.println("Konda is onResourceReady" );
+
                             holder.mProgressBar.setVisibility(View.GONE);
                             return false;
                         }

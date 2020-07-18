@@ -2,10 +2,12 @@ package com.example.alphanetwork.addpost;
 
 
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -54,12 +56,15 @@ public class post extends AppCompatActivity {
     public static int NoOfSlecteImg;
     public EditText mtitle;
     private Button share,anonymousshare;
+    private ImageView back;
 
 
 
     public static List<String>  urls = new ArrayList<>();
     private SharedPreferences sharedPref;
     public String LONG,LAT;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,8 +74,15 @@ public class post extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-
+        back = findViewById(R.id.backArrow);
         sharedPref = getSharedPreferences("Location" , Context.MODE_PRIVATE);
+        share = findViewById(R.id.share);
+        anonymousshare = findViewById(R.id.shareanonymous);
+
+        share.setEnabled(true);
+        anonymousshare.setEnabled(true);
+
+
 
 
 
@@ -92,23 +104,37 @@ public class post extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), Home.class));
             }
         });
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                post.urls.clear();
+                gallery.SelectedImgUrls.clear();
+                post.NoOfSlecteImg = 0;
+                views.clear();
+                startActivity(new Intent(getApplicationContext(), Home.class));
+            }
+        });
 
-        share = findViewById(R.id.share);
         share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
+                    share.setEnabled(false);
+
+                    Toast.makeText(getApplication(), "Uploading, Please Wait.", Toast.LENGTH_LONG).show();
                     postJSON();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         });
-        anonymousshare = findViewById(R.id.shareanonymous);
         anonymousshare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
+                    anonymousshare.setEnabled(false);
+
+                    Toast.makeText(getApplication(), "Uploading, Please Wait.", Toast.LENGTH_LONG).show();
                     postanonymousJSON();
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -131,10 +157,26 @@ public class post extends AppCompatActivity {
             public void onClick(View v) {
                 gallery.SelectedImgUrls.clear();
                 post.NoOfSlecteImg = 0;
-                Intent i = new Intent(post.this,gallery.class);
-                post.this.startActivity(i);
-                views.clear();
-                finish();
+
+
+
+                String requiredPermission = Manifest.permission.READ_EXTERNAL_STORAGE;
+                int checkVal = getApplication().checkCallingOrSelfPermission(requiredPermission);
+                if (checkVal== PackageManager.PERMISSION_GRANTED){
+                    Intent i = new Intent(post.this,gallery.class);
+                    post.this.startActivity(i);
+                    views.clear();
+                    finish();
+                }
+                else{
+                    Toast.makeText(getApplication(), "Please provide storage permissions before accessing the gallery.", Toast.LENGTH_LONG).show();
+
+                }
+
+
+
+
+
             }
         });
 
@@ -283,6 +325,13 @@ public class post extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        share.setEnabled(true);
+        anonymousshare.setEnabled(true);
+    }
+
     public void postJSON() throws IOException {
 
         LONG  = sharedPref.getString("LONG" , "NULL");
@@ -349,6 +398,8 @@ public class post extends AppCompatActivity {
                         gallery.SelectedImgUrls.clear();
                         post.NoOfSlecteImg = 0;
                         views.clear();
+
+
                         Intent i = new Intent(post.this, Home.class);
                         startActivity(i);
                     }
@@ -431,6 +482,12 @@ public class post extends AppCompatActivity {
                     String m = response.message();
                     System.out.println(m);
                     if(response.code()==200){
+                        post.urls.clear();
+                        gallery.SelectedImgUrls.clear();
+                        post.NoOfSlecteImg = 0;
+                        views.clear();
+
+
                         Intent i = new Intent(post.this, Home.class);
                         startActivity(i);
                     }

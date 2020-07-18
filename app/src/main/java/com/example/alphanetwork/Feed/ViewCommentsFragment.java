@@ -232,7 +232,7 @@ public class ViewCommentsFragment extends Fragment {
                 if(response.isSuccessful() ){
 
                     commentfeed = response.body().getComments();
-
+                    System.out.println(commentfeed);
                     CommentListAdapter adapter = new CommentListAdapter(mContext,
                             R.layout.layout_comment, commentfeed,type);
 

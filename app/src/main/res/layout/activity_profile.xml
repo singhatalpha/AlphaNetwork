@@ -27,9 +27,11 @@
 
 
 
-        <ScrollView
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            >
             
         <FrameLayout
             android:layout_width="match_parent"
@@ -38,7 +40,7 @@
 
         </FrameLayout>
 
-        </ScrollView>
+        </androidx.core.widget.NestedScrollView>
 
     </RelativeLayout>
 

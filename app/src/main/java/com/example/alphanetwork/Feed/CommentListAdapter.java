@@ -97,7 +97,9 @@ public class CommentListAdapter extends ArrayAdapter<Comments> {
 
         holder.username.setText(getItem(position).getProfile().getUser());
         holder.timestamp.setText(Utils.DateToTimeFormat(getItem(position).getCommented_date()));
-        Glide.with(mContext).load(getItem(position).getProfile().getPhoto()).dontAnimate().into(holder.profileImage);
+        Glide.with(mContext).load(getItem(position).getProfile().getPhoto()).dontAnimate()
+                .placeholder(R.drawable.alphanotext)
+                .into(holder.profileImage);
 
         System.out.println(getItem(position).getLikes_count());
         holder.likes.setText(String.valueOf(getItem(position).getLikes_count())+" likes");
