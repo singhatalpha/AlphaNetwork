@@ -55,7 +55,7 @@ public class post extends AppCompatActivity {
     public static List<View> views = new ArrayList<>();
     public static int NoOfSlecteImg;
     public EditText mtitle;
-    private Button share,anonymousshare;
+    private Button share,anonymousshare,clear;
     private ImageView back;
 
 
@@ -75,6 +75,7 @@ public class post extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         back = findViewById(R.id.backArrow);
+        clear = findViewById(R.id.clear);
         sharedPref = getSharedPreferences("Location" , Context.MODE_PRIVATE);
         share = findViewById(R.id.share);
         anonymousshare = findViewById(R.id.shareanonymous);
@@ -104,6 +105,7 @@ public class post extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), Home.class));
             }
         });
+
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -322,6 +324,17 @@ public class post extends AppCompatActivity {
             }
         });
 
+        clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                post.urls.clear();
+                gallery.SelectedImgUrls.clear();
+                post.NoOfSlecteImg = 0;
+                viewPager.setVisibility(View.INVISIBLE);
+//                startActivity(new Intent(getApplicationContext(), Home.class));
+            }
+        });
+
 
     }
 
@@ -424,10 +437,7 @@ public class post extends AppCompatActivity {
 
         LONG  = sharedPref.getString("LONG" , "NULL");
         LAT   = sharedPref.getString("LAT","NULL");
-        RequestBody longitude =
-                RequestBody.create(MediaType.parse("multipart/form-data"), LONG);
-        RequestBody latitude =
-                RequestBody.create(MediaType.parse("multipart/form-data"), LAT);
+
 
         if(LONG=="NULL"){
             Toast.makeText(getApplication(), "Please Enable Location, We need location for the feed", Toast.LENGTH_LONG).show();
@@ -438,71 +448,70 @@ public class post extends AppCompatActivity {
 
             mtitle = findViewById(R.id.postcontent);
             String Title = mtitle.getText().toString();
-
-
-            List<MultipartBody.Part> parts = new ArrayList<>();
-
-//pass it like this
-
-            RequestBody title =
-                    RequestBody.create(MediaType.parse("multipart/form-data"), Title);
-
-            if (urls.size() != 0) {
-                for (int index = 0; index < urls.size(); index++) {
-
-                    System.out.println("The urls are :" + urls);
-
-                    File file = new File(urls.get(index));
-
-//                RequestBody requestFile =
-//                        RequestBody.create(MediaType.parse("multipart/form-data"), file);
-
-                    RequestBody requestFile =
-                            RequestBody.create(MediaType.parse("multipart/form-data"), new Compressor(this).compressToFile(file));
-
-// MultipartBody.Part is used to send also the actual file name
-                    MultipartBody.Part body =
-                            MultipartBody.Part.createFormData("media", file.getName(), requestFile);
-
-                    parts.add(body);
-
-
-                }
+            if (Title.equals("")) {
+                Toast.makeText(getApplication(), "Empty Anonymous Posts are not Allowed.", Toast.LENGTH_LONG).show();
+                anonymousshare.setEnabled(true);
             }
 
-            Call<ResponseBody> call = RetrofitClient
-                    .getInstance()
-                    .getApi()
-                    .addAnonymousPost(title,longitude,latitude, parts);
-            call.enqueue(new Callback<ResponseBody>() {
+            else if (urls.size() != 0) {
+                Toast.makeText(getApplication(), "Images are not allowed in Anonymous Posts.", Toast.LENGTH_LONG).show();
+                anonymousshare.setEnabled(true);
+//                for (int index = 0; index < urls.size(); index++) {
+//
+//                    System.out.println("The urls are :" + urls);
+//
+//                    File file = new File(urls.get(index));
+//
+////                RequestBody requestFile =
+////                        RequestBody.create(MediaType.parse("multipart/form-data"), file);
+//
+//                    RequestBody requestFile =
+//                            RequestBody.create(MediaType.parse("multipart/form-data"), new Compressor(this).compressToFile(file));
+//
+//// MultipartBody.Part is used to send also the actual file name
+//                    MultipartBody.Part body =
+//                            MultipartBody.Part.createFormData("media", file.getName(), requestFile);
+//
+//                    parts.add(body);
+//
+//
+//                }
+            }
+            else {
 
-                @Override
-                public void onResponse(Call<ResponseBody> call,
-                                       Response<ResponseBody> response) {
-                    String m = response.message();
-                    System.out.println(m);
-                    if(response.code()==200){
-                        post.urls.clear();
-                        gallery.SelectedImgUrls.clear();
-                        post.NoOfSlecteImg = 0;
-                        views.clear();
+                Call<ResponseBody> call = RetrofitClient
+                        .getInstance()
+                        .getApi()
+                        .addAnonymousPost(Title, LONG, LAT);
+                call.enqueue(new Callback<ResponseBody>() {
+
+                    @Override
+                    public void onResponse(Call<ResponseBody> call,
+                                           Response<ResponseBody> response) {
+                        String m = response.message();
+                        System.out.println(m);
+                        if (response.code() == 200) {
+                            post.urls.clear();
+                            gallery.SelectedImgUrls.clear();
+                            post.NoOfSlecteImg = 0;
+                            views.clear();
 
 
-                        Intent i = new Intent(post.this, Home.class);
-                        startActivity(i);
+                            Intent i = new Intent(post.this, Home.class);
+                            startActivity(i);
+                        }
+
+                        Log.v("Upload", "success");
                     }
 
-                    Log.v("Upload", "success");
-                }
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        Toast.makeText(getApplication(), "Couldn't reach the server", Toast.LENGTH_LONG).show();
+                        Log.e("Upload error:", t.getMessage());
+                    }
+                });
 
-                @Override
-                public void onFailure(Call<ResponseBody> call, Throwable t) {
-                    Toast.makeText(getApplication(), "Couldn't reach the server", Toast.LENGTH_LONG).show();
-                    Log.e("Upload error:", t.getMessage());
-                }
-            });
-
-
+            }
         }
     }
 

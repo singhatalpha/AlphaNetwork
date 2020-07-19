@@ -1,4 +1,5 @@
-package com.example.alphanetwork.Home;
+package com.example.alphanetwork.Circle;
+
 
 
 
@@ -49,16 +50,16 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class HomeLocalWallFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
+public class CircleAnonymousFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
 
 
 
-    private Context mContext;
+
     private static final String TAG = "DarkLocalFragment";
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private List<ModelAnonymousFeed> feed = new ArrayList<>();
-    private DarkAdapter adapter;
+    private CircleDarkAdapter adapter;
     private SwipeRefreshLayout swipeRefreshLayout;
     private RelativeLayout errorLayout;
     private ImageView errorImage;
@@ -75,7 +76,9 @@ public class HomeLocalWallFragment extends Fragment implements SwipeRefreshLayou
         View view = inflater.inflate(R.layout.activity_darkfeed, container, false);
 
 
-        mContext = getActivity();
+
+
+
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
@@ -85,51 +88,9 @@ public class HomeLocalWallFragment extends Fragment implements SwipeRefreshLayou
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setNestedScrollingEnabled(false);
-        sharedPref = getActivity().getSharedPreferences("Location" , Context.MODE_PRIVATE);
-        String f = sharedPref.getString("darkfeed","NULL");
-
-        if (!f.equals("NULL")) {
-            Gson gson = new Gson();
-            feed = gson.fromJson(f, ModelAnonymousWall.class).getPosts();
-            adapter = new DarkAdapter(feed, getActivity(), getActivity().getSupportFragmentManager());
-            recyclerView.setAdapter(adapter);
-            adapter.notifyDataSetChanged();
-            swipeRefreshLayout.setRefreshing(false);
-            LoadJson();
-        }
-        else{
-            AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
-            builder1.setMessage("Anonymous feed contains content some people may not like. User discretion advised. Are you sure you want to continue?");
-            builder1.setCancelable(true);
-
-            builder1.setPositiveButton(
-                    "Yes",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-
-                            dialog.cancel();
-                            LoadJson();
-                        }
-                    });
-
-            builder1.setNegativeButton(
-                    "No",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            swipeRefreshLayout.setRefreshing(false);
-                            dialog.cancel();
-                        }
-                    });
-
-            AlertDialog alert11 = builder1.create();
-            alert11.show();
-        }
-
-
-
-
-
+        LoadJson();
         return view;
+
 
     }
 
@@ -139,73 +100,26 @@ public class HomeLocalWallFragment extends Fragment implements SwipeRefreshLayou
     public void onResume()
     {
         super.onResume();
-
-
         //INSERT CUSTOM CODE HERE
     }
 
-//    @Override
-//    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
-//        super.onViewStateRestored(savedInstanceState);
-//        if (mBundleRecyclerViewState != null) {
-//            Parcelable listState = mBundleRecyclerViewState.getParcelable("state");
-//            recyclerView.getLayoutManager().onRestoreInstanceState(listState);
-//        }
-//    }
-//
-//
-//    public void onSaveInstanceState(Bundle state) {
-//        super.onSaveInstanceState(state);
-//
-//
-//        mBundleRecyclerViewState = new Bundle();
-//        Parcelable listState = recyclerView.getLayoutManager().onSaveInstanceState();
-//        mBundleRecyclerViewState.putParcelable("state", listState);
-//    }
-//
-//    public void onRestoreInstanceState(Bundle state) {
-//        super.onRestoreInstanceState(state);
-//
-//        /if (mBundleRecyclerViewState != null) {
-//            Parcelable listState = mBundleRecyclerViewState.getParcelable("state");
-//            recyclerView.getLayoutManager().onRestoreInstanceState(listState);
-//        }
-//    }
 
     public void LoadJson() {
 
-        swipeRefreshLayout.setRefreshing(true);
 
-        LONG  = sharedPref.getString("LONG" , "NULL");
-        LAT   = sharedPref.getString("LAT","NULL");
-        if(LONG=="NULL"){
-            Toast.makeText(getActivity(), "Please Enable Location, location is require for the feed", Toast.LENGTH_LONG).show();
-        }
-        else {
             Api api = RetrofitClient.getInstance().getApi();
             Call<ModelAnonymousWall> call;
-            call = api.anonymousfeed(LONG,LAT);
+            call = api.topanonymousfeed();
             call.enqueue(new Callback<ModelAnonymousWall>() {
                 @Override
                 public void onResponse(Call<ModelAnonymousWall> call, Response<ModelAnonymousWall> response) {
                     if (response.isSuccessful() && response.body().getStatus() != null) {
 
-
-
-                        Gson gson = new Gson();
-                        String json = gson.toJson(response.body());
-                        SharedPreferences.Editor editor = sharedPref.edit();
-                        editor.putString("darkfeed" , json);
-                        editor.apply();
-
-
-
                         feed = response.body().getPosts();
                         System.out.println(feed);
-                        adapter = new DarkAdapter(feed, getActivity(), getActivity().getSupportFragmentManager());
+                        adapter = new CircleDarkAdapter(feed, getActivity(), getActivity().getSupportFragmentManager());
                         recyclerView.setAdapter(adapter);
                         adapter.notifyDataSetChanged();
-
                         swipeRefreshLayout.setRefreshing(false);
 
                     } else {
@@ -224,7 +138,7 @@ public class HomeLocalWallFragment extends Fragment implements SwipeRefreshLayou
 
             });
         }
-    }
+
 
 
 
@@ -237,8 +151,6 @@ public class HomeLocalWallFragment extends Fragment implements SwipeRefreshLayou
 //            Log.e(TAG, "onAttach: ClassCastException: " + e.getMessage() );
 //        }
 //    }
-
-
 
 
     @Override
@@ -259,10 +171,17 @@ public class HomeLocalWallFragment extends Fragment implements SwipeRefreshLayou
         );
 
     }
-//    @Override
-//    public void onDarkFragmentInteraction(Uri uri) {
-//
-//    }
+
 
 
 }
+
+//
+//    @Nullable
+//    @Override
+//    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+//        View view = inflater.inflate(R.layout.fragment_dark_local_wall, container, false);
+//
+//        return view;
+//    }
+//}

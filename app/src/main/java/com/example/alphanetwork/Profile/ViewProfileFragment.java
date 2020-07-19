@@ -80,7 +80,7 @@ public class ViewProfileFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
 
@@ -129,9 +129,50 @@ public class ViewProfileFragment extends Fragment {
 
 
 
-
-
         user_id = getArguments().getString("user_id");
+
+
+
+        mPackimage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =  new Intent(getActivity(), PackActivity.class);
+                intent.putExtra("user_id",user_id);
+                startActivity(intent);
+            }
+        });
+        mPackname.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =  new Intent(getActivity(), PackActivity.class);
+                intent.putExtra("user_id",user_id);
+
+                startActivity(intent);
+            }
+        });
+        mPartyimage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =  new Intent(getActivity(), PartyActivity.class);
+                intent.putExtra("user_id",user_id);
+
+                startActivity(intent);
+            }
+        });
+        mPartyname.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =  new Intent(getActivity(), PartyActivity.class);
+                intent.putExtra("user_id",user_id);
+
+                startActivity(intent);
+            }
+        });
+
+
+
+
+
 
         mContext = getActivity();
 

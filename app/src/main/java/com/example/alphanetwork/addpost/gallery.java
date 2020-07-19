@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
+
+import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -37,6 +39,7 @@ public class gallery extends AppCompatActivity {
     private Spinner directorySpinner;
     public static Button SelectImgBTn;
     private String mAppend = "file:/";
+    Toolbar toolbar;
     RecyclerView gridView;
 
 
@@ -44,7 +47,7 @@ public class gallery extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gallery);
-        Toolbar toolbar = findViewById(R.id.toolbar_gallery);
+        toolbar = findViewById(R.id.toolbar_gallery);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -74,13 +77,6 @@ public class gallery extends AppCompatActivity {
                 }
             });
         }
-
-
-
-
-
-
-
 
 
         directorySpinner = findViewById(R.id.spinner);
@@ -113,13 +109,37 @@ public class gallery extends AppCompatActivity {
 
 
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = getIntent();
+        if(intent.hasExtra(getString(R.string.calling_activity))){
+
+                    finish();
+
+        }
+        else {
+
+                    startActivity(new Intent(getApplicationContext(), post.class));
+                    finish();
+
+        }
+    }
+
     private void init(){
         FilePaths filePaths = new FilePaths();
+//        String destPath = getApplication().getExternalFilesDir;
+        System.out.println("------------------"+filePaths.ROOT_DIR);
+        System.out.println("------------------"+getApplication().getExternalFilesDir(null));
+//        filePaths.ROOT_DIR = destPath;
 
         //check for other folders indide "/storage/emulated/0/pictures"
         if (FileSearch.getDirectoryPaths(filePaths.PICTURES) != null) {
             directories = FileSearch.getDirectoryPaths(filePaths.PICTURES);
         }
+
+        directories.add(filePaths.WHATSAPP);
         directories.add(filePaths.CAMERA);
         Collections.reverse(directories);
 

@@ -133,6 +133,7 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent =  new Intent(getActivity(), PackActivity.class);
+
                 startActivity(intent);
             }
         });

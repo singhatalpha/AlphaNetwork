@@ -13,8 +13,6 @@
             android:id="@+id/container"
 
             >
-
-
         </androidx.viewpager.widget.ViewPager>
 
 

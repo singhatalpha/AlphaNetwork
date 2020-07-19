@@ -173,8 +173,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
         }
         else
         {
-//            System.out.println(holder.vp);
-//        System.out.println("veiw holder : " + holder);
+
+
             holder.vp.setId(position+1);
             holder.vp.setAdapter(receive);
 
@@ -190,8 +190,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
             public void onPageSelected(int position) {
 //                System.out.println(viewPager);
 //                System.out.println("view pager");
-
-                MediaAdapter one = (MediaAdapter) receive.mediaFragments.get(holder.vp.getCurrentItem());
+                MediaAdapter one = new MediaAdapter(context);
+                one = (MediaAdapter) receive.mediaFragments.get(holder.vp.getCurrentItem());
 //                System.out.println("fragement : " + one);
                 if(one.link.endsWith(".mp4")){
                     one.bar.setVisibility(View.VISIBLE);
@@ -319,7 +319,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
         for(int j = 0; j < urls.size(); j++)
         {
 //            System.out.println(urls.get(j));
-            one = MediaAdapter.newInstance(urls.get(j));
+            one = MediaAdapter.newInstance(urls.get(j),context);
             pagerAdapter.mediaFragments.add(one);
 
         }

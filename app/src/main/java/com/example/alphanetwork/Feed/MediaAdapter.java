@@ -50,7 +50,8 @@ public class MediaAdapter extends Fragment {
 //    public ProgressBar progressBar;
 
 
-    public MediaAdapter() {
+    public MediaAdapter(Context context) {
+        this.context = context;
         // Required empty public constructor
     }
 
@@ -72,8 +73,8 @@ public class MediaAdapter extends Fragment {
 
 
 
-    public static MediaAdapter newInstance(String media) {
-        MediaAdapter fragment = new MediaAdapter();
+    public static MediaAdapter newInstance(String media, Context context) {
+        MediaAdapter fragment = new MediaAdapter(context);
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, media);
 //        args.putString(ARG_PARAM2, param2);
@@ -103,7 +104,7 @@ public class MediaAdapter extends Fragment {
         System.out.println("thiis reached onview created");
         mImage = view.findViewById(R.id.imageplayer);
 //        mImage.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-        mVideo = view.findViewById(R.id.videoplayer);
+//        mVideo = view.findViewById(R.id.videoplayer);
 //        mTest = view.findViewById(R.id.test);
         bar = view.findViewById(R.id.progress);
         init();
@@ -120,29 +121,28 @@ public class MediaAdapter extends Fragment {
 //                    .load(link)
 //                    .into(mImage);
 //        }
-//        System.out.println("thiis reached media inititations " + link);
         if (link != null) {
-            if (link.endsWith(".mp4")) {
-                mVideo.setVisibility(View.VISIBLE);
+//            if (link.endsWith(".mp4")) {
+//                mVideo.setVisibility(View.VISIBLE);
+//
+//                mediaController = new MediaController(getActivity());
+//                mediaController.setAnchorView(mVideo);
+//                mVideo.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+//                    @Override
+//                    public void onPrepared(MediaPlayer mediaPlayer) {
+//                        bar.setVisibility(getView().GONE);
+//                    }
+//                });
+//
+////                mVideo.setVideoPath(link);
+////                bar.setVisibility(View.GONE);
+////                mVideo.start();
+//                mImage.setVisibility(View.GONE);
+//
+//            } else {
 
-                mediaController = new MediaController(getActivity());
-                mediaController.setAnchorView(mVideo);
-                mVideo.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                    @Override
-                    public void onPrepared(MediaPlayer mediaPlayer) {
-                        bar.setVisibility(getView().GONE);
-                    }
-                });
-
-//                mVideo.setVideoPath(link);
-//                bar.setVisibility(View.GONE);
-//                mVideo.start();
-                mImage.setVisibility(View.GONE);
-
-            } else {
-
-                mVideo.setVisibility(View.GONE);
-                mImage.setVisibility(View.VISIBLE);
+//                mVideo.setVisibility(View.GONE);
+//                mImage.setVisibility(View.VISIBLE);
 
                 RequestOptions requestOptions = new RequestOptions();
                 requestOptions.placeholder(R.drawable.ic_launcher_background);
@@ -158,32 +158,34 @@ public class MediaAdapter extends Fragment {
 //                        .dontAnimate()
 //                        .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
 //                        .into(mImage);
-                
-                Glide.with(getActivity())
-                        .load(link)
-                        .apply(requestOptions)
-                        .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
-                        .listener(new RequestListener<Drawable>() {
-                            @Override
-                            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-//                                System.out.println("Glide Load Failed Fellas....Hate glide" );
-                                System.out.println(e);
-                                return false;
-                            }
+            System.out.println("Entered if with link: " + link);
+            mImage.setVisibility(View.VISIBLE);
 
-                            @Override
-                            public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-//                                System.out.println("Glide worked...damn" );
-                                bar.setVisibility(View.GONE);
+            Glide.with(this)
+                    .load(link)
+                    .apply(requestOptions)
+                    .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
+                    .listener(new RequestListener<Drawable>() {
+                        @Override
+                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                            System.out.println("Glide Load Failed ....Hate glide" );
+                            System.out.println(e);
+                            return false;
+                        }
 
-                                return false;
-                            }
-                        })
-                        .transition(DrawableTransitionOptions.withCrossFade())
-                        .dontAnimate()
-                        .into(mImage);
+                        @Override
+                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                            System.out.println("Glide worked...damn" );
+                            bar.setVisibility(View.GONE);
 
+                            return false;
+                        }
+                    })
+//                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .dontAnimate()
+                    .into(mImage);
 
+            System.out.println("Crossed Glide");
 
 //                File cacheDir = StorageUtils.getCacheDirectory(context);
 //                ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context)
@@ -228,12 +230,13 @@ public class MediaAdapter extends Fragment {
             }
 
 
-        }
-        else
-        {
-            mVideo.setVisibility(View.GONE);
-            mImage.setVisibility(View.GONE);
-        }
+//        }
+//        else
+//        {
+//            System.out.println("Entered Else===================");
+////            mVideo.setVisibility(View.GONE);
+//            mImage.setVisibility(View.GONE);
+//        }
     }
 
     public void onButtonPressed(Uri uri) {

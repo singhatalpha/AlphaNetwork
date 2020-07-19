@@ -7,31 +7,12 @@
     tools:context=".Feed.MediaAdapter">
 
 
-
-    <VideoView
+    <Utils.ScaleImageView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:id = "@+id/videoplayer"
-        android:visibility="gone"
-        android:layout_gravity="center"
+        android:id="@+id/imageplayer"
+        android:adjustViewBounds="true"
         />
-
-
-        <Utils.ScaleImageView
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:id="@+id/imageplayer"
-            android:adjustViewBounds="true"
-            />
-
-
-<!--    <Utils.ScaleImageView-->
-<!--        android:layout_width="fill_parent"-->
-<!--        android:layout_height="fill_parent"-->
-<!--        android:id="@+id/imageplayer"-->
-<!--        android:adjustViewBounds="true"-->
-
-<!--        />-->
 
 
     <ProgressBar

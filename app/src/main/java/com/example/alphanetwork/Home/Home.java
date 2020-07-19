@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 
+//import com.example.alphanetwork.Dark.DarkMediaAdapter;
 import com.example.alphanetwork.Model.ModelFeed;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.core.app.ActivityCompat;
@@ -55,7 +56,7 @@ import android.location.Location;
 import android.widget.TextView;
 
 
-public class Home extends LocationBaseActivity implements MediaAdapter.OnFragmentInteractionListener{
+public class Home extends LocationBaseActivity implements MediaAdapter.OnFragmentInteractionListener {
     private static final String TAG = "Home";
     private static final int ACTIVITY_NUM = 0;
 
@@ -357,7 +358,6 @@ public class Home extends LocationBaseActivity implements MediaAdapter.OnFragmen
 
 
 
-
     private boolean checkPermissionArray(String[] permission) {
 
         for (int i=0;i<permission.length;i++){
@@ -388,4 +388,6 @@ public class Home extends LocationBaseActivity implements MediaAdapter.OnFragmen
 
         ActivityCompat.requestPermissions(Home.this,permissions,1);
     }
+
+
 }

@@ -82,105 +82,105 @@ public class GridviewAdapter extends RecyclerView.Adapter<ViewHolderItem> {
         int index = imgURL.lastIndexOf(".");
         String format = imgURL.substring(index+1);
 
-        if(format.equals("MP4")){
-
-            viewHolderItem.timeduration.setVisibility(View.VISIBLE);
-
-            Glide.with(mContext)
-                    .load(imgURL)
-                    .centerCrop()
-                    .placeholder(R.color.blue)
-                    .transition(withCrossFade())
-                    .into(viewHolderItem.imageView);
-            MediaMetadataRetriever retriever = new MediaMetadataRetriever();
-            retriever.setDataSource(imgURL);
-            long duration = Long.parseLong(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION));
-//            int width = Integer.valueOf(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_WIDTH));
-//            int height = Integer.valueOf(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_HEIGHT));
-            retriever.release();
-            duration = duration/1000;
-            int minutes = (int) (duration/60);
-            int seconds = (int) (duration -(minutes * 60));
-            String time = valueOf(minutes) + ":" + valueOf(seconds);
-            viewHolderItem.timeduration.setText(time);
-
-
-            viewHolderItem.imageView.setOnClickListener(new View.OnClickListener() {
-                String TrueImageUrl = mAppend + imgURL;
-                @Override
-                public void onClick(View v) {
-
-
-
-                    if(post.NoOfSlecteImg<LIMIT_IMGAES){
-
-
-                        if(viewHolderItem.selected==0){
-                            viewHolderItem.selected=1;
-                            viewHolderItem.imageView.setAlpha(0.4f);
-                            viewHolderItem.tick.setVisibility(View.VISIBLE);
-                            viewHolderItem.tick.setAlpha(0.8f);
-                            post.NoOfSlecteImg++;
-                            gallery.SelectedImgUrls.add(TrueImageUrl);
-                            ExifInterface exif = null;
-                            String datetime = null;
-                            try {
-                                exif = new ExifInterface(TrueImageUrl);
-                                datetime = exif.getAttribute(ExifInterface.TAG_DATETIME);
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-
-                            Log.e(TAG, "onClick: "+ datetime );
-
-
-
-
-
-
-
-
-                        }
-
-                        else {
-                            viewHolderItem.selected=0;
-                            viewHolderItem.imageView.setAlpha(1.0f);
-                            viewHolderItem.tick.setVisibility(View.INVISIBLE);
-                            gallery.SelectedImgUrls.remove(TrueImageUrl);
-                            post.NoOfSlecteImg--;
-
-                        }
-
-                    }
-
-                    else {
-                        if(viewHolderItem.selected==1){
-                            viewHolderItem.selected=0;
-                            viewHolderItem.imageView.setAlpha(1.0f);
-                            viewHolderItem.tick.setVisibility(View.INVISIBLE);
-                            gallery.SelectedImgUrls.remove(TrueImageUrl);
-                            post.NoOfSlecteImg--;
-
-
-                        }
-
-                    }
-//                    int p = viewHolderItem.getPosition();
-//                    post.imageCursor = mAppend + imageuris.get(p);
-//                    Intent i = new Intent(mContext, post.class);
-//                    mContext.startActivity(i);
+//        if(format.equals("MP4")){
 //
-//                    ((Activity) mContext).finish();
+//            viewHolderItem.timeduration.setVisibility(View.VISIBLE);
+//
+//            Glide.with(mContext)
+//                    .load(imgURL)
+//                    .centerCrop()
+//                    .placeholder(R.color.blue)
+//                    .transition(withCrossFade())
+//                    .into(viewHolderItem.imageView);
+//            MediaMetadataRetriever retriever = new MediaMetadataRetriever();
+//            retriever.setDataSource(imgURL);
+//            long duration = Long.parseLong(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION));
+////            int width = Integer.valueOf(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_WIDTH));
+////            int height = Integer.valueOf(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_HEIGHT));
+//            retriever.release();
+//            duration = duration/1000;
+//            int minutes = (int) (duration/60);
+//            int seconds = (int) (duration -(minutes * 60));
+//            String time = valueOf(minutes) + ":" + valueOf(seconds);
+//            viewHolderItem.timeduration.setText(time);
+//
+//
+//            viewHolderItem.imageView.setOnClickListener(new View.OnClickListener() {
+//                String TrueImageUrl = mAppend + imgURL;
+//                @Override
+//                public void onClick(View v) {
+//
+//
+//
+//                    if(post.NoOfSlecteImg<LIMIT_IMGAES){
+//
+//
+//                        if(viewHolderItem.selected==0){
+//                            viewHolderItem.selected=1;
+//                            viewHolderItem.imageView.setAlpha(0.4f);
+//                            viewHolderItem.tick.setVisibility(View.VISIBLE);
+//                            viewHolderItem.tick.setAlpha(0.8f);
+//                            post.NoOfSlecteImg++;
+//                            gallery.SelectedImgUrls.add(TrueImageUrl);
+//                            ExifInterface exif = null;
+//                            String datetime = null;
+//                            try {
+//                                exif = new ExifInterface(TrueImageUrl);
+//                                datetime = exif.getAttribute(ExifInterface.TAG_DATETIME);
+//                            } catch (IOException e) {
+//                                e.printStackTrace();
+//                            }
+//
+//                            Log.e(TAG, "onClick: "+ datetime );
+//
+//
+//
+//
+//
+//
+//
+//
+//                        }
+//
+//                        else {
+//                            viewHolderItem.selected=0;
+//                            viewHolderItem.imageView.setAlpha(1.0f);
+//                            viewHolderItem.tick.setVisibility(View.INVISIBLE);
+//                            gallery.SelectedImgUrls.remove(TrueImageUrl);
+//                            post.NoOfSlecteImg--;
+//
+//                        }
+//
+//                    }
+//
+//                    else {
+//                        if(viewHolderItem.selected==1){
+//                            viewHolderItem.selected=0;
+//                            viewHolderItem.imageView.setAlpha(1.0f);
+//                            viewHolderItem.tick.setVisibility(View.INVISIBLE);
+//                            gallery.SelectedImgUrls.remove(TrueImageUrl);
+//                            post.NoOfSlecteImg--;
+//
+//
+//                        }
+//
+//                    }
+////                    int p = viewHolderItem.getPosition();
+////                    post.imageCursor = mAppend + imageuris.get(p);
+////                    Intent i = new Intent(mContext, post.class);
+////                    mContext.startActivity(i);
+////
+////                    ((Activity) mContext).finish();
+//
+//                    gallery.SelectImgBTn.setText("Selected"+ " " +post.NoOfSlecteImg+" Images");
+//
+//                }
+//            });
+//
+//
+//        }
 
-                    gallery.SelectImgBTn.setText("Selected"+ " " +post.NoOfSlecteImg+" Images");
-
-                }
-            });
-
-
-        }
-
-        else {
+        if(format.equals("jpeg") || format.equals("jpg") || format.equals("png")) {
             viewHolderItem.timeduration.setVisibility(View.INVISIBLE);
             ImageLoader imageLoader = ImageLoader.getInstance();
             imageLoader.init(ImageLoaderConfiguration.createDefault(mContext));

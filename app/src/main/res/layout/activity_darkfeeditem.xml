@@ -2,12 +2,6 @@
 
 
 
-
-
-
-
-
-
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -57,22 +51,22 @@
 
 
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/relLayout12"
-            android:layout_marginTop="2dp"
-            android:layout_below="@+id/relLayout11">
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:id="@+id/relLayout12"-->
+<!--            android:layout_marginTop="2dp"-->
+<!--            android:layout_below="@+id/relLayout11">-->
 
-            <androidx.viewpager.widget.ViewPager
-                android:layout_width="match_parent"
-                android:layout_height="400dp"
-                android:id="@+id/view_pager_media"
-                >
+<!--            <androidx.viewpager.widget.ViewPager-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="400dp"-->
+<!--                android:id="@+id/view_pager_media_dark"-->
+<!--                >-->
 
-            </androidx.viewpager.widget.ViewPager>
+<!--            </androidx.viewpager.widget.ViewPager>-->
 
-        </RelativeLayout>
+<!--        </RelativeLayout>-->
 
 
         <RelativeLayout
@@ -80,18 +74,18 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
 
-            android:layout_below="@+id/relLayout12">
+            android:layout_below="@+id/relLayout11">
 
 
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tab_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:tabBackground="@drawable/tab_selector"
-                app:tabGravity="center"
+<!--            <com.google.android.material.tabs.TabLayout-->
+<!--                android:id="@+id/tab_layout"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:tabBackground="@drawable/tab_selector"-->
+<!--                app:tabGravity="center"-->
 
-                app:tabIndicatorHeight="0dp"
-                app:tabMaxWidth="10dp" />
+<!--                app:tabIndicatorHeight="0dp"-->
+<!--                app:tabMaxWidth="10dp" />-->
 
 
             <RelativeLayout

@@ -76,14 +76,14 @@ public interface Api {
 
     );
 
-    @Multipart
+    @FormUrlEncoded
     @POST("articles/addanonymouspost")
     Call<ResponseBody> addAnonymousPost(
-            @Part("title") RequestBody title,
-            @Part("longitude") RequestBody longitude,
-            @Part("latitude") RequestBody latitude,
+            @Field("title") String title,
+            @Field("longitude") String longitude,
+            @Field("latitude") String latitude
 //            @Part("description") RequestBody description,
-            @Part List<MultipartBody.Part> image
+//            @Part List<MultipartBody.Part> image
     );
 
 
@@ -127,6 +127,26 @@ public interface Api {
             @Query("longitude") String longitude,
             @Query("latitude") String latitude
     );
+
+
+
+
+
+
+    //CIRCLE
+    @GET("articles/topfeed")
+    Call<ModelHomeWall> topfeed(
+    );
+
+    @GET("articles/topanonymousfeed")
+    Call<ModelAnonymousWall> topanonymousfeed(
+    );
+
+
+
+
+
+
 
     @GET("articles/feedgrid")
     Call<ModelHomeWall> feedgrid(
@@ -175,12 +195,32 @@ public interface Api {
     @GET("users/checkpack")
     Call<ResponseBody> checkpack(
     );
+
+    @GET("users/viewgetpack")
+    Call<ModelPack> view_getpack(
+            @Query("id") String id
+    );
+
+    @GET("users/viewcheckpack")
+    Call<ResponseBody> view_checkpack(
+            @Query("id") String id
+    );
+
     @GET("users/getparty")
     Call<ModelPack> getparty(
     );
 
     @GET("users/checkparty")
     Call<ResponseBody> checkparty(
+    );
+    @GET("users/viewgetparty")
+    Call<ModelPack> view_getparty(
+            @Query("id") String id
+    );
+
+    @GET("users/viewcheckparty")
+    Call<ResponseBody> view_checkparty(
+            @Query("id") String id
     );
 
 
